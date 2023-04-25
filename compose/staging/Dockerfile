@@ -22,7 +22,7 @@ RUN yarn build
 FROM nginx:1.21.1-alpine
 
 # Copy the build output to replace the default nginx contents.
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder ./front/build /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
