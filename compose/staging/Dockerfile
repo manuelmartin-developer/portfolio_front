@@ -6,8 +6,8 @@ ENV NODE_ENV production
 WORKDIR /app
 
 # Cache and Install dependencies
-COPY package.json .
-COPY yarn.lock .
+COPY ./front/package.json .
+COPY ./front/yarn.lock .
 RUN yarn install --frozen-lockfile
 
 # Copy source files
