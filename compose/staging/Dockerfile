@@ -11,7 +11,7 @@ COPY ./front/yarn.lock .
 RUN yarn install --frozen-lockfile
 
 # Copy source files
-COPY . .
+COPY ./front .
 
 # Build the app
 RUN yarn build
