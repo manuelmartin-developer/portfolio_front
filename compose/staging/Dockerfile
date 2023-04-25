@@ -14,7 +14,7 @@ RUN yarn install --frozen-lockfile && mkdir /nextjs-ui && mv ./node_modules ./ne
 COPY ./front .
 
 # Build the app
-RUN yarn build
+RUN npm run build
 
 # Stage 2 - the production environment
 FROM nginx:1.19.6-alpine
