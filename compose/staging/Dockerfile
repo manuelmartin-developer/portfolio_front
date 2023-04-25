@@ -8,7 +8,7 @@ WORKDIR /app
 # Cache and Install dependencies
 COPY ./front/package.json .
 COPY ./front/yarn.lock .
-RUN yarn install --frozen-lockfile
+RUN yarn install --frozen-lockfile && mkdir /nextjs-ui && mv ./node_modules ./nextjs-ui
 
 # Copy source files
 COPY ./front .
@@ -20,7 +20,7 @@ RUN yarn build
 FROM nginx:1.19.6-alpine
 
 # Copy build from builder stage
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /nextjs-ui/out /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
