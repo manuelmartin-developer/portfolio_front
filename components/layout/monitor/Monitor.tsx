@@ -54,58 +54,32 @@ const Monitor: React.FC<{
         const data = lastMessage.data.split("CPU:")[1];
         const parsedData = JSON.parse(data);
 
-        if (cpuData.length === 0) {
-          const keys = Object.keys(parsedData);
-          setLabels(keys);
-          const values = Object.values(parsedData);
-          const data = keys.map((key, index) => {
-            return {
-              name: key,
-              type: "line",
-              data: [values[index]]
-            };
-          });
-          setCPUData(data);
-        } else {
-          const values = Object.values(parsedData);
-          setCPUData((prev) => {
-            const newData = prev.map((data, index) => {
-              return {
-                ...data,
-                data: [...data.data, values[index]]
-              };
-            });
-            return newData;
-          });
-        }
+        const keys = Object.keys(parsedData);
+        setLabels(keys);
+        const values = Object.values(parsedData);
+        const cpuData = keys.map((key, index) => {
+          return {
+            name: key,
+            type: "bar",
+            data: [values[index]]
+          };
+        });
+        setCPUData(cpuData);
       } else if (lastMessage.data.startsWith("RAM")) {
         const data = lastMessage.data.split("RAM:")[1];
         const parsedData = JSON.parse(data);
 
-        if (ramData.length === 0) {
-          const keys = Object.keys(parsedData);
-          setLabels(keys);
-          const values = Object.values(parsedData);
-          const data = keys.map((key, index) => {
-            return {
-              name: key,
-              type: "line",
-              data: [values[index]]
-            };
-          });
-          setRAMData(data);
-        } else {
-          const values = Object.values(parsedData);
-          setRAMData((prev) => {
-            const newData = prev.map((data, index) => {
-              return {
-                ...data,
-                data: [...data.data, values[index]]
-              };
-            });
-            return newData;
-          });
-        }
+        const keys = Object.keys(parsedData);
+        setLabels(keys);
+        const values = Object.values(parsedData);
+        const ramData = keys.map((key, index) => {
+          return {
+            name: key,
+            type: "bar",
+            data: [values[index]]
+          };
+        });
+        setRAMData(ramData);
       } else if (lastMessage.data.startsWith("DISK")) {
         // Pie chart
         const pieData = lastMessage.data.split("DISK:")[1];

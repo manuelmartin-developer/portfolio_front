@@ -17,7 +17,7 @@ const RAMChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
     yAxis: {
       type: "value",
       min: 0,
-      max: 100
+      max: 4
     },
     series: data,
     tooltip: {
