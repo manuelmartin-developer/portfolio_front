@@ -1,0 +1,56 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+  background-image: url("../public/assets/img/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #fff;
+
+  &__title {
+    font-size: 10vw;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__description {
+    font-size: 2vw;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__clock {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    max-width: 50rem;
+    padding: 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+    & > div > .count {
+      font-size: 5rem;
+      font-weight: 500;
+    }
+  }
+  &_monitorButton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    border: none;
+    outline: none;
+    background: none;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 0.5rem #fff);
+    }
+  }
+}
