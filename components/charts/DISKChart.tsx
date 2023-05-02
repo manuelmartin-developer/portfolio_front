@@ -2,6 +2,14 @@ import ReactECharts from "echarts-for-react";
 
 const DISKChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
   const options = {
+    title: {
+      text: "Uso de disco",
+      textStyle: {
+        color: "#fff",
+        fontSize: 18,
+        fontWeight: 700
+      }
+    },
     grid: {
       left: "1%",
       right: "1%",
@@ -22,7 +30,7 @@ const DISKChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
           },
           fontSize: 12,
           fontWeight: "500",
-          color: "#fff"
+          color: "#3e3e3e"
         },
         data: data
       }

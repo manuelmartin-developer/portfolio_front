@@ -8,11 +8,11 @@ import { FiHardDrive } from "react-icons/fi";
 import CPUChart from "../../charts/CPUChart";
 import RAMChart from "../../charts/RAMChart";
 import DISKChart from "../../charts/DISKChart";
+import { useCursorStore } from "../../../store/cursorStore";
 
 const Monitor: React.FC<{
-  isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}> = ({ isOpen, setIsOpen }) => {
+}> = ({ setIsOpen }) => {
   // Component states
   const [monitorRequestData, setMonitorRequestData] = useState<
     "CPU" | "RAM" | "DISK"
@@ -20,8 +20,10 @@ const Monitor: React.FC<{
   const [cpuData, setCPUData] = useState<any[]>([]);
   const [ramData, setRAMData] = useState<any[]>([]);
   const [diskData, setDiskData] = useState<any[]>([]);
-  const [chartData, setChartData] = useState<any[]>([]);
   const [labels, setLabels] = useState<any[]>([]);
+
+  // Store
+  const { setCursorVariant } = useCursorStore();
 
   // WebSocket
   const { sendMessage, lastMessage, getWebSocket } = useWebSocket(
@@ -32,6 +34,15 @@ const Monitor: React.FC<{
       shouldReconnect: (closeEvent) => true
     }
   );
+
+  // Methods
+  const onEnterLink = () => {
+    setCursorVariant("link_small");
+  };
+
+  const onLeaveLink = () => {
+    setCursorVariant("default");
+  };
 
   // LifeCycle component
   useEffect(() => {
@@ -61,7 +72,13 @@ const Monitor: React.FC<{
           return {
             name: key,
             type: "bar",
-            data: [values[index]]
+            data: [values[index]],
+            color:
+              key === "avgLoad"
+                ? "#809bce"
+                : key === "currentLoad"
+                ? "#ff686b"
+                : "#84dcc6"
           };
         });
         setCPUData(cpuData);
@@ -76,12 +93,17 @@ const Monitor: React.FC<{
           return {
             name: key,
             type: "bar",
-            data: [values[index]]
+            data: [values[index]],
+            color:
+              key === "total"
+                ? "#809bce"
+                : key === "active"
+                ? "#ff686b"
+                : "#84dcc6"
           };
         });
         setRAMData(ramData);
       } else if (lastMessage.data.startsWith("DISK")) {
-        // Pie chart
         const pieData = lastMessage.data.split("DISK:")[1];
         const parsedData = JSON.parse(pieData);
         const keys = Object.keys(parsedData);
@@ -89,34 +111,44 @@ const Monitor: React.FC<{
         const data = keys.map((key, index) => {
           return {
             name: key,
-            value: values[index]
+            value: values[index],
+            itemStyle: {
+              color: key === "size" ? "#ffd97d" : "#84dcc6"
+            }
           };
         });
+
         setDiskData(data);
       }
     }
   }, [lastMessage]);
 
   return (
-    <div className={`${styles.container} ${isOpen ? styles.open : ""}`}>
+    <div className={styles.container}>
       <div className={styles.container_header}>
         <div className={styles.container_header__title}>
-          <h3>Monitor</h3>
+          <h3>Monitor__</h3>
           <div className={styles.container_header__title__status}>
             <FiCpu
-              size="1.5rem"
+              size="1.7rem"
               className={monitorRequestData === "CPU" ? styles.active : ""}
               onClick={() => setMonitorRequestData("CPU")}
+              onMouseEnter={onEnterLink}
+              onMouseLeave={onLeaveLink}
             />
             <BsMemory
-              size="1.5rem"
+              size="1.7rem"
               className={monitorRequestData === "RAM" ? styles.active : ""}
               onClick={() => setMonitorRequestData("RAM")}
+              onMouseEnter={onEnterLink}
+              onMouseLeave={onLeaveLink}
             />
             <FiHardDrive
-              size="1.5rem"
+              size="1.7rem"
               className={monitorRequestData === "DISK" ? styles.active : ""}
               onClick={() => setMonitorRequestData("DISK")}
+              onMouseEnter={onEnterLink}
+              onMouseLeave={onLeaveLink}
             />
           </div>
         </div>
@@ -124,7 +156,11 @@ const Monitor: React.FC<{
           className={styles.container_header__close}
           onClick={() => setIsOpen(false)}
         >
-          <AiOutlineClose size="2rem" />
+          <AiOutlineClose
+            size="2rem"
+            onMouseEnter={onEnterLink}
+            onMouseLeave={onLeaveLink}
+          />
         </div>
       </div>
       <div className={styles.container_content}>

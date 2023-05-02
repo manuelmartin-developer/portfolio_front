@@ -1,0 +1,86 @@
+.nav {
+  width: 100%;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 4vw;
+  z-index: 999;
+  &_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+  }
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+    & > img {
+      transition: filter 0.5s ease;
+      width: 40px;
+      height: 40px;
+      mix-blend-mode: difference;
+    }
+  }
+  &_menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+    pointer-events: all;
+    &__item {
+      width: 76px;
+      position: relative;
+      opacity: 0.3;
+      transition: opacity 0.3s ease;
+      padding: 16px;
+      &::before {
+        content: "";
+        position: absolute;
+        height: 2px;
+        background: #3e3e3e;
+        left: 16px;
+        right: 16px;
+        bottom: 8px;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s cubic-bezier(0.27, 0, 0, 1);
+      }
+      &:hover:not(&_active) {
+        opacity: 0.5;
+        &::before {
+          content: "";
+          position: absolute;
+          height: 2px;
+          background: #3e3e3e;
+          left: 16px;
+          right: 16px;
+          bottom: 8px;
+          transform: scaleX(0.25);
+          transform-origin: left;
+          transition: transform 0.5s cubic-bezier(0.27, 0, 0, 1);
+        }
+      }
+      &_active {
+        opacity: 1;
+        &::before {
+          content: "";
+          position: absolute;
+          height: 2px;
+          background: #3e3e3e;
+          left: 16px;
+          right: 16px;
+          bottom: 8px;
+          transform-origin: left;
+          transform: scaleX(1);
+          transition: transform 0.5s cubic-bezier(0.27, 0, 0, 1);
+        }
+      }
+    }
+  }
+}

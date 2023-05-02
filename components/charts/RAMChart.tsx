@@ -2,6 +2,14 @@ import ReactECharts from "echarts-for-react";
 
 const RAMChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
   const options = {
+    title: {
+      text: "Uso de Ram",
+      textStyle: {
+        color: "#fff",
+        fontSize: 18,
+        fontWeight: 700
+      }
+    },
     grid: {
       left: "1%",
       right: "1%",
@@ -10,14 +18,17 @@ const RAMChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
       containLabel: true
     },
     xAxis: {
-      type: "time",
-      data: labels,
+      type: "category",
+      data: ["Uso de RAM"],
       show: false
     },
     yAxis: {
       type: "value",
       min: 0,
-      max: 4
+      max: 4,
+      axisLabel: {
+        color: "#fff"
+      }
     },
     series: data,
     tooltip: {
@@ -35,7 +46,8 @@ const RAMChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
       padding: 20,
       textStyle: {
         fontSize: 12,
-        fontWeight: 500
+        fontWeight: 500,
+        color: "#fff"
       },
       itemWidth: 25,
       itemHeight: 10,
