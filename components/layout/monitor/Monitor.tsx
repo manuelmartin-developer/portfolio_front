@@ -9,6 +9,7 @@ import CPUChart from "../../charts/CPUChart";
 import RAMChart from "../../charts/RAMChart";
 import DISKChart from "../../charts/DISKChart";
 import { useCursorStore } from "../../../store/cursorStore";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Monitor: React.FC<{
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,7 +24,7 @@ const Monitor: React.FC<{
   const [labels, setLabels] = useState<any[]>([]);
 
   // Store
-  const { setCursorVariant } = useCursorStore();
+  const { setCursorVariant, setCursorText } = useCursorStore();
 
   // WebSocket
   const { sendMessage, lastMessage, getWebSocket } = useWebSocket(
@@ -36,11 +37,13 @@ const Monitor: React.FC<{
   );
 
   // Methods
-  const onEnterLink = () => {
+  const onEnterLink = (text: string) => {
+    setCursorText(text);
     setCursorVariant("link_small");
   };
 
   const onLeaveLink = () => {
+    setCursorText("");
     setCursorVariant("default");
   };
 
@@ -133,21 +136,21 @@ const Monitor: React.FC<{
               size="1.7rem"
               className={monitorRequestData === "CPU" ? styles.active : ""}
               onClick={() => setMonitorRequestData("CPU")}
-              onMouseEnter={onEnterLink}
+              onMouseEnter={() => onEnterLink("CPU")}
               onMouseLeave={onLeaveLink}
             />
             <BsMemory
               size="1.7rem"
               className={monitorRequestData === "RAM" ? styles.active : ""}
               onClick={() => setMonitorRequestData("RAM")}
-              onMouseEnter={onEnterLink}
+              onMouseEnter={() => onEnterLink("RAM")}
               onMouseLeave={onLeaveLink}
             />
             <FiHardDrive
               size="1.7rem"
               className={monitorRequestData === "DISK" ? styles.active : ""}
               onClick={() => setMonitorRequestData("DISK")}
-              onMouseEnter={onEnterLink}
+              onMouseEnter={() => onEnterLink("DISK")}
               onMouseLeave={onLeaveLink}
             />
           </div>
@@ -158,21 +161,62 @@ const Monitor: React.FC<{
         >
           <AiOutlineClose
             size="2rem"
-            onMouseEnter={onEnterLink}
+            onMouseEnter={() => onEnterLink("")}
             onMouseLeave={onLeaveLink}
           />
         </div>
       </div>
       <div className={styles.container_content}>
-        {monitorRequestData === "CPU" && (
-          <CPUChart data={cpuData} labels={labels} />
-        )}
-        {monitorRequestData === "RAM" && (
-          <RAMChart data={ramData} labels={labels} />
-        )}
-        {monitorRequestData === "DISK" && (
-          <DISKChart data={diskData} labels={labels} />
-        )}
+        <AnimatePresence mode="wait">
+          {monitorRequestData === "CPU" && (
+            <motion.div
+              key="CPU"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "grid",
+                placeItems: "center"
+              }}
+            >
+              <CPUChart data={cpuData} labels={labels} />
+            </motion.div>
+          )}
+          {monitorRequestData === "RAM" && (
+            <motion.div
+              key="RAM"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "grid",
+                placeItems: "center"
+              }}
+            >
+              <RAMChart data={ramData} labels={labels} />
+            </motion.div>
+          )}
+          {monitorRequestData === "DISK" && (
+            <motion.div
+              key="DISK"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "grid",
+                placeItems: "center"
+              }}
+            >
+              <DISKChart data={diskData} labels={labels} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

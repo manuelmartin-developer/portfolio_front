@@ -6,14 +6,16 @@ import { useCursorStore } from "../../store/cursorStore";
 
 const Footer: React.FC = () => {
   // Store
-  const { setCursorVariant } = useCursorStore();
+  const { setCursorVariant, setCursorText } = useCursorStore();
 
   // Methods
-  const onEnterLink = () => {
+  const onEnterLink = (text: string) => {
     setCursorVariant("link");
+    setCursorText(text);
   };
 
   const onLeaveLink = () => {
+    setCursorText("");
     setCursorVariant("default");
   };
   const onEnterFooter = () => {
@@ -28,20 +30,20 @@ const Footer: React.FC = () => {
             aria-label="Ir a mi perfil de LinkedIn"
             className={styles.footer_container_social__link}
             target="_blank"
-            onMouseEnter={onEnterLink}
+            onMouseEnter={() => onEnterLink("LinkedIn")}
             onMouseLeave={onLeaveLink}
           >
-            <CiLinkedin size={30} color="#3e3e3e" />
+            <CiLinkedin size={30} color="#94a3b8" />
           </Link>
           <Link
             href="https://github.com/manuelmartin-developer"
-            aria-label="Ir a mi perfil de LinkedIn"
+            aria-label="Ir a mi perfil de GitHub"
             className={styles.footer_container_social__link}
             target="_blank"
-            onMouseEnter={onEnterLink}
+            onMouseEnter={() => onEnterLink("GitHub")}
             onMouseLeave={onLeaveLink}
           >
-            <RiGithubLine size={30} color="#3e3e3e" />
+            <RiGithubLine size={30} color="#94a3b8" />
           </Link>
         </div>
         <div className={styles.footer_container_copy}>

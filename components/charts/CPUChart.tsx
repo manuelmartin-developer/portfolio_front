@@ -3,9 +3,9 @@ import ReactECharts from "echarts-for-react";
 const CPUChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
   const options = {
     title: {
-      text: "Uso de CPU",
+      text: "CPU Usage",
       textStyle: {
-        color: "#fff",
+        color: "#94a3b8",
         fontSize: 18,
         fontWeight: 700
       }
@@ -19,7 +19,7 @@ const CPUChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
     },
     xAxis: {
       type: "category",
-      data: ["Uso de CPU"],
+      data: ["CPU Usage"],
       show: false,
       axisTick: {
         show: false
@@ -33,7 +33,7 @@ const CPUChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
       min: 0,
       max: 100,
       axisLabel: {
-        color: "#fff"
+        color: "#94a3b8"
       }
     },
     series: data,
@@ -53,7 +53,7 @@ const CPUChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
       textStyle: {
         fontSize: 12,
         fontWeight: 500,
-        color: "#fff"
+        color: "#94a3b8"
       },
       itemWidth: 25,
       itemHeight: 10,

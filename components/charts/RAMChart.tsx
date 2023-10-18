@@ -3,9 +3,9 @@ import ReactECharts from "echarts-for-react";
 const RAMChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
   const options = {
     title: {
-      text: "Uso de Ram",
+      text: "RAM Usage",
       textStyle: {
-        color: "#fff",
+        color: "#94a3b8",
         fontSize: 18,
         fontWeight: 700
       }
@@ -19,7 +19,7 @@ const RAMChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
     },
     xAxis: {
       type: "category",
-      data: ["Uso de RAM"],
+      data: ["RAM Usage"],
       show: false
     },
     yAxis: {
@@ -27,7 +27,7 @@ const RAMChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
       min: 0,
       max: 4,
       axisLabel: {
-        color: "#fff"
+        color: "#94a3b8"
       }
     },
     series: data,
@@ -47,7 +47,7 @@ const RAMChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
       textStyle: {
         fontSize: 12,
         fontWeight: 500,
-        color: "#fff"
+        color: "#94a3b8"
       },
       itemWidth: 25,
       itemHeight: 10,

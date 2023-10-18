@@ -27,6 +27,7 @@
       justify-content: center;
       align-items: center;
       gap: 1rem;
+      color: var(--font-color);
       &__status {
         display: flex;
         justify-content: center;
@@ -42,6 +43,9 @@
           }
         }
       }
+    }
+    &__close {
+      color: var(--font-color);
     }
   }
   &_content {

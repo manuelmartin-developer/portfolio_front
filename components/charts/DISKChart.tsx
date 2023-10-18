@@ -3,9 +3,9 @@ import ReactECharts from "echarts-for-react";
 const DISKChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
   const options = {
     title: {
-      text: "Uso de disco",
+      text: "DISK Usage",
       textStyle: {
-        color: "#fff",
+        color: "#94a3b8",
         fontSize: 18,
         fontWeight: 700
       }
@@ -19,7 +19,7 @@ const DISKChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
     },
     series: [
       {
-        name: "Uso de disco",
+        name: "DISK Usage",
         type: "sunburst",
         radius: ["13%", "90%"],
         label: {

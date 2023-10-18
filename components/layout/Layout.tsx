@@ -75,7 +75,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         }}
         onClick={() => setIsMonitorOpen(!isMonitorOpen)}
       >
-        <TbDeviceHeartMonitor size={15} color="#3e3e3e" />
+        <TbDeviceHeartMonitor size={15} color="#94a3b8" />
       </button>
     </>
   );
