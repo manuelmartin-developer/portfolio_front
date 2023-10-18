@@ -6,6 +6,7 @@
   left: 0;
   padding: 4vw;
   z-index: 999;
+  color: var(--font-color);
   &_container {
     display: flex;
     justify-content: space-between;
@@ -20,6 +21,7 @@
     align-items: center;
     pointer-events: all;
     & > img {
+      filter: invert(1);
       transition: filter 0.5s ease;
       width: 40px;
       height: 40px;
@@ -34,16 +36,16 @@
     gap: 1rem;
     pointer-events: all;
     &__item {
-      width: 76px;
+      width: 96px;
       position: relative;
-      opacity: 0.3;
+      opacity: 0.4;
       transition: opacity 0.3s ease;
       padding: 16px;
       &::before {
         content: "";
         position: absolute;
         height: 2px;
-        background: #3e3e3e;
+        background: var(--font-color);
         left: 16px;
         right: 16px;
         bottom: 8px;
@@ -57,7 +59,7 @@
           content: "";
           position: absolute;
           height: 2px;
-          background: #3e3e3e;
+          background: var(--font-color);
           left: 16px;
           right: 16px;
           bottom: 8px;
@@ -72,7 +74,7 @@
           content: "";
           position: absolute;
           height: 2px;
-          background: #3e3e3e;
+          background: var(--font-color);
           left: 16px;
           right: 16px;
           bottom: 8px;

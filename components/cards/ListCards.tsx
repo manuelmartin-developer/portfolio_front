@@ -7,6 +7,7 @@ import Card from "./Card";
 import styles from "./Card.module.scss";
 import { useProjectsStore } from "../../store/projectsStore";
 import { useCursorStore } from "../../store/cursorStore";
+import { AnimatePresence } from "framer-motion";
 
 const ListCards: React.FC = () => {
   // Constants
@@ -30,7 +31,9 @@ const ListCards: React.FC = () => {
 
     category === "All"
       ? setProjects(projectsData)
-      : setProjects(projectsData.filter((item) => item.category === category));
+      : setProjects(
+          projectsData.filter((item) => item.category.includes(category))
+        );
   };
 
   // Methods

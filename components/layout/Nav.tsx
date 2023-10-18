@@ -49,19 +49,19 @@ const Nav: React.FC = () => {
             onMouseLeave={onLeaveLink}
             scroll={false}
           >
-            Work_
+            Info_
           </Link>
           <Link
-            href="/info"
+            href="/work"
             aria-current="page"
             onMouseEnter={onEnterLink}
             onMouseLeave={onLeaveLink}
             className={`${styles.nav_menu__item} ${
-              asPath === "/info" ? styles.nav_menu__item_active : ""
+              asPath === "/work" ? styles.nav_menu__item_active : ""
             }`}
             scroll={false}
           >
-            Info_
+            Work_
           </Link>
           <Link
             href="/blog"
@@ -72,8 +72,11 @@ const Nav: React.FC = () => {
               asPath === "/blog" ? styles.nav_menu__item_active : ""
             }`}
             scroll={false}
+            style={{
+              pointerEvents: "none"
+            }}
           >
-            Blog_
+            Blog_ 🚧
           </Link>
         </div>
       </div>

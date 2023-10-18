@@ -1,6 +1,8 @@
 import "@/styles/globals.scss";
+import "@/styles/device.scss";
+import "@/styles/emulator.scss";
+
 import type { AppProps } from "next/app";
-import { Toaster } from "react-hot-toast";
 import Layout from "../components/layout/Layout";
 import { useEffect } from "react";
 import PageTransition from "../components/transitions/PageTransition";
@@ -21,17 +23,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Toaster
-        position="bottom-left"
-        reverseOrder={false}
-        toastOptions={{
-          style: {
-            fontFamily: "Helvetica Neue, sans-serif",
-            fontSize: "1.2rem"
-          },
-          duration: 5000
-        }}
-      />
       <Layout>
         <Cursor />
         <PageTransition>

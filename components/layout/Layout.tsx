@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Nav from "./Nav";
-import { useRouter } from "next/router";
 import Footer from "./Footer";
 import { TbDeviceHeartMonitor } from "react-icons/tb";
 import dynamic from "next/dynamic";
 import { useCursorStore } from "../../store/cursorStore";
+import { getProjectData } from "../../public/assets/data/data";
+import { useProjectsStore } from "../../store/projectsStore";
 // Dynamic imports
 const Monitor = dynamic(() => import("./monitor/Monitor"), { ssr: false });
 
@@ -13,14 +14,12 @@ type Props = {
 };
 
 const Layout: React.FC<Props> = ({ children }) => {
-  // Constants
-  const { asPath } = useRouter();
-
   // Component states
   const [isMonitorOpen, setIsMonitorOpen] = useState<boolean>(false);
 
   // Store
   const { setCursorVariant, setCursorText } = useCursorStore();
+  const { projectSelected } = useProjectsStore();
 
   // Methods
   const onEnterAPP = () => {
@@ -56,16 +55,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         onMouseLeave={onLeaveAPP}
         className="main"
         style={{
-          backgroundColor:
-            asPath === "/"
-              ? "#f5ebe0"
-              : asPath === "/info"
-              ? "#d6ccc2"
-              : asPath === "/blog"
-              ? "#d5bdaf"
-              : asPath.startsWith("/projects/")
-              ? "#f5ebe0"
-              : "#f5ebe0"
+          backgroundColor: projectSelected?.backgroundColor || "#1e293b"
         }}
       >
         {children}

@@ -34,7 +34,7 @@ const PageTransition: React.FC<Props> = ({ children }) => {
     isProject ? (
       <>{children}</>
     ) : (
-      <AnimatePresence initial={false} mode="wait">
+      <AnimatePresence mode="wait">
         <motion.div
           key={asPath}
           variants={variants}

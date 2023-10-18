@@ -8,9 +8,10 @@ import { projectsData } from "../../public/assets/data/data";
 
 const Card: React.FC<{
   id: number;
-  category: string;
+  category: string[];
   title: string;
-}> = ({ id, category, title }) => {
+  color?: string;
+}> = ({ id, category, title, color }) => {
   // Refs
   const cardRef = useRef<HTMLLIElement>(null);
 
@@ -63,17 +64,24 @@ const Card: React.FC<{
             className={styles.title_container}
             layoutId={`title-container-${id}`}
           >
-            <span className={styles.category}>{category}</span>
-            <h2>{title}</h2>
+            <span
+              className={styles.category}
+              style={{
+                color: color ? color : ""
+              }}
+            >
+              {category && category.join(" - ")}
+            </span>
+            <h2
+              style={{
+                color: color ? color : ""
+              }}
+            >
+              {title}
+            </h2>
           </motion.div>
         </motion.div>
       </div>
-      {/* //? Comentado por problema en la animación de vuelta desde la página del proyecto */}
-      {/* <Link
-        href={`/projects/${id}`}
-        className={styles.card_open_link}
-        scroll={false}
-      /> */}
     </li>
   );
 };
