@@ -65,14 +65,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         onMouseEnter={onEnterServerButton}
         onMouseLeave={onLeaveServerButton}
         aria-label="Abrir monitor"
-        style={{
-          backgroundColor: "transparent",
-          border: "none",
-          position: "fixed",
-          bottom: 0,
-          right: 0,
-          padding: "2rem 1rem 1rem 2rem"
-        }}
+        className="server_button"
         onClick={() => setIsMonitorOpen(!isMonitorOpen)}
       >
         <TbDeviceHeartMonitor size={15} color="#94a3b8" />

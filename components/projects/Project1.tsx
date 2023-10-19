@@ -103,7 +103,11 @@ const Project1 = () => {
           position: "relative"
         }}
       >
-        <Gallery>
+        <Gallery
+          options={{
+            loop: false
+          }}
+        >
           <Item
             original="/assets/img/projects/project_1/1.webp"
             thumbnail="/assets/img/projects/project_1/1_thumb.webp"

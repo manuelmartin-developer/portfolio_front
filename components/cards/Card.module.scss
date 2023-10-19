@@ -1,7 +1,7 @@
 .card {
   position: relative;
   padding: 20px;
-  height: 460px;
+  height: 100%;
   flex: 0 0 40%;
   max-width: 40%;
   filter: grayscale(1);
@@ -76,7 +76,6 @@
 
 .card_image_container {
   position: relative;
-  height: 450px;
   width: 100vw;
   overflow: hidden;
   z-index: 5;
@@ -160,6 +159,9 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
   &_item {
     position: relative;
     border: none;
@@ -167,7 +169,6 @@
     font-size: 14px;
     opacity: 0.3;
     transition: opacity 0.3s ease;
-    padding: 16px;
     color: var(--font-color);
     &::before {
       content: "";

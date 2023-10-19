@@ -10,14 +10,11 @@
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
-
-  &.comming_soon {
-    padding: 6rem;
-    background-image: url("../public/assets/img/bg.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    color: #fff;
+  @media screen and (max-width: 800px) {
+    padding: 6rem 3rem;
+  }
+  @media screen and (max-width: 400px) {
+    padding: 6rem 2rem;
   }
 
   &__title {
@@ -91,6 +88,30 @@
         font-weight: 900;
         margin-bottom: 10px;
         margin-left: auto;
+      }
+    }
+    @media screen and (max-width: 800px) {
+      flex-direction: column;
+      align-items: flex-start;
+      &__title {
+        font-size: 100px;
+        line-height: 100px;
+        margin-right: 0;
+        margin-bottom: 0px;
+        &__underscore {
+          width: 60px;
+          height: 10px;
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+        &__nextUnderscore {
+          font-size: 12px;
+          margin-bottom: 5px;
+        }
+        &__right {
+          font-size: 12px;
+          margin-left: 0;
+        }
       }
     }
   }
