@@ -75,7 +75,7 @@ const Monitor: React.FC<{
           return {
             name: key,
             type: "bar",
-            data: [values[index]],
+            data: [Number(values[index]).toFixed(2)],
             color:
               key === "avgLoad"
                 ? "#809bce"
@@ -96,7 +96,7 @@ const Monitor: React.FC<{
           return {
             name: key,
             type: "bar",
-            data: [values[index]],
+            data: [Number(values[index]).toFixed(2)],
             color:
               key === "total"
                 ? "#809bce"

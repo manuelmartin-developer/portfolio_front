@@ -6,6 +6,7 @@ import { useProjectsStore } from "../../store/projectsStore";
 import { CgClose } from "react-icons/cg";
 import { DeviceFrameset } from "react-device-frameset";
 import Project2 from "../projects/Project2";
+import { useRef } from "react";
 // Dynamic imports
 const Project1 = dynamic(() => import("../projects/Project1"), { ssr: false });
 
@@ -114,7 +115,6 @@ const Item: React.FC<{ id?: number }> = ({ id }) => {
                 title={title}
                 width="100%"
                 height="100%"
-                sandbox=" allow-same-origin allow-scripts allow-popups allow-forms"
                 allow="camera; geolocation;"
               ></iframe>
             </DeviceFrameset>

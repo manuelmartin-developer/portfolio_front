@@ -7,17 +7,22 @@ import { useCursorStore } from "../../store/cursorStore";
 import { IoLogoIonic } from "react-icons/io5";
 import { TbBrandNextjs } from "react-icons/tb";
 import { FaReact } from "react-icons/fa";
+import "photoswipe/dist/photoswipe.css";
+
+import { Gallery, Item } from "react-photoswipe-gallery";
 
 const Project1 = () => {
   // Store
-  const { setCursorVariant } = useCursorStore();
+  const { setCursorVariant, setCursorText } = useCursorStore();
 
   // Methods
-  const onEnterLink = () => {
+  const onEnterLink = (text: string) => {
+    setCursorText(text);
     setCursorVariant("link");
   };
 
   const onLeaveLink = () => {
+    setCursorText("");
     setCursorVariant("default");
   };
   return (
@@ -28,7 +33,7 @@ const Project1 = () => {
           className={styles.linkBtn}
           href="https://touryme.com"
           target="_blank"
-          onMouseEnter={onEnterLink}
+          onMouseEnter={() => onEnterLink("Visit")}
           onMouseLeave={onLeaveLink}
         >
           <FiExternalLink />
@@ -37,7 +42,7 @@ const Project1 = () => {
       <h3>
         Client project carried out in{" "}
         <Link
-          onMouseEnter={onEnterLink}
+          onMouseEnter={() => onEnterLink("")}
           onMouseLeave={onLeaveLink}
           className={styles.link}
           href="https://roymo.es"
@@ -73,7 +78,7 @@ const Project1 = () => {
       >
         <Link
           href="https://apps.apple.com/es/app/touryme/id6443578378"
-          onMouseEnter={onEnterLink}
+          onMouseEnter={() => onEnterLink("App Store")}
           onMouseLeave={onLeaveLink}
           target="_blank"
         >
@@ -81,7 +86,7 @@ const Project1 = () => {
         </Link>
         <Link
           href="https://play.google.com/store/apps/details?id=com.touryme.app"
-          onMouseEnter={onEnterLink}
+          onMouseEnter={() => onEnterLink("Google Play")}
           onMouseLeave={onLeaveLink}
           target="_blank"
         >
@@ -89,7 +94,7 @@ const Project1 = () => {
         </Link>
       </motion.div>
       <motion.div
-        className={styles.imgContainer}
+        className={`${styles.imgContainer} ${styles.project_1}`}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         initial={{ opacity: 0 }}
@@ -98,11 +103,72 @@ const Project1 = () => {
           position: "relative"
         }}
       >
-        <img
-          className={styles.img}
-          src="/assets/img/projects/1_1.png"
-          alt="touryme image"
-        />
+        <Gallery>
+          <Item
+            original="/assets/img/projects/project_1/1.webp"
+            thumbnail="/assets/img/projects/project_1/1_thumb.webp"
+            width="626"
+            height="835"
+          >
+            {({ ref, open }) => (
+              <img
+                ref={ref as React.RefObject<HTMLImageElement>}
+                onClick={open}
+                className={styles.img}
+                src="/assets/img/projects/project_1/1_thumb.webp"
+                alt="touryme image"
+              />
+            )}
+          </Item>
+          <Item
+            original="/assets/img/projects/project_1/2.png"
+            thumbnail="/assets/img/projects/project_1/2_thumb.webp"
+            width="626"
+            height="835"
+          >
+            {({ ref, open }) => (
+              <img
+                ref={ref as React.RefObject<HTMLImageElement>}
+                onClick={open}
+                className={styles.img}
+                src="/assets/img/projects/project_1/2_thumb.webp"
+                alt="touryme image"
+              />
+            )}
+          </Item>
+          <Item
+            original="/assets/img/projects/project_1/3.webp"
+            thumbnail="/assets/img/projects/project_1/3_thumb.webp"
+            width="626"
+            height="835"
+          >
+            {({ ref, open }) => (
+              <img
+                ref={ref as React.RefObject<HTMLImageElement>}
+                onClick={open}
+                className={styles.img}
+                src="/assets/img/projects/project_1/3_thumb.webp"
+                alt="touryme image"
+              />
+            )}
+          </Item>
+          <Item
+            original="/assets/img/projects/project_1/4.png"
+            thumbnail="/assets/img/projects/project_1/4_thumb.webp"
+            width="626"
+            height="835"
+          >
+            {({ ref, open }) => (
+              <img
+                ref={ref as React.RefObject<HTMLImageElement>}
+                onClick={open}
+                className={styles.img}
+                src="/assets/img/projects/project_1/4_thumb.webp"
+                alt="touryme image"
+              />
+            )}
+          </Item>
+        </Gallery>
       </motion.div>
       <h3>Role</h3>
       <p className={styles.paragraph}>
@@ -128,7 +194,7 @@ const Project1 = () => {
             color: "#fff"
           }}
         >
-          <TbBrandNextjs size="2rem" />
+          <TbBrandNextjs size="1.5rem" />
           <p
             style={{
               position: "relative",
@@ -149,7 +215,7 @@ const Project1 = () => {
             color: "#fff"
           }}
         >
-          <IoLogoIonic size="2rem" />
+          <IoLogoIonic size="1.5rem" />
           <p
             style={{
               position: "relative",
@@ -170,7 +236,7 @@ const Project1 = () => {
             color: "#fff"
           }}
         >
-          <FaReact size="2rem" />
+          <FaReact size="1.5rem" />
           <p
             style={{
               position: "relative",

@@ -8,14 +8,19 @@ const Nav: React.FC = () => {
   const { asPath } = useRouter();
 
   // Store
-  const { setCursorVariant } = useCursorStore();
+  const { setCursorVariant, setCursorText } = useCursorStore();
 
   // Methods
   const onEnterLink = () => {
     setCursorVariant("link");
   };
+  const onEnterLogo = () => {
+    setCursorText("Home");
+    setCursorVariant("link");
+  };
 
   const onLeaveLink = () => {
+    setCursorText("");
     setCursorVariant("default");
   };
   const onEnterNav = () => {
@@ -29,7 +34,7 @@ const Nav: React.FC = () => {
           href="/"
           aria-current="page"
           className={styles.nav__logo}
-          onMouseEnter={onEnterLink}
+          onMouseEnter={onEnterLogo}
           onMouseLeave={onLeaveLink}
           style={{
             pointerEvents: asPath !== "/" ? "all" : "none"
