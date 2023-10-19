@@ -6,7 +6,7 @@ import type { AppProps } from "next/app";
 import Layout from "../components/layout/Layout";
 import { useEffect } from "react";
 import PageTransition from "../components/transitions/PageTransition";
-import Cursor from "../components/cursor/Cursor";
+import Cursor from "../components/Cursor/Cursor";
 
 export default function App({ Component, pageProps }: AppProps) {
   // Lifecycle component
