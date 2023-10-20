@@ -3,6 +3,7 @@ import "@/styles/device.scss";
 import "@/styles/emulator.scss";
 
 import type { AppProps } from "next/app";
+import { Analytics } from "@vercel/analytics/react";
 import Layout from "../components/layout/Layout";
 import { useEffect } from "react";
 import PageTransition from "../components/transitions/PageTransition";
@@ -44,6 +45,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Cursor />
         <PageTransition>
           <Component {...pageProps} />
+          <Analytics />
         </PageTransition>
       </Layout>
     </>
