@@ -5,10 +5,10 @@ import styles from "./Card.module.scss";
 import { useProjectsStore } from "../../store/projectsStore";
 import { CgClose } from "react-icons/cg";
 import { DeviceFrameset } from "react-device-frameset";
-import Project2 from "../projects/Project2";
-import { useRef } from "react";
+
 // Dynamic imports
 const Project1 = dynamic(() => import("../projects/Project1"), { ssr: false });
+const Project2 = dynamic(() => import("../projects/Project2"), { ssr: false });
 
 const Item: React.FC<{ id?: number }> = ({ id }) => {
   // Constants
@@ -110,7 +110,7 @@ const Item: React.FC<{ id?: number }> = ({ id }) => {
           >
             <DeviceFrameset device={"iPhone X"}>
               <iframe
-                className={styles.phoneIframe}
+                className={`${styles.phoneIframe} ${styles[`project_${id}`]}`}
                 src={url}
                 title={title}
                 width="100%"

@@ -65,6 +65,7 @@ const Nav: React.FC = () => {
               asPath === "/work" ? styles.nav_menu__item_active : ""
             }`}
             scroll={false}
+            prefetch={false}
           >
             Work_
           </Link>
@@ -80,6 +81,7 @@ const Nav: React.FC = () => {
             style={{
               pointerEvents: "none"
             }}
+            prefetch={false}
           >
             Blog_ 🚧
           </Link>

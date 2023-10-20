@@ -243,6 +243,17 @@
 .phoneIframe {
   filter: grayscale(1);
   transition: filter 0.5s ease;
+  &.project_1,
+  &.project_6 {
+    width: calc(100% + 17px);
+  }
+  &.project_2 {
+    width: calc(100% + 4px);
+  }
+  & > div {
+    overflow-x: hidden;
+  }
+
   &:hover {
     filter: grayscale(0);
   }
