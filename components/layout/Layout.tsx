@@ -4,8 +4,8 @@ import Footer from "./Footer";
 import { TbDeviceHeartMonitor } from "react-icons/tb";
 import dynamic from "next/dynamic";
 import { useCursorStore } from "../../store/cursorStore";
-import { getProjectData } from "../../public/assets/data/data";
 import { useProjectsStore } from "../../store/projectsStore";
+import TopOverlay from "./TopOverlay";
 // Dynamic imports
 const Monitor = dynamic(() => import("./monitor/Monitor"), { ssr: false });
 
@@ -49,6 +49,7 @@ const Layout: React.FC<Props> = ({ children }) => {
   return (
     <>
       {isMonitorOpen && <Monitor setIsOpen={setIsMonitorOpen} />}
+      <TopOverlay />
       <Nav />
       <main
         onMouseEnter={onEnterAPP}

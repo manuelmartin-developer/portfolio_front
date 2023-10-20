@@ -36,10 +36,7 @@ const DISKChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
       }
     ],
     tooltip: {
-      show: true,
-      axisPointer: {
-        type: "shadow"
-      }
+      show: false
     }
   };
 
@@ -53,7 +50,8 @@ const DISKChart: React.FC<{ data: any; labels: any }> = ({ data, labels }) => {
         maxHeight: "500px",
         margin: "0 auto",
         minWidth: "300px",
-        maxWidth: "900px"
+        maxWidth: "900px",
+        padding: "0 20px"
       }}
       opts={{ renderer: "svg" }}
     />

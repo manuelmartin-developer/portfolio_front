@@ -24,7 +24,8 @@
     align-items: center;
     pointer-events: all;
     & > img {
-      filter: invert(1);
+      filter: invert(71%) sepia(8%) saturate(761%) hue-rotate(176deg)
+        brightness(91%) contrast(88%);
       transition: filter 0.5s ease;
       width: 40px;
       min-width: 40px;

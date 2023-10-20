@@ -55,8 +55,8 @@ const Cursor: React.FC = () => {
       scale: 3,
       width: "2rem",
       height: "2rem",
-      backgroundColor: "#fff",
-      border: "1px solid #fff",
+      backgroundColor: "#eff1f6",
+      border: "1px solid #eff1f6",
       borderRadius: "0",
       transition: {
         type: "spring",

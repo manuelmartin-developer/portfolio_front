@@ -1,16 +1,15 @@
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { projectsData } from "../../public/assets/data/data";
+import { getProjectData, projectsData } from "../../public/assets/data/data";
 import styles from "./Card.module.scss";
 import { useProjectsStore } from "../../store/projectsStore";
 import { CgClose } from "react-icons/cg";
 import { DeviceFrameset } from "react-device-frameset";
 
 // Dynamic imports
-const Project1 = dynamic(() => import("../projects/Project1"), { ssr: false });
-const Project2 = dynamic(() => import("../projects/Project2"), { ssr: false });
+const Project = dynamic(() => import("../projects/Project"), { ssr: false });
 
-const Item: React.FC<{ id?: number }> = ({ id }) => {
+const Item: React.FC<{ id: number }> = ({ id }) => {
   // Constants
   const { category, title, backgroundColor, color, url } = projectsData.find(
     (item) => item.id === id
@@ -48,7 +47,7 @@ const Item: React.FC<{ id?: number }> = ({ id }) => {
           <img
             className={styles.card_image}
             src={`/assets/img/projects/${id}.jpeg`}
-            alt=""
+            alt={title}
           />
         </motion.div>
         <motion.div
@@ -96,8 +95,7 @@ const Item: React.FC<{ id?: number }> = ({ id }) => {
               color: color ? color : ""
             }}
           >
-            {id && id === 1 && <Project1 />}
-            {id && id === 2 && <Project2 />}
+            {<Project data={getProjectData(id)!} />}
           </motion.div>
           <motion.div
             className={styles.content_container__phone}

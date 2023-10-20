@@ -57,6 +57,9 @@
   color: #fff;
   font-size: 14px;
   text-transform: uppercase;
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 }
 
 .open .card_content {
@@ -114,6 +117,9 @@
   & > h2 {
     font-size: calc(40px + 4vw);
     font-weight: 400;
+    @media only screen and (max-width: 600px) {
+      font-size: calc(40px + 2vw);
+    }
   }
 }
 
@@ -147,11 +153,12 @@
       top: unset;
       left: unset;
       width: 100%;
-      height: auto;
-      margin: 0 auto;
       display: grid;
       place-items: center;
     }
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 40px;
   }
 }
 .filters {
@@ -160,7 +167,6 @@
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
   margin-bottom: 1rem;
   &_item {
     position: relative;
@@ -170,6 +176,7 @@
     opacity: 0.3;
     transition: opacity 0.3s ease;
     color: var(--font-color);
+    padding: 0 1rem 1rem 1rem;
     &::before {
       content: "";
       position: absolute;
@@ -243,16 +250,6 @@
 .phoneIframe {
   filter: grayscale(1);
   transition: filter 0.5s ease;
-  &.project_1,
-  &.project_6 {
-    width: calc(100% + 17px);
-  }
-  &.project_2 {
-    width: calc(100% + 4px);
-  }
-  & > div {
-    overflow-x: hidden;
-  }
 
   &:hover {
     filter: grayscale(0);

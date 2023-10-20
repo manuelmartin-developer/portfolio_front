@@ -83,7 +83,7 @@ const Nav: React.FC = () => {
             }}
             prefetch={false}
           >
-            Blog_ 🚧
+            Blog_🚧
           </Link>
         </div>
       </div>

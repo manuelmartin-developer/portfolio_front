@@ -4,6 +4,9 @@
   align-items: center;
   gap: 1rem;
   padding-bottom: 1rem;
+  @media screen and (max-width: 500px) {
+    justify-content: space-between;
+  }
 }
 .link {
   transition: color 0.5s ease;
@@ -25,6 +28,9 @@
 }
 .paragraph {
   padding-bottom: 1rem;
+}
+.subtitle {
+  padding: 1rem 0;
 }
 .icons {
   margin: 2rem 0;

@@ -7,8 +7,12 @@ import Layout from "../components/layout/Layout";
 import { useEffect } from "react";
 import PageTransition from "../components/transitions/PageTransition";
 import Cursor from "../components/Cursor/Cursor";
+import { useProjectsStore } from "../store/projectsStore";
 
 export default function App({ Component, pageProps }: AppProps) {
+  // Store
+  const { projectSelected } = useProjectsStore();
+
   // Lifecycle component
   useEffect(() => {
     console.log(
@@ -20,6 +24,19 @@ export default function App({ Component, pageProps }: AppProps) {
       "font-family:monospace;font-size:1.2rem;font-weight:400;color:#fff;background-color:#3e3e3e;padding:0.3rem 0.8rem;border-radius:0.5rem;"
     );
   }, []);
+
+  useEffect(() => {
+    //  If a project is selected change urk to /work/project-id
+    if (projectSelected) {
+      window.history.pushState(
+        null,
+        "",
+        `/work/${projectSelected.title.toLowerCase()}`
+      );
+    } else {
+      window.history.pushState(null, "", "/work");
+    }
+  }, [projectSelected]);
 
   return (
     <>
