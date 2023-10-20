@@ -27,7 +27,6 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   useEffect(() => {
-    //  If a project is selected change urk to /work/project-id
     if (projectSelected) {
       window.history.pushState(
         null,
