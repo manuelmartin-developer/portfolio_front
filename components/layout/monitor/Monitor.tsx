@@ -127,7 +127,12 @@ const Monitor: React.FC<{
   }, [lastMessage]);
 
   return (
-    <div className={styles.container}>
+    <motion.div
+      className={styles.container}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <div className={styles.container_header}>
         <div className={styles.container_header__title}>
           <h3>Monitor__</h3>
@@ -218,7 +223,7 @@ const Monitor: React.FC<{
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,12 +1,12 @@
-import { NextPage } from "next";
 import Head from "next/head";
 import styles from "@/styles/Layout.module.scss";
 import Hero from "../components/layout/Hero";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useCursorStore } from "../store/cursorStore";
+import { NextPage } from "next";
 
-const info: NextPage = () => {
+const Home: NextPage = () => {
   // Store
   const { setCursorVariant, setCursorText } = useCursorStore();
 
@@ -41,7 +41,7 @@ const info: NextPage = () => {
             transition={{ duration: 0.5 }}
           >
             <h2>
-              Hi there! I'm{" "}
+              Hi there! I&apos;m{" "}
               <motion.span
                 initial={{ opacity: 0, y: 0 }}
                 animate={{ opacity: 1, y: 20 }}
@@ -60,8 +60,8 @@ const info: NextPage = () => {
             transition={{ duration: 0.5 }}
           >
             <p>
-              I'm a advocate of the open source movement and I love to learn
-              about new technologies.
+              I&apos;m a advocate of the open source movement and I love to
+              learn about new technologies.
             </p>
             <p>
               Currently working in an incredible audio startup project -
@@ -82,4 +82,4 @@ const info: NextPage = () => {
   );
 };
 
-export default info;
+export default Home;

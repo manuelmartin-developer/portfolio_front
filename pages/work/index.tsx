@@ -1,13 +1,13 @@
 import Head from "next/head";
 import styles from "@/styles/Layout.module.scss";
-import Hero from "../components/layout/Hero";
-import ListCards from "../components/cards/ListCards";
+import Hero from "../../components/layout/Hero";
+import ListCards from "../../components/cards/ListCards";
 import { AnimatePresence } from "framer-motion";
-import { useProjectsStore } from "../store/projectsStore";
-import Item from "../components/cards/Item";
+import { useProjectsStore } from "../../store/projectsStore";
+import Item from "../../components/cards/Item";
 import { useEffect } from "react";
 
-export default function Home() {
+const Work = () => {
   // Store
   const { projectSelected, setProjectSelected } = useProjectsStore();
 
@@ -16,7 +16,6 @@ export default function Home() {
     if (!projectSelected) return;
 
     // Prevent that back button go to the previous page.
-    window.history.pushState(null, "", "/");
     window.addEventListener("popstate", () => {
       setProjectSelected(null);
     });
@@ -58,4 +57,6 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+export default Work;

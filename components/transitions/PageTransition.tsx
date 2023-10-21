@@ -16,7 +16,8 @@ const PageTransition: React.FC<Props> = ({ children }) => {
       scale: 1,
       y: 0,
       transition: {
-        duration: 0.3
+        duration: 0.5,
+        delay: 0.2
       }
     },
     out: {
@@ -24,7 +25,7 @@ const PageTransition: React.FC<Props> = ({ children }) => {
       scale: 1,
       y: 20,
       transition: {
-        duration: 0.2
+        duration: 0.3
       }
     }
   };
@@ -34,7 +35,7 @@ const PageTransition: React.FC<Props> = ({ children }) => {
     isProject ? (
       <>{children}</>
     ) : (
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="popLayout">
         <motion.div
           key={asPath}
           variants={variants}

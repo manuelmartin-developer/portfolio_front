@@ -24,7 +24,7 @@ export interface ProjectData {
 export const projectsData: ProjectData[] = [
   {
     id: 1,
-    category: ["PWA", "Mobile APP", "IOS", "Android"],
+    category: ["PWA", "IOS", "Android"],
     title: "Touryme",
     backgroundColor: "#52BBBC",
     color: "#fff",
@@ -81,7 +81,7 @@ export const projectsData: ProjectData[] = [
   },
   {
     id: 3,
-    category: ["PWA", "Mobile APP", "IOS", "Android"],
+    category: ["PWA", "IOS", "Android", "Flutter"],
     title: "Weagus",
     backgroundColor: "#14213D",
     color: "#fff",
@@ -91,7 +91,7 @@ export const projectsData: ProjectData[] = [
   },
   {
     id: 4,
-    category: ["AI"],
+    category: ["AI", "Tensorflow"],
     title: "EmotionAI",
     backgroundColor: "#3e3e3e",
     color: "#fff",
@@ -101,7 +101,7 @@ export const projectsData: ProjectData[] = [
   },
   {
     id: 5,
-    category: ["AI"],
+    category: ["AI", "ElevenLabs"],
     title: "TrivIA",
     backgroundColor: "#354397",
     color: "#fff",
@@ -111,7 +111,7 @@ export const projectsData: ProjectData[] = [
   },
   {
     id: 6,
-    category: ["Web", "Server"],
+    category: ["Admin"],
     title: "No+vello",
     backgroundColor: "#fff",
     color: "#93D500",
@@ -127,6 +127,16 @@ export const getAllProjectsIds = () => {
     return {
       params: {
         id
+      }
+    };
+  });
+};
+
+export const getAllProjectsTitles = () => {
+  return projectsData.map(({ title }) => {
+    return {
+      params: {
+        title: title.toLowerCase()
       }
     };
   });
@@ -153,4 +163,8 @@ export const getCategoryCount = (category: string) => {
 
 export const getProjectData = (id: number) => {
   return projectsData.find((item) => item.id === id);
+};
+
+export const getProjectDataByTitle = (title: string) => {
+  return projectsData.find((item) => item.title.toLowerCase() === title);
 };

@@ -162,6 +162,6 @@
   z-index: 998;
   pointer-events: none;
   @media screen and (max-width: 1400px) {
-    top: 86px;
+    top: calc(8vw + 56px);
   }
 }

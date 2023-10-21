@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { useCursorStore } from "../../store/cursorStore";
 import { useProjectsStore } from "../../store/projectsStore";
 import TopOverlay from "./TopOverlay";
+import { AnimatePresence } from "framer-motion";
 // Dynamic imports
 const Monitor = dynamic(() => import("./monitor/Monitor"), { ssr: false });
 
@@ -48,7 +49,9 @@ const Layout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      {isMonitorOpen && <Monitor setIsOpen={setIsMonitorOpen} />}
+      <AnimatePresence mode="wait">
+        {isMonitorOpen && <Monitor setIsOpen={setIsMonitorOpen} />}
+      </AnimatePresence>
       <TopOverlay />
       <Nav />
       <main
