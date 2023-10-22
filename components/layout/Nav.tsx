@@ -39,7 +39,7 @@ const Nav: React.FC = () => {
           style={{
             pointerEvents: asPath !== "/" ? "all" : "none"
           }}
-          scroll={false}
+          prefetch={false}
         >
           <img src="/assets/img/commons/logo.png" alt="logo image" width={40} />
         </Link>
@@ -52,7 +52,7 @@ const Nav: React.FC = () => {
             }`}
             onMouseEnter={onEnterLink}
             onMouseLeave={onLeaveLink}
-            scroll={false}
+            prefetch={false}
           >
             Info_
           </Link>
@@ -64,7 +64,6 @@ const Nav: React.FC = () => {
             className={`${styles.nav_menu__item} ${
               asPath.startsWith("/work") ? styles.nav_menu__item_active : ""
             }`}
-            scroll={false}
             prefetch={false}
           >
             Work_
@@ -77,7 +76,6 @@ const Nav: React.FC = () => {
             className={`${styles.nav_menu__item} ${
               asPath === "/blog" ? styles.nav_menu__item_active : ""
             }`}
-            scroll={false}
             style={{
               pointerEvents: "none"
             }}

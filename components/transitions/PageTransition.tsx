@@ -8,7 +8,6 @@ type Props = {
 const PageTransition: React.FC<Props> = ({ children }) => {
   // Constants
   const { asPath } = useRouter();
-  const isProject: boolean = asPath.split("/")[1] === "projects";
 
   const variants = {
     in: {
@@ -16,8 +15,7 @@ const PageTransition: React.FC<Props> = ({ children }) => {
       scale: 1,
       y: 0,
       transition: {
-        duration: 0.5,
-        delay: 0.2
+        duration: 0.2
       }
     },
     out: {
@@ -25,28 +23,23 @@ const PageTransition: React.FC<Props> = ({ children }) => {
       scale: 1,
       y: 20,
       transition: {
-        duration: 0.3
+        duration: 0.2
       }
     }
   };
 
   return (
-    // If next page is like /projects/1, no transition
-    isProject ? (
-      <>{children}</>
-    ) : (
-      <AnimatePresence mode="popLayout">
-        <motion.div
-          key={asPath}
-          variants={variants}
-          animate="in"
-          initial="out"
-          exit="out"
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
-    )
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={asPath}
+        variants={variants}
+        animate="in"
+        initial="out"
+        exit="out"
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

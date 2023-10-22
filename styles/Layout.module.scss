@@ -31,20 +31,6 @@
     margin-bottom: 2rem;
   }
 
-  &__clock {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    width: 100%;
-    max-width: 50rem;
-    padding: 2rem;
-    gap: 2rem;
-    flex-wrap: wrap;
-    & > div > .count {
-      font-size: 5rem;
-      font-weight: 500;
-    }
-  }
   &_monitorButton {
     position: absolute;
     bottom: 20px;
@@ -136,6 +122,9 @@
       margin-top: 2rem;
       & > p {
         margin-bottom: 1rem;
+        &:nth-child(even) {
+          text-align: right;
+        }
       }
       &__link {
         color: var(--font-color);
@@ -143,6 +132,33 @@
         transition: color 0.5s ease;
         &:hover {
           color: var(--font-color-light);
+        }
+      }
+    }
+    &_social {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 2rem;
+      &__links {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: 2rem;
+        & > a {
+          margin-right: 1rem;
+          &:last-child {
+            margin-right: 0;
+          }
+          & > svg {
+            width: 30px;
+            height: 30px;
+            fill: var(--font-color);
+            transition: fill 0.5s ease;
+            &:hover {
+              fill: var(--font-color-light);
+            }
+          }
         }
       }
     }

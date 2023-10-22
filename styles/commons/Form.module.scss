@@ -1,0 +1,45 @@
+.formGroup {
+  margin-bottom: 1rem;
+  position: relative;
+  & > button {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--primary-color);
+    background: var(--font-color);
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    transition: all 0.3s ease;
+    &:hover {
+      background: var(--primary-color);
+      color: var(--font-color);
+    }
+  }
+}
+.input {
+  position: relative;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--primary-color);
+  background: var(--font-color);
+  color: var(--primary-color);
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  &::placeholder {
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+.passIcon {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 999;
+}

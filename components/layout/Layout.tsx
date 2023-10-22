@@ -7,8 +7,10 @@ import { useCursorStore } from "../../store/cursorStore";
 import { useProjectsStore } from "../../store/projectsStore";
 import TopOverlay from "./TopOverlay";
 import { AnimatePresence } from "framer-motion";
+import { useAdminStore } from "../../store/adminStore";
 // Dynamic imports
 const Monitor = dynamic(() => import("./monitor/Monitor"), { ssr: false });
+const AdminPanel = dynamic(() => import("../admin/AdminPanel"), { ssr: false });
 
 type Props = {
   children: React.ReactNode;
@@ -21,6 +23,7 @@ const Layout: React.FC<Props> = ({ children }) => {
   // Store
   const { setCursorVariant, setCursorText } = useCursorStore();
   const { projectSelected } = useProjectsStore();
+  const { isAdminLoggedIn } = useAdminStore();
 
   // Methods
   const onEnterAPP = () => {
@@ -49,7 +52,8 @@ const Layout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
-      <AnimatePresence mode="wait">
+      {isAdminLoggedIn && <AdminPanel />}
+      <AnimatePresence mode="wait" initial={false}>
         {isMonitorOpen && <Monitor setIsOpen={setIsMonitorOpen} />}
       </AnimatePresence>
       <TopOverlay />

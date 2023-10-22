@@ -172,7 +172,7 @@ const Monitor: React.FC<{
         </div>
       </div>
       <div className={styles.container_content}>
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           {monitorRequestData === "CPU" && (
             <motion.div
               key="CPU"

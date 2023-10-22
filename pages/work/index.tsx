@@ -48,7 +48,7 @@ const Work = () => {
         <Hero title="Dev" nextUnderscore="17 . 10 . 2023" right="v0.0.2" />
         <div className={styles.container_content}>
           <ListCards />
-          <AnimatePresence mode="wait" initial>
+          <AnimatePresence mode="wait" initial={false}>
             {projectSelected && (
               <Item id={projectSelected.id} key={projectSelected.id} />
             )}

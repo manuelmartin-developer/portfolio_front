@@ -51,6 +51,17 @@ const Cursor: React.FC = () => {
         mass: 0.3
       }
     },
+    dot: {
+      scale: 1,
+      width: "0.5rem",
+      height: "0.5rem",
+      backgroundColor: "#fff",
+      border: "10px solid #fff",
+      transition: {
+        type: "spring",
+        mass: 0.3
+      }
+    },
     server: {
       scale: 3,
       width: "2rem",

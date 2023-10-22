@@ -5,6 +5,10 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useCursorStore } from "../store/cursorStore";
 import { NextPage } from "next";
+import { CiLinkedin } from "react-icons/ci";
+import { RiGithubLine } from "@react-icons/all-files/ri/RiGithubLine";
+import { RiTwitterXFill } from "react-icons/ri";
+import { MdOutlineEmail } from "react-icons/md";
 
 const Home: NextPage = () => {
   // Store
@@ -19,6 +23,9 @@ const Home: NextPage = () => {
   const onLeaveLink = () => {
     setCursorText("");
     setCursorVariant("default");
+  };
+  const onEnterSpotify = () => {
+    setCursorVariant("hide");
   };
   return (
     <>
@@ -50,7 +57,9 @@ const Home: NextPage = () => {
               >
                 Manuel Martin
               </motion.span>
-              , a fullstack web and mobile developer.
+              , a fullstack web and mobile developer. I&apos;m advocate of
+              clean, efficient and scalable code. I love to learn new
+              technologies and to share my knowledge with others.
             </h2>
           </motion.div>
           <motion.div
@@ -60,11 +69,8 @@ const Home: NextPage = () => {
             transition={{ duration: 0.5 }}
           >
             <p>
-              I&apos;m a advocate of the open source movement and I love to
-              learn about new technologies.
-            </p>
-            <p>
-              Currently working in an incredible audio startup project -
+              My work currently consist of a full time job as a fullstack
+              software engineer at{" "}
               <Link
                 className={styles.container_content_description__link}
                 href="https://earscloud.io/"
@@ -75,6 +81,52 @@ const Home: NextPage = () => {
                 Earscloud
               </Link>
             </p>
+            <p>
+              But...always working on side projects, learning new technologies
+              and trying to improve my skills.
+            </p>
+          </motion.div>
+          <motion.div
+            className={styles.container_content_social}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h3>Find me on:</h3>
+            <div className={styles.container_content_social__links}>
+              <Link
+                href="https://github.com/manuelmartin-developer"
+                onMouseEnter={() => onEnterLink("Github")}
+                onMouseLeave={onLeaveLink}
+                target="_blank"
+              >
+                <RiGithubLine size={30} color="#94a3b8" />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/manuel-martin-developer/"
+                onMouseEnter={() => onEnterLink("Linkedin")}
+                onMouseLeave={onLeaveLink}
+                target="_blank"
+              >
+                <CiLinkedin size={30} color="#94a3b8" />
+              </Link>
+              <Link
+                href="https://twitter.com/ManuelMartinDia"
+                onMouseEnter={() => onEnterLink("Twitter")}
+                onMouseLeave={onLeaveLink}
+                target="_blank"
+              >
+                <RiTwitterXFill size={30} color="#94a3b8" />
+              </Link>
+              <Link
+                href="mailto:hola@manuelmartin.dev"
+                onMouseEnter={() => onEnterLink("Email")}
+                onMouseLeave={onLeaveLink}
+                target="_blank"
+              >
+                <MdOutlineEmail size={30} color="#94a3b8" />
+              </Link>
+            </div>
           </motion.div>
         </div>
       </div>
