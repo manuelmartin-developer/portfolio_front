@@ -18,7 +18,7 @@ const PageTransition = (
       scale: 1,
       y: 0,
       transition: {
-        duration: 0.2
+        duration: 0.5
       }
     },
     out: {
@@ -26,7 +26,7 @@ const PageTransition = (
       scale: 1,
       y: 20,
       transition: {
-        duration: 0.2
+        duration: 0.3
       }
     }
   };
