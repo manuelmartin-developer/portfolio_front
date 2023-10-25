@@ -1,14 +1,17 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/router";
+import { HTMLMotionProps, motion } from "framer-motion";
+import { forwardRef } from "react";
 
 type Props = {
   children: React.ReactNode;
 };
 
-const PageTransition: React.FC<Props> = ({ children }) => {
-  // Constants
-  const { asPath } = useRouter();
+type PageTransitionProps = HTMLMotionProps<"div">;
+type PageTransitionRef = React.ForwardedRef<HTMLDivElement>;
 
+const PageTransition = (
+  { children, ...rest }: Props & PageTransitionProps,
+  ref: PageTransitionRef
+) => {
   const variants = {
     in: {
       opacity: 1,
@@ -29,18 +32,17 @@ const PageTransition: React.FC<Props> = ({ children }) => {
   };
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={asPath}
-        variants={variants}
-        animate="in"
-        initial="out"
-        exit="out"
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      ref={ref}
+      variants={variants}
+      animate="in"
+      initial="out"
+      exit="out"
+      {...rest}
+    >
+      {children}
+    </motion.div>
   );
 };
 
-export default PageTransition;
+export default forwardRef(PageTransition);

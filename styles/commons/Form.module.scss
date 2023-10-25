@@ -34,6 +34,29 @@
     font-size: 1rem;
     font-weight: 500;
   }
+  &_disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+.checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  & > input {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+  & > label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    cursor: pointer;
+  }
 }
 .passIcon {
   position: absolute;

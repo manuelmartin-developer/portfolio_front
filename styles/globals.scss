@@ -170,6 +170,33 @@ body > #__next {
   cursor: default !important;
 }
 
+.blogEditorWrapper {
+  height: 100%;
+}
+.blogEditor {
+  background: var(--bg-color-light);
+  color: var(--font-color);
+  padding: 1rem;
+}
+.blog_gallery__dropzone {
+  width: 100%;
+  height: 240px;
+  padding: 1rem;
+  background-color: #d9d9d9;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  cursor: pointer;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+}
+
 // Fonts imports
 @font-face {
   font-family: "Helvetica Neue";

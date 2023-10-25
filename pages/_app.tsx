@@ -6,7 +6,6 @@ import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
 import Layout from "../components/layout/Layout";
 import { useEffect } from "react";
-import PageTransition from "../components/transitions/PageTransition";
 import Cursor from "../components/Cursor/Cursor";
 import { useProjectsStore } from "../store/projectsStore";
 import { Toaster } from "react-hot-toast";
@@ -14,10 +13,14 @@ import { useRouter } from "next/router";
 import axios, { AxiosError } from "axios";
 import { useAdminStore } from "../store/adminStore";
 import toast from "react-hot-toast";
+import { AnimatePresence } from "framer-motion";
 
 export default function App({ Component, pageProps }: AppProps) {
   // Hooks
   const router = useRouter();
+
+  // Constants
+  const pageKey = router.asPath;
 
   // Store
   const { projectSelected } = useProjectsStore();
@@ -93,20 +96,20 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Layout>
-        <Toaster
-          position="bottom-left"
-          containerClassName="toastContainer"
-          toastOptions={{
-            duration: 5000
-          }}
-        />
-        <Cursor />
-        <PageTransition>
-          <Component {...pageProps} />
-          <Analytics />
-        </PageTransition>
-      </Layout>
+      <Toaster
+        position="bottom-left"
+        containerClassName="toastContainer"
+        toastOptions={{
+          duration: 5000
+        }}
+      />
+      <Cursor />
+      <Analytics />
+      <AnimatePresence mode="popLayout" initial={false}>
+        <Layout>
+          <Component key={pageKey} {...pageProps} />
+        </Layout>
+      </AnimatePresence>
     </>
   );
 }

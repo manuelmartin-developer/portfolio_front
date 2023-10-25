@@ -5,9 +5,13 @@ import ListCards from "../../components/cards/ListCards";
 import { AnimatePresence } from "framer-motion";
 import { useProjectsStore } from "../../store/projectsStore";
 import Item from "../../components/cards/Item";
-import { useEffect } from "react";
+import { forwardRef, useEffect } from "react";
+import PageTransition from "../../components/transitions/PageTransition";
 
-const Work = () => {
+type WorkPageProps = {};
+type WorkPageRef = React.ForwardedRef<HTMLDivElement>;
+
+function Work(props: WorkPageProps, ref: WorkPageRef) {
   // Store
   const { projectSelected, setProjectSelected } = useProjectsStore();
 
@@ -44,19 +48,21 @@ const Work = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.container}>
-        <Hero title="Dev" nextUnderscore="17 . 10 . 2023" right="v0.0.2" />
-        <div className={styles.container_content}>
-          <ListCards />
-          <AnimatePresence mode="wait" initial={false}>
-            {projectSelected && (
-              <Item id={projectSelected.id} key={projectSelected.id} />
-            )}
-          </AnimatePresence>
+      <PageTransition ref={ref}>
+        <div className={styles.container}>
+          <Hero title="Dev" nextUnderscore="17 . 10 . 2023" right="v0.0.2" />
+          <div className={styles.container_content}>
+            <ListCards />
+            <AnimatePresence mode="wait" initial={false}>
+              {projectSelected && (
+                <Item id={projectSelected.id} key={projectSelected.id} />
+              )}
+            </AnimatePresence>
+          </div>
         </div>
-      </div>
+      </PageTransition>
     </>
   );
-};
+}
 
-export default Work;
+export default forwardRef(Work);

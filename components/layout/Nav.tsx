@@ -76,12 +76,9 @@ const Nav: React.FC = () => {
             className={`${styles.nav_menu__item} ${
               asPath === "/blog" ? styles.nav_menu__item_active : ""
             }`}
-            style={{
-              pointerEvents: "none"
-            }}
             prefetch={false}
           >
-            Blog_🚧
+            Blog_
           </Link>
         </div>
       </div>

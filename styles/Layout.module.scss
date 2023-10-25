@@ -85,18 +85,13 @@
         margin-right: 0;
         margin-bottom: 0px;
         &__underscore {
-          width: 60px;
-          height: 10px;
-          margin-right: 0;
-          margin-bottom: 10px;
+          display: none;
         }
         &__nextUnderscore {
-          font-size: 12px;
-          margin-bottom: 5px;
+          display: none;
         }
         &__right {
-          font-size: 12px;
-          margin-left: 0;
+          display: none;
         }
       }
     }
