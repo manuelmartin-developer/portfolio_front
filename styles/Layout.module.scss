@@ -189,9 +189,9 @@
           text-align: right;
         }
       }
-      & > p:nth-of-type(4) {
+      & > h3 {
         margin-top: 4rem;
-        text-align: right;
+        text-align: left;
         @media screen and (max-width: 800px) {
           margin-top: 7rem;
         }

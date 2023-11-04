@@ -195,11 +195,11 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
                   not available in your country, in that case, refresh!.
                 </p>
               </div>
-              <p>
+              <h3>
                 Coding is a passion for me, so I spend a lot of time doing it.
                 Here you have some facts about my coding activity from the last
                 year...
-              </p>
+              </h3>
 
               <motion.table
                 className={styles.container_content_description__table}
