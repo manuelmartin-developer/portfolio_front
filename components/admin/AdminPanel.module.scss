@@ -11,7 +11,7 @@
 }
 .adminPanel_content {
   width: 100%;
-  background: var(--font-color);
+  background: var(--bg-color-light);
   position: fixed;
   opacity: 0.95;
   top: 0;
@@ -54,56 +54,6 @@
     align-items: center;
     justify-content: flex-start;
   }
-  &_posts {
-    width: 100%;
-    height: 100%;
-    padding: 2rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 2rem;
-    overflow-y: auto;
-
-    &__form {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      &__gallery {
-        height: 200px;
-        max-height: 200px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 1rem;
-        &::-webkit-scrollbar {
-          display: none;
-        }
-      }
-      & > form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 1rem;
-      }
-
-      &__footer {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 1rem;
-      }
-    }
-    &__empty {
-      width: 100%;
-      height: 100%;
-      text-align: center;
-    }
-  }
   &_header {
     width: 100%;
     display: flex;
@@ -118,9 +68,11 @@
   }
   &_selector {
     width: 100%;
-    height: 100vh;
+    height: fit-content;
     display: grid;
     place-items: center;
+    grid-gap: 1rem;
+    margin: auto;
     &__title {
       font-size: 1.5rem;
       font-weight: 500;
@@ -129,7 +81,7 @@
   }
   &_footer {
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     padding: 1rem;
@@ -142,7 +94,7 @@
 .menuBtn {
   position: fixed;
   top: 45px;
-  left: 100px;
+  left: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,18 +112,19 @@
 }
 .btn {
   width: fit-content;
+  min-width: 120px;
   padding: 0.5rem 1rem;
   border-radius: 10px;
-  border: 1px solid var(--primary-color);
-  background: var(--font-color);
-  color: var(--primary-color);
+  border: 1px solid var(--font-color);
+  background: none;
+  color: var(--font-color);
   font-size: 1rem;
   font-weight: 500;
   outline: none;
   transition: all 0.3s ease;
   &:hover {
-    background: var(--primary-color);
-    color: var(--font-color);
+    background: var(--font-color);
+    color: var(--font-color-inverse);
   }
   &_disabled {
     opacity: 0.5;

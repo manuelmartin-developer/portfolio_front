@@ -3,7 +3,7 @@ import Head from "next/head";
 import styles from "@/styles/Admin.module.scss";
 import { useRef, useState } from "react";
 import axios, { AxiosError } from "axios";
-import toast from "react-hot-toast";
+import { useSnackbar } from "notistack";
 import { useAdminStore } from "../store/adminStore";
 import { BsEye } from "@react-icons/all-files/bs/BsEye";
 import { BsEyeSlash } from "@react-icons/all-files/bs/BsEyeSlash";
@@ -13,6 +13,9 @@ const AdminPage: NextPage = () => {
   // Refs
   const emailInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
+
+  // Hooks
+  const { enqueueSnackbar } = useSnackbar();
 
   // Store
   const { isAdminLoggedIn, setAdminLoggedIn } = useAdminStore();
@@ -33,8 +36,7 @@ const AdminPage: NextPage = () => {
     try {
       const response = await axios.post(URL, body);
       if (response.status === 200) {
-        toast.success("Login correcto");
-        console.log(response.data);
+        enqueueSnackbar("Login correcto", { variant: "success" });
         localStorage.setItem("admin_token", response.data.token);
         setAdminLoggedIn(true);
       }
@@ -42,9 +44,10 @@ const AdminPage: NextPage = () => {
       const err = error as AxiosError;
       if (err && err.response?.data) {
         const errorData: any = err.response.data;
-        toast.error(errorData.message);
-      } else {
-        toast.error("Ha existido un error en el servidor");
+        enqueueSnackbar(
+          errorData.errorData?.message || "Ha ocurrido un error",
+          { variant: "error" }
+        );
       }
     }
   };

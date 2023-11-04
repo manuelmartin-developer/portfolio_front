@@ -1,22 +1,17 @@
 import { create } from "zustand";
-import { ProjectData } from "../public/assets/data/data";
-import { projectsData } from "../public/assets/data/data";
+import { Project } from "../components/admin/Projects/AdminProjects";
 
 interface ProjectsStore {
-  projects: ProjectData[];
-  setProjects: (projects: ProjectData[]) => void;
-  categorySelected: string;
-  setCategorySelected: (categorySelected: string) => void;
-  projectSelected: ProjectData | null;
-  setProjectSelected: (projectSelected: ProjectData | null) => void;
+  projects: Project[];
+  setProjects: (projects: Project[]) => void;
+  projectSelected: Project | null;
+  setProjectSelected: (projectSelected: Project | null) => void;
 }
 
 export const useProjectsStore = create<ProjectsStore>((set) => ({
-  projects: projectsData,
-  setProjects: (projects: ProjectData[]) => set({ projects }),
-  categorySelected: "All",
-  setCategorySelected: (categorySelected: string) => set({ categorySelected }),
+  projects: [],
+  setProjects: (projects: Project[]) => set({ projects }),
   projectSelected: null,
-  setProjectSelected: (projectSelected: ProjectData | null) =>
+  setProjectSelected: (projectSelected: Project | null) =>
     set({ projectSelected })
 }));

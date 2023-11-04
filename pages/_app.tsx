@@ -1,23 +1,26 @@
 import "@/styles/globals.scss";
 import "@/styles/device.scss";
 import "@/styles/emulator.scss";
+import "tippy.js/dist/tippy.css";
 
 import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
-import Layout from "../components/layout/Layout";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+
+import axios, { AxiosError } from "axios";
+import { SnackbarProvider, useSnackbar } from "notistack";
+import { AnimatePresence } from "framer-motion";
+
+import Layout from "../components/layout/Layout";
 import Cursor from "../components/Cursor/Cursor";
 import { useProjectsStore } from "../store/projectsStore";
-import { Toaster } from "react-hot-toast";
-import { useRouter } from "next/router";
-import axios, { AxiosError } from "axios";
 import { useAdminStore } from "../store/adminStore";
-import toast from "react-hot-toast";
-import { AnimatePresence } from "framer-motion";
 
 export default function App({ Component, pageProps }: AppProps) {
   // Hooks
   const router = useRouter();
+  const { enqueueSnackbar } = useSnackbar();
 
   // Constants
   const pageKey = router.asPath;
@@ -48,15 +51,16 @@ export default function App({ Component, pageProps }: AppProps) {
       const response = await axios.post(URL, payload, { headers });
       if (response.status === 200) {
         setAdminLoggedIn(true);
-        toast.success(response.data.message);
+        enqueueSnackbar(response.data.message, { variant: "success" });
       }
     } catch (error) {
       const err = error as AxiosError;
       if (err && err.response?.data) {
         const errorData: any = err.response.data;
-        toast.error(errorData.message);
-      } else {
-        toast.error("Ha existido un error en el servidor");
+        enqueueSnackbar(
+          errorData.errorData?.message || "Ha ocurrido un error",
+          { variant: "error" }
+        );
       }
       setAdminLoggedIn(false);
       localStorage.removeItem("admin_token");
@@ -93,22 +97,23 @@ export default function App({ Component, pageProps }: AppProps) {
       window.history.pushState(null, "", `/work`);
     }
   }, [projectSelected]);
-
   return (
     <>
-      <Toaster
-        position="bottom-left"
-        containerClassName="toastContainer"
-        toastOptions={{
-          duration: 5000
-        }}
-      />
       <Cursor />
       <Analytics />
-      <AnimatePresence mode="popLayout" initial={false}>
-        <Layout>
-          <Component key={pageKey} {...pageProps} />
-        </Layout>
+      <AnimatePresence mode="popLayout">
+        <SnackbarProvider
+          maxSnack={5}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left"
+          }}
+          autoHideDuration={3000}
+        >
+          <Layout>
+            <Component key={pageKey} {...pageProps} />
+          </Layout>
+        </SnackbarProvider>
       </AnimatePresence>
     </>
   );

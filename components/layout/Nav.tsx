@@ -74,7 +74,7 @@ const Nav: React.FC = () => {
             onMouseEnter={onEnterLink}
             onMouseLeave={onLeaveLink}
             className={`${styles.nav_menu__item} ${
-              asPath === "/blog" ? styles.nav_menu__item_active : ""
+              asPath.startsWith("/blog") ? styles.nav_menu__item_active : ""
             }`}
             prefetch={false}
           >

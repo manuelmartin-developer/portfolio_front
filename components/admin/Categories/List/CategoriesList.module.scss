@@ -1,0 +1,32 @@
+.categories {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 1rem;
+  gap: 2rem;
+  &_projects,
+  &_posts {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--font-color);
+    & > h2 {
+      width: 100%;
+      text-align: left;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--font-color);
+    }
+    &_list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+    }
+  }
+}

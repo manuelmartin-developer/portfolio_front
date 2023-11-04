@@ -12,6 +12,8 @@
   --bg-color-inverse: #eff1f6;
   --heading-color: #fff;
   --shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.1);
+  --error-color: tomato;
+  --accent-color: #ffad69;
 }
 // Reset CSS
 * {
@@ -21,6 +23,7 @@
   cursor: none;
   &::-webkit-scrollbar {
     width: 4px;
+    height: 4px;
   }
   &::-webkit-scrollbar-track {
     background: var(--bg-color-light);
@@ -74,6 +77,9 @@ textarea,
 select {
   font: inherit;
 }
+button {
+  cursor: none;
+}
 p,
 h1,
 h2,
@@ -99,10 +105,6 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
 #root,
 #__next {
   isolation: isolate;
@@ -116,7 +118,7 @@ body > #__next {
 }
 .main {
   flex: 1;
-  transition: background-color 0.5s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
   background: var(--bg-color-light);
   color: var(--font-color);
   &.light {
@@ -131,7 +133,7 @@ body > #__next {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  z-index: 99999;
+  z-index: 999999;
   pointer-events: none;
   mix-blend-mode: difference;
   border-color: black;
@@ -154,6 +156,7 @@ body > #__next {
   font-size: 4px;
   font-weight: 700;
   text-wrap: nowrap;
+  color: var(--font-color);
   @media only screen and (max-width: 800px) {
     display: none !important;
   }
@@ -177,10 +180,12 @@ body > #__next {
   background: var(--bg-color-light);
   color: var(--font-color);
   padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
 }
-.blog_gallery__dropzone {
+.blog_dropzone {
   width: 100%;
-  height: 240px;
+  height: 200px;
   padding: 1rem;
   background-color: #d9d9d9;
   position: relative;
@@ -188,13 +193,81 @@ body > #__next {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  cursor: pointer;
-  overflow-x: hidden;
-  overflow-y: auto;
   border-radius: 5px;
-  margin-bottom: 2rem;
+  text-align: center;
+}
+.tippy-content {
+  background-color: var(--font-color);
+  color: var(--bg-color-light);
+  padding: 1rem !important;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-align: center;
+}
+.notistack-SnackbarContainer {
+  z-index: 999999999 !important;
+}
+.multi-select {
+  width: 100%;
+  &.error > div {
+    border: 1px solid var(--error-color) !important;
+  }
+  & > div {
+    min-height: 42px !important;
+    background-color: var(--bg-color-light) !important;
+    border: 1px solid #fff !important;
+  }
+  &__placeholder {
+    color: var(--font-color) !important;
+  }
+  &--is-disabled {
+    opacity: 0.5;
+  }
+  &__menu-list {
+    background-color: var(--bg-color-light) !important;
+    border: 1px solid #fff !important;
+    color: var(--font-color) !important;
+    z-index: 9999 !important;
+  }
+  &__multi-value {
+    background-color: var(--bg-color-light) !important;
+    border: 1px solid #fff !important;
+    border-radius: 5px !important;
+    &__label {
+      color: var(--font-color) !important;
+    }
+    &__remove {
+      color: var(--font-color) !important;
+      &:hover {
+        background-color: var(--bg-color-light) !important;
+        color: var(--font-color) !important;
+      }
+    }
+  }
+  &__single-value {
+    color: var(--font-color) !important;
+  }
+}
+.w-md-editor {
+  height: 100% !important;
+  max-height: 80vh !important;
+  color: var(--font-color) !important;
+  background-color: var(--bg-color-light) !important;
+  &-toolbar {
+    & > ul > li {
+      font-size: 1.2rem !important;
+    }
+    & > ul > li > button > svg {
+      color: var(--font-color) !important;
+      width: 1.2rem !important;
+      height: 1.2rem !important;
+    }
+  }
+}
+.wmde-markdown {
+  background-color: var(--bg-color-light) !important;
+  color: var(--font-color) !important;
 }
 
 // Fonts imports

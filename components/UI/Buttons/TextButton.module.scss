@@ -1,0 +1,20 @@
+.btn {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--font-color);
+  background: none;
+  color: var(--font-color);
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  transition: all 0.3s ease;
+  &:hover {
+    background: var(--font-color);
+    color: var(--font-color-inverse);
+  }
+  &_disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

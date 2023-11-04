@@ -1,11 +1,12 @@
 import Head from "next/head";
-import styles from "@/styles/Layout.module.scss";
-import Hero from "../../components/layout/Hero";
-import ListCards from "../../components/cards/ListCards";
-import { AnimatePresence } from "framer-motion";
-import { useProjectsStore } from "../../store/projectsStore";
-import Item from "../../components/cards/Item";
 import { forwardRef, useEffect } from "react";
+
+import styles from "@/styles/Layout.module.scss";
+
+import Hero from "../../components/layout/Hero";
+import ProjectsList from "../../components/projects/ProjectList";
+import { useProjectsStore } from "../../store/projectsStore";
+import ProjectContent from "../../components/projects/ProjectContent";
 import PageTransition from "../../components/transitions/PageTransition";
 
 type WorkPageProps = {};
@@ -48,16 +49,14 @@ function Work(props: WorkPageProps, ref: WorkPageRef) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageTransition ref={ref}>
+      <PageTransition ref={ref} layoutId="work-page">
         <div className={styles.container}>
-          <Hero title="Dev" nextUnderscore="17 . 10 . 2023" right="v0.0.2" />
+          <Hero title="Dev" nextUnderscore="03 . 11 . 2023" right="v0.1.2" />
           <div className={styles.container_content}>
-            <ListCards />
-            <AnimatePresence mode="wait" initial={false}>
-              {projectSelected && (
-                <Item id={projectSelected.id} key={projectSelected.id} />
-              )}
-            </AnimatePresence>
+            <ProjectsList />
+            {projectSelected && (
+              <ProjectContent key={projectSelected.id_project} />
+            )}
           </div>
         </div>
       </PageTransition>

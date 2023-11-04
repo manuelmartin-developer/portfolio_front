@@ -1,20 +1,39 @@
 import Head from "next/head";
-import styles from "@/styles/Layout.module.scss";
-import Hero from "../components/layout/Hero";
-import { motion } from "framer-motion";
+import { forwardRef, useEffect, useState } from "react";
 import Link from "next/link";
+import { GetStaticProps } from "next";
+
+import { AnimatePresence, motion } from "framer-motion";
+import axios from "axios";
+
+import styles from "@/styles/Layout.module.scss";
+
+import Hero from "../components/layout/Hero";
 import { useCursorStore } from "../store/cursorStore";
 import { CiLinkedin } from "react-icons/ci";
 import { RiGithubLine } from "@react-icons/all-files/ri/RiGithubLine";
 import { RiTwitterXFill } from "react-icons/ri";
 import { MdOutlineEmail } from "react-icons/md";
+import { IoIosRefresh } from "@react-icons/all-files/io/IoIosRefresh";
 import PageTransition from "../components/transitions/PageTransition";
-import { forwardRef } from "react";
 
-type IndexPageProps = {};
+type IndexPageProps = {
+  codingStats: any;
+};
 type IndexPageRef = React.ForwardedRef<HTMLDivElement>;
 
 function Home(props: IndexPageProps, ref: IndexPageRef) {
+  // Component states
+  const [songName, setSongName] = useState<string>("");
+  const [albumImage, setAlbumImage] = useState<{
+    height: number;
+    url: string;
+    width: number;
+  }>();
+  const [artistName, setArtistName] = useState<string>("");
+  const [songUrl, setSongUrl] = useState<string>("");
+  const [isLoadingSong, setIsLoadingSong] = useState<boolean>(true);
+
   // Store
   const { setCursorVariant, setCursorText } = useCursorStore();
 
@@ -29,6 +48,34 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
     setCursorVariant("default");
   };
 
+  const onGetSpotifyRandomSong = async () => {
+    const URL = `${process.env.NEXT_PUBLIC_API_URL}/spotify/song/`;
+
+    setIsLoadingSong(true);
+    try {
+      const response = await axios.get(URL);
+      if (response.status === 200) {
+        setSongName(response.data.song.name);
+        setAlbumImage({
+          height: response.data.song.album.images[0].height,
+          url: response.data.song.album.images[0].url,
+          width: response.data.song.album.images[0].width
+        });
+        setArtistName(response.data.song.artists[0].name);
+        setSongUrl(response.data.song.preview_url);
+        setIsLoadingSong(false);
+      }
+    } catch (error) {
+      setIsLoadingSong(false);
+      console.log(error);
+    }
+  };
+
+  // Component Lifecycle
+  useEffect(() => {
+    onGetSpotifyRandomSong();
+  }, []);
+
   return (
     <>
       <Head>
@@ -40,7 +87,7 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageTransition ref={ref}>
+      <PageTransition ref={ref} layoutId="index">
         <div className={styles.container}>
           <Hero title="Info" nextUnderscore="FN: Manuel" right="LN: Martín" />
           <div className={styles.container_content}>
@@ -55,8 +102,10 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
                 <motion.span
                   initial={{ opacity: 0, y: 0 }}
                   animate={{ opacity: 1, y: 20 }}
-                  transition={{ duration: 0.5, delay: 1 }}
+                  transition={{ duration: 0.5, delay: 1.5 }}
                   className={styles.container_content_title__name}
+                  onMouseEnter={() => setCursorVariant("image")}
+                  onMouseLeave={onLeaveLink}
                 >
                   Manuel Martin
                 </motion.span>
@@ -88,6 +137,155 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
                 But...always working on side projects, learning new technologies
                 and trying to improve my skills.
               </p>
+              <p>
+                I&apos;m also a music lover, surely you&apos;ll find me
+                listening to music while coding. Here&apos;s a random song from
+                my Spotify playlist:
+              </p>
+              <div className={styles.container_content_description__song}>
+                <AnimatePresence mode="wait">
+                  {!isLoadingSong && songName && albumImage && artistName && (
+                    <motion.div
+                      key={songName}
+                      className={
+                        styles.container_content_description__song__info
+                      }
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 20 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <div
+                        className={
+                          styles.container_content_description__song__info_data
+                        }
+                        style={{
+                          backgroundImage: `url(${albumImage.url})`
+                        }}
+                      >
+                        <div
+                          className={
+                            styles.container_content_description__song__info_data__text
+                          }
+                        >
+                          <h3>{songName}</h3>
+                          <h4>{artistName}</h4>
+                        </div>
+                      </div>
+                      <audio controls src={songUrl} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <motion.button
+                  className={styles.container_content_description__song__button}
+                  onClick={onGetSpotifyRandomSong}
+                  onMouseEnter={() => onEnterLink("Next song")}
+                  onMouseLeave={onLeaveLink}
+                  whileTap={{ rotate: 360, transition: { duration: 0.5 } }}
+                >
+                  <IoIosRefresh />
+                </motion.button>
+                <p
+                  className={
+                    styles.container_content_description__song__disclaimer
+                  }
+                >
+                  *Songs are randomly selected with the Spotify API. May song is
+                  not available in your country, in that case, refresh!.
+                </p>
+              </div>
+              <p>
+                Coding is a passion for me, so I spend a lot of time doing it.
+                Here you have some facts about my coding activity from the last
+                year...
+              </p>
+
+              <motion.table
+                className={styles.container_content_description__table}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <thead>
+                  <tr>
+                    <th>Stat</th>
+                    <th>Fact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <motion.tr
+                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                  >
+                    <td>Total last year</td>
+                    <td>{props.codingStats.stats.total}</td>
+                  </motion.tr>
+                  <motion.tr
+                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <td>Daily average</td>
+                    <td>{props.codingStats.stats.dayly_average}</td>
+                  </motion.tr>
+                  <motion.tr
+                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}
+                  >
+                    <td>Best day</td>
+                    <td>
+                      {props.codingStats.stats.best_day.date} with{" "}
+                      {props.codingStats.stats.best_day.text}
+                    </td>
+                  </motion.tr>
+                  <motion.tr
+                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    viewport={{ once: true }}
+                  >
+                    <td>Top language</td>
+                    <td>
+                      {props.codingStats.stats.top_language.name} with{" "}
+                      {props.codingStats.stats.top_language.percent}% of total
+                      time
+                    </td>
+                  </motion.tr>
+                  <motion.tr
+                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                    viewport={{ once: true }}
+                  >
+                    <td>This portfolio back</td>
+                    <td>{props.codingStats.stats.portfolio_back.text}*</td>
+                  </motion.tr>
+                  <motion.tr
+                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                    viewport={{ once: true }}
+                  >
+                    <td>This portfolio front</td>
+                    <td>{props.codingStats.stats.portfolio_front.text}*</td>
+                  </motion.tr>
+                  <motion.tr
+                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    <td colSpan={2}>
+                      *People say that frontend is easier than backend... 😏
+                    </td>
+                  </motion.tr>
+                </tbody>
+              </motion.table>
             </motion.div>
             <motion.div
               className={styles.container_content_social}
@@ -139,3 +337,26 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
 }
 
 export default forwardRef(Home);
+
+export const getStaticProps: GetStaticProps = async () => {
+  const getCodingStats = async () => {
+    const URL = `${process.env.NEXT_PUBLIC_API_URL}/coding/stats/`;
+    try {
+      const response = await axios.get(URL);
+      if (response.status === 200) {
+        return response.data;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const codingStats = await getCodingStats();
+
+  return {
+    props: {
+      codingStats
+    },
+    revalidate: 60 * 60 * 24 // 24 hours
+  };
+};

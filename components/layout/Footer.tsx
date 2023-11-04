@@ -24,28 +24,6 @@ const Footer: React.FC = () => {
   return (
     <footer className={styles.footer} onMouseEnter={onEnterFooter}>
       <div className={styles.footer_container}>
-        <div className={styles.footer_container_social}>
-          <Link
-            href="https://www.linkedin.com/in/manuel-martin-developer/"
-            aria-label="Ir a mi perfil de LinkedIn"
-            className={styles.footer_container_social__link}
-            target="_blank"
-            onMouseEnter={() => onEnterLink("LinkedIn")}
-            onMouseLeave={onLeaveLink}
-          >
-            <CiLinkedin size={30} color="#94a3b8" />
-          </Link>
-          <Link
-            href="https://github.com/manuelmartin-developer"
-            aria-label="Ir a mi perfil de GitHub"
-            className={styles.footer_container_social__link}
-            target="_blank"
-            onMouseEnter={() => onEnterLink("GitHub")}
-            onMouseLeave={onLeaveLink}
-          >
-            <RiGithubLine size={30} color="#94a3b8" />
-          </Link>
-        </div>
         <div className={styles.footer_container_copy}>
           <p className={styles.footer_container_copy__text}>
             {`© ${new Date().getFullYear()} made with effort by Manuel Martín`}

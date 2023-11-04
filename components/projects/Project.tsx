@@ -6,17 +6,18 @@ import { Gallery, Item } from "react-photoswipe-gallery";
 import "photoswipe/dist/photoswipe.css";
 import styles from "./Projects.module.scss";
 
-import { ProjectData } from "../../public/assets/data/data";
 import { FiExternalLink } from "react-icons/fi";
 import { BsApple, BsGooglePlay } from "react-icons/bs";
 import { useCursorStore } from "../../store/cursorStore";
 import { IoLogoIonic } from "react-icons/io5";
 import { TbBrandNextjs } from "react-icons/tb";
 import { FaReact } from "react-icons/fa";
+import { useProjectsStore } from "../../store/projectsStore";
 
-const Project: React.FC<{ data: ProjectData }> = ({ data }) => {
+const Project = () => {
   // Store
   const { setCursorVariant, setCursorText } = useCursorStore();
+  const { projectSelected } = useProjectsStore();
 
   // Methods
   const onEnterLink = (text: string) => {
@@ -32,10 +33,10 @@ const Project: React.FC<{ data: ProjectData }> = ({ data }) => {
   return (
     <>
       <div className={styles.title}>
-        <h1>{data.title}</h1>
+        <h1>{projectSelected?.title}</h1>
         <Link
           className={styles.linkBtn}
-          href={data.url}
+          href={projectSelected?.url || "#"}
           target="_blank"
           onMouseEnter={() => onEnterLink("Visit")}
           onMouseLeave={onLeaveLink}
@@ -43,7 +44,7 @@ const Project: React.FC<{ data: ProjectData }> = ({ data }) => {
           <FiExternalLink />
         </Link>
       </div>
-      {!data.isSideProject && (
+      {!projectSelected?.isSideProject && (
         <h3 className={styles.subtitle}>
           Client project carried out in{" "}
           <Link
@@ -58,7 +59,9 @@ const Project: React.FC<{ data: ProjectData }> = ({ data }) => {
           agency
         </h3>
       )}
-      {data.isSideProject && <h3 className={styles.subtitle}>Side project</h3>}
+      {projectSelected?.isSideProject && (
+        <h3 className={styles.subtitle}>Side project</h3>
+      )}
       <motion.div
         className="line"
         initial={{ width: 0 }}
@@ -66,17 +69,17 @@ const Project: React.FC<{ data: ProjectData }> = ({ data }) => {
         whileInView={{ width: "100%" }}
         viewport={{ once: true }}
         style={{
-          backgroundColor: data.color,
+          backgroundColor: projectSelected?.color,
           height: "1px",
           marginBottom: "1rem"
         }}
       ></motion.div>
-      {data.paragraphs.map((paragraph, index) => (
+      {projectSelected?.paragraphs?.map((paragraph, index) => (
         <p key={index} className={styles.paragraph}>
           {paragraph}
         </p>
       ))}
-      {data.id === 1 && (
+      {projectSelected?.id_project === 1 && (
         <motion.div
           className={styles.icons}
           whileInView={{ opacity: 1 }}
@@ -102,51 +105,56 @@ const Project: React.FC<{ data: ProjectData }> = ({ data }) => {
           </Link>
         </motion.div>
       )}
-      <h3 className={styles.subtitle}>Gallery</h3>
-      {data.gallery && (
-        <motion.div
-          className={`${styles.imgContainer} ${styles[`project_${data.id}`]}`}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          initial={{ opacity: 0 }}
-          transition={{ duration: 0.5, delay: 1 }}
-          style={{
-            position: "relative"
-          }}
-        >
-          <Gallery
-            options={{
-              loop: false
+      {projectSelected?.gallery && projectSelected?.gallery.length > 0 && (
+        <>
+          <h3 className={styles.subtitle}>Gallery</h3>
+          <motion.div
+            className={`${styles.imgContainer} ${
+              styles[`project_${projectSelected?.id_project}`]
+            }`}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            initial={{ opacity: 0 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            style={{
+              position: "relative"
             }}
           >
-            {data.gallery.map((image, index) => (
-              <Item
-                key={index}
-                original={`/assets/img/projects/project_${data.id}/${image.original}`}
-                thumbnail={`/assets/img/projects/project_${data.id}/${image.thumbnail}`}
-                width={image.width}
-                height={image.height}
-              >
-                {({ ref, open }) => (
-                  <img
-                    ref={ref as React.RefObject<HTMLImageElement>}
-                    onClick={open}
-                    className={styles.img}
-                    src={`/assets/img/projects/project_${data.id}/${image.thumbnail}`}
-                    alt={`${data.title} image ${index}`}
-                    onMouseEnter={() => onEnterLink("Zoom")}
-                    onMouseLeave={onLeaveLink}
-                  />
-                )}
-              </Item>
-            ))}
-          </Gallery>
-        </motion.div>
+            <Gallery
+              options={{
+                loop: false
+              }}
+            >
+              {projectSelected?.gallery.map((image, index) => (
+                <Item
+                  key={index}
+                  original={image.url}
+                  thumbnail={image.url}
+                  width={image.width || 626}
+                  height={image.height || 825}
+                >
+                  {({ ref, open }) => (
+                    <img
+                      ref={ref as React.RefObject<HTMLImageElement>}
+                      onClick={open}
+                      className={styles.img}
+                      src={image.url}
+                      alt={`${projectSelected?.title} image ${index}`}
+                      onMouseEnter={() => onEnterLink("Zoom")}
+                      onMouseLeave={onLeaveLink}
+                      loading="lazy"
+                    />
+                  )}
+                </Item>
+              ))}
+            </Gallery>
+          </motion.div>
+        </>
       )}
-      {data.role && (
+      {projectSelected?.role && (
         <>
           <h3 className={styles.subtitle}>Role</h3>
-          <p className={styles.paragraph}>{data.role}</p>
+          <p className={styles.paragraph}>{projectSelected?.role}</p>
         </>
       )}
       <h3 className={styles.subtitle}>Technologies</h3>
@@ -157,8 +165,8 @@ const Project: React.FC<{ data: ProjectData }> = ({ data }) => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        {data.technologies &&
-          data.technologies.map((technology, index) => (
+        {projectSelected?.technologies &&
+          projectSelected?.technologies.map((technology, index) => (
             <motion.div
               key={index}
               className={styles.chip}
@@ -171,16 +179,16 @@ const Project: React.FC<{ data: ProjectData }> = ({ data }) => {
                 color: "#fff"
               }}
             >
-              {technology === "Next.js" && <TbBrandNextjs size="1.5rem" />}
-              {technology === "Ionic" && <IoLogoIonic size="1.5rem" />}
-              {technology === "React" && <FaReact size="1.5rem" />}
+              {technology.name === "Next.js" && <TbBrandNextjs size="1.5rem" />}
+              {technology.name === "Ionic" && <IoLogoIonic size="1.5rem" />}
+              {technology.name === "React" && <FaReact size="1.5rem" />}
               <p
                 style={{
                   position: "relative",
                   top: "1px"
                 }}
               >
-                {technology}
+                {technology.name}
               </p>
             </motion.div>
           ))}

@@ -135,7 +135,12 @@ const Monitor: React.FC<{
     >
       <div className={styles.container_header}>
         <div className={styles.container_header__title}>
-          <h3>Monitor__</h3>
+          <h3>
+            My cheap server stats{" "}
+            <span role="img" aria-label="emoji">
+              📈
+            </span>
+          </h3>
           <div className={styles.container_header__title__status}>
             <FiCpu
               size="1.7rem"

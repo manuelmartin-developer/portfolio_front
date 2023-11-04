@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
+const removeImports = require("next-remove-imports")();
+
 const nextConfig = {
   reactStrictMode: false,
+  webpack: function (config) {
+    config.module.rules.push({
+      test: /\.md$/,
+      use: "raw-loader"
+    });
+    return config;
+  },
   env: {
     NEXT_APP_ENV: process.env.NEXT_APP_ENV,
     NEXT_PUBLIC_MONITOR_WS_URL: process.env.NEXT_PUBLIC_MONITOR_WS_URL,
@@ -8,4 +17,4 @@ const nextConfig = {
   }
 };
 
-module.exports = nextConfig;
+module.exports = removeImports(nextConfig);

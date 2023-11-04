@@ -13,7 +13,7 @@ const Cursor: React.FC = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  const springConfig = { damping: 35, stiffness: 700 };
+  const springConfig = { damping: 35, stiffness: 500 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
@@ -83,6 +83,23 @@ const Cursor: React.FC = () => {
       backgroundColor: "rgba(0, 0, 0, 0)",
       x: 0,
       y: 0
+    },
+    image: {
+      scale: 4,
+      width: "3rem",
+      height: "3rem",
+      backgroundColor: "rgba(0, 0, 0, 0)"
+    },
+    party: {
+      scale: 3,
+      width: "3rem",
+      height: "3rem",
+      backgroundColor: "rgba(0, 0, 0, 0)",
+      border: "2px solid #fff",
+      transition: {
+        type: "spring",
+        mass: 0.3
+      }
     }
   };
 
@@ -114,6 +131,19 @@ const Cursor: React.FC = () => {
         }}
       >
         <span className="cursorText">{cursorText}</span>
+        {cursorVariant === "image" && (
+          <img
+            style={{
+              borderRadius: "50%",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              transform: "translate(0%, -70%)"
+            }}
+            src="/assets/img/commons/me.jpeg"
+            alt="Manuel Martín"
+          />
+        )}
       </m.div>
     </LazyMotion>
   );
