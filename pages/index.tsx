@@ -238,7 +238,7 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     viewport={{ once: true }}
                   >
-                    <td>Best day</td>
+                    <td>Craziest day</td>
                     <td>
                       {props.codingStats.stats.best_day.date} with{" "}
                       {props.codingStats.stats.best_day.text}

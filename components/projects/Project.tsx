@@ -57,6 +57,27 @@ const Project = () => {
         >
           <FiExternalLink />
         </Link>
+        {projectSelected?.title === "Touryme" && (
+          <img
+            src="https://wakatime.com/badge/user/8020e9ee-e306-42d1-badf-114217fce27c/project/8666cd1b-8fca-4ad1-acda-7d011ae56b53.svg?style=plastic"
+            alt="Touryme coding time"
+            title="Coding time"
+          />
+        )}
+        {projectSelected?.title === "ConBdeBoda" && (
+          <img
+            src="https://wakatime.com/badge/user/8020e9ee-e306-42d1-badf-114217fce27c/project/01397791-c904-4c43-afd7-103efc209dc0.svg?style=plastic"
+            alt="ConBdeBoda coding time"
+            title="Coding time"
+          />
+        )}
+        {projectSelected?.title === "No+vello" && (
+          <img
+            src="https://wakatime.com/badge/user/8020e9ee-e306-42d1-badf-114217fce27c/project/f3937d8d-34d9-4607-9ec3-2575308ed517.svg?style=plastic"
+            alt="No+vello coding time"
+            title="Coding time"
+          />
+        )}
       </div>
       {!projectSelected?.isSideProject && (
         <h3 className={styles.subtitle}>
@@ -93,7 +114,7 @@ const Project = () => {
           {paragraph}
         </p>
       ))}
-      {projectSelected?.id_project === 1 && (
+      {projectSelected?.title === "Touryme" && (
         <motion.div
           className={styles.icons}
           whileInView={{ opacity: 1 }}
@@ -197,7 +218,7 @@ const Project = () => {
               {technology.name === "Next.js" && <TbBrandNextjs size="1.5rem" />}
               {technology.name === "Node.js" && <FaNodeJs size="1.5rem" />}
               {technology.name === "Express" && <SiExpress size="1.5rem" />}
-              {technology.name === "Typescript" && (
+              {technology.name === "TypeScript" && (
                 <BiLogoTypescript size="1.5rem" />
               )}
               {technology.name === "Ionic" && <IoLogoIonic size="1.5rem" />}

@@ -44,15 +44,13 @@
   width: 100%;
   display: grid;
   padding: 3rem 0;
-  &.project_1 {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    & > img {
-      width: 200px;
-      height: auto;
-      object-fit: cover;
-      border-radius: 5px;
-    }
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  & > img {
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
   }
 }
 
@@ -67,7 +65,7 @@
   & > .chip {
     width: 120px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: nowrap;
     gap: 1rem;
