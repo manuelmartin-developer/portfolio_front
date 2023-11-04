@@ -178,6 +178,7 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
                 </AnimatePresence>
                 <motion.button
                   className={styles.container_content_description__song__button}
+                  aria-label="Next song"
                   onClick={onGetSpotifyRandomSong}
                   onMouseEnter={() => onEnterLink("Next song")}
                   onMouseLeave={onLeaveLink}
@@ -301,10 +302,11 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
                   onMouseLeave={onLeaveLink}
                   target="_blank"
                 >
-                  <RiGithubLine size={30} color="#94a3b8" />
+                  <RiGithubLine size={30} color="#94a3b8" aria-label="Github" />
                 </Link>
                 <Link
                   href="https://www.linkedin.com/in/manuel-martin-developer/"
+                  aria-label="Linkedin"
                   onMouseEnter={() => onEnterLink("Linkedin")}
                   onMouseLeave={onLeaveLink}
                   target="_blank"
@@ -313,6 +315,7 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
                 </Link>
                 <Link
                   href="https://twitter.com/ManuelMartinDia"
+                  aria-label="Twitter"
                   onMouseEnter={() => onEnterLink("Twitter")}
                   onMouseLeave={onLeaveLink}
                   target="_blank"
@@ -321,6 +324,7 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
                 </Link>
                 <Link
                   href="mailto:hola@manuelmartin.dev"
+                  aria-label="Email"
                   onMouseEnter={() => onEnterLink("Email")}
                   onMouseLeave={onLeaveLink}
                   target="_blank"

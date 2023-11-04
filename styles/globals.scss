@@ -268,6 +268,11 @@ body > #__next {
 .wmde-markdown {
   background-color: var(--bg-color-light) !important;
   color: var(--font-color) !important;
+  // paragraphs with a image inside
+  & > img {
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 // Fonts imports

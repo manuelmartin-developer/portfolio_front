@@ -41,7 +41,12 @@ const Nav: React.FC = () => {
           }}
           prefetch={false}
         >
-          <img src="/assets/img/commons/logo.png" alt="logo image" width={40} />
+          <img
+            src="/assets/img/commons/logo.png"
+            alt="logo image"
+            width={40}
+            height={40}
+          />
         </Link>
         <div className={styles.nav_menu}>
           <Link
