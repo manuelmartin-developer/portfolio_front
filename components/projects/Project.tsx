@@ -9,9 +9,23 @@ import styles from "./Projects.module.scss";
 import { FiExternalLink } from "react-icons/fi";
 import { BsApple, BsGooglePlay } from "react-icons/bs";
 import { useCursorStore } from "../../store/cursorStore";
-import { IoLogoIonic } from "react-icons/io5";
+import { IoLogoIonic } from "@react-icons/all-files/io5/IoLogoIonic";
 import { TbBrandNextjs } from "react-icons/tb";
-import { FaReact } from "react-icons/fa";
+import { FaReact } from "@react-icons/all-files/fa/FaReact";
+import { FaNodeJs } from "@react-icons/all-files/fa/FaNodeJs";
+import { SiExpress, SiTensorflow } from "react-icons/si";
+import {
+  BiLogoTypescript,
+  BiLogoAws,
+  BiLogoJavascript,
+  BiLogoCss3
+} from "react-icons/bi";
+import { AiFillHtml5 } from "@react-icons/all-files/ai/AiFillHtml5";
+import { TbBrandSass } from "react-icons/tb";
+import { DiMongodb } from "react-icons/di";
+import { BiLogoPostgresql } from "react-icons/bi";
+import { RiOpenaiFill } from "react-icons/ri";
+import { FaDocker } from "@react-icons/all-files/fa/FaDocker";
 import { useProjectsStore } from "../../store/projectsStore";
 
 const Project = () => {
@@ -179,9 +193,31 @@ const Project = () => {
                 color: "#fff"
               }}
             >
-              {technology.name === "Next.js" && <TbBrandNextjs size="1.5rem" />}
-              {technology.name === "Ionic" && <IoLogoIonic size="1.5rem" />}
               {technology.name === "React" && <FaReact size="1.5rem" />}
+              {technology.name === "Next.js" && <TbBrandNextjs size="1.5rem" />}
+              {technology.name === "Node.js" && <FaNodeJs size="1.5rem" />}
+              {technology.name === "Express" && <SiExpress size="1.5rem" />}
+              {technology.name === "Typescript" && (
+                <BiLogoTypescript size="1.5rem" />
+              )}
+              {technology.name === "Ionic" && <IoLogoIonic size="1.5rem" />}
+              {technology.name === "Javascript" && (
+                <BiLogoJavascript size="1.5rem" />
+              )}
+              {technology.name === "CSS" && <BiLogoCss3 size="1.5rem" />}
+              {technology.name === "HTML" && <AiFillHtml5 size="1.5rem" />}
+              {technology.name === "Sass" && <TbBrandSass size="1.5rem" />}
+              {technology.name === "MongoDB" && <DiMongodb size="1.5rem" />}
+              {technology.name === "PostgreSQL" && (
+                <BiLogoPostgresql size="1.5rem" />
+              )}
+              {technology.name === "AWS" && <BiLogoAws size="1.5rem" />}
+              {technology.name === "Tensorflow" && (
+                <SiTensorflow size="1.5rem" />
+              )}
+              {technology.name === "OpenAI" && <RiOpenaiFill size="1.5rem" />}
+              {technology.name === "Docker" && <FaDocker size="1.5rem" />}
+
               <p
                 style={{
                   position: "relative",

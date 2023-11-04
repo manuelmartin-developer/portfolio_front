@@ -25,28 +25,19 @@ const technologies = [
   "Next.js",
   "Node.js",
   "Express",
+  "Ionic",
   "TypeScript",
   "JavaScript",
   "HTML",
   "CSS",
   "Sass",
-  "Bootstrap",
   "Material UI",
-  "Tailwind CSS",
   "MongoDB",
   "PostgreSQL",
-  "MySQL",
-  "Firebase",
   "AWS",
-  "Git",
-  "GitHub",
-  "GitLab",
   "TensorFlow",
   "OpenAI",
-  "Python",
-  "Django",
-  "Docker",
-  "Kubernetes"
+  "Docker"
 ];
 
 const ProjectForm: React.FC<{
