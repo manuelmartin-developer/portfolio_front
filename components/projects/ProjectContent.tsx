@@ -6,6 +6,7 @@ import { DeviceFrameset } from "react-device-frameset";
 import styles from "./Project.module.scss";
 import { useProjectsStore } from "../../store/projectsStore";
 import { CgClose } from "@react-icons/all-files/cg/CgClose";
+import Image from "next/image";
 
 // Dynamic imports
 const Project = dynamic(() => import("./Project"), { ssr: false });
@@ -44,10 +45,12 @@ const ProjectContent = () => {
           className={`${styles.card_image_container} ${styles.open}`}
           layoutId={`card-image-container-${projectSelected?.id_project}`}
         >
-          <img
+          <Image
             className={styles.card_image}
-            src={projectSelected?.featuredImage.url}
-            alt={projectSelected?.title}
+            src={projectSelected?.featuredImage.url || ""}
+            alt={projectSelected?.title || ""}
+            width={800}
+            height={450}
           />
         </motion.div>
         <motion.div

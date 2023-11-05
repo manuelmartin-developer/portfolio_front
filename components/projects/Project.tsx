@@ -27,6 +27,7 @@ import { BiLogoPostgresql } from "react-icons/bi";
 import { RiOpenaiFill } from "react-icons/ri";
 import { FaDocker } from "@react-icons/all-files/fa/FaDocker";
 import { useProjectsStore } from "../../store/projectsStore";
+import Image from "next/image";
 
 const ProjectComponent = () => {
   // Store
@@ -169,7 +170,7 @@ const ProjectComponent = () => {
                   height={image.height || 825}
                 >
                   {({ ref, open }) => (
-                    <img
+                    <Image
                       ref={ref as React.RefObject<HTMLImageElement>}
                       onClick={open}
                       className={styles.img}
@@ -177,7 +178,8 @@ const ProjectComponent = () => {
                       alt={`${projectSelected?.title} image ${index}`}
                       onMouseEnter={() => onEnterLink("Zoom")}
                       onMouseLeave={onLeaveLink}
-                      loading="lazy"
+                      width={image.width || 626}
+                      height={image.height || 825}
                     />
                   )}
                 </Item>

@@ -7,6 +7,7 @@ import {
   domAnimation
 } from "framer-motion";
 import { useCursorStore } from "../../store/cursorStore";
+import Image from "next/image";
 
 const Cursor: React.FC = () => {
   // Constants
@@ -132,7 +133,7 @@ const Cursor: React.FC = () => {
       >
         <span className="cursorText">{cursorText}</span>
         {cursorVariant === "image" && (
-          <img
+          <Image
             style={{
               borderRadius: "50%",
               width: "100%",
@@ -142,6 +143,9 @@ const Cursor: React.FC = () => {
             }}
             src="/assets/img/commons/me.jpeg"
             alt="Manuel Martín"
+            width={192}
+            height={192}
+            priority
           />
         )}
       </m.div>

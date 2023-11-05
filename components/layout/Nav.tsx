@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "./Nav.module.scss";
 import { useRouter } from "next/router";
 import { useCursorStore } from "../../store/cursorStore";
+import Image from "next/image";
 
 const Nav: React.FC = () => {
   // Constants
@@ -41,11 +42,12 @@ const Nav: React.FC = () => {
           }}
           prefetch={false}
         >
-          <img
+          <Image
             src="/assets/img/commons/logo.png"
             alt="logo image"
             width={40}
             height={40}
+            priority
           />
         </Link>
         <div className={styles.nav_menu}>

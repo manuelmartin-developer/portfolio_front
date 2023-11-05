@@ -7,6 +7,7 @@ import styles from "./Project.module.scss";
 import { useCursorStore } from "../../store/cursorStore";
 import { useProjectsStore } from "../../store/projectsStore";
 import { Project } from "../admin/Projects/AdminProjects";
+import Image from "next/image";
 
 const ProjectItem: React.FC<{
   project: Project;
@@ -59,10 +60,12 @@ const ProjectItem: React.FC<{
             className={styles.card_image_container}
             layoutId={`card-image-container-${id_project}`}
           >
-            <img
+            <Image
               className={styles.card_image}
               src={project.featuredImage.url}
               alt={project.title}
+              width={800}
+              height={450}
             />
           </motion.div>
           <AnimatePresence mode="wait">
