@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap><loc>https://manuelmartin.dev/sitemap-global.xml</loc>
+<lastmod>2023-11-03T00:00:00+00:00</lastmod>
+</sitemap>
+<sitemap><loc>https://manuelmartin.dev/sitemap-work.xml</loc>
+<lastmod>2023-11-03T00:00:00+00:00</lastmod>
+</sitemap>
+<sitemap><loc>https://manuelmartin.dev/sitemap-blog.xml</loc>
+<lastmod>2023-11-03T00:00:00+00:00</lastmod>
+</sitemap>
+</sitemapindex>

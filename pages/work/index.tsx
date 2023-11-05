@@ -49,9 +49,68 @@ function Work(props: WorkPageProps, ref: WorkPageRef) {
         <title>Manuel Martín | Portfolio</title>
         <meta
           name="description"
-          content="Portfolio de Manuel Martín, desarrollador web fullstack."
+          content="Manuel Martín | Fullstack web and mobile developer"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "CreativeWork",
+            name: "Manuel Martín | Portfolio",
+            description: "Manuel Martín | Fullstack web and mobile developer",
+            image: "https://manuelmartin.dev/assets/img/commons/logo.png",
+            url: "https://manuelmartin.dev",
+            author: {
+              "@type": "Person",
+              name: "Manuel Martín"
+            },
+            creator: {
+              "@type": "Person",
+              name: "Manuel Martín"
+            },
+            publisher: {
+              "@type": "Person",
+              name: "Manuel Martín"
+            },
+            datePublished: "2023-11-03",
+            dateModified: "2023-11-03",
+            version: "v0.1.2",
+            mainEntityOfPage: "https://manuelmartin.dev",
+            license: "MIT",
+            keywords:
+              "Manuel Martín, Portfolio, developer, web, mobile, fullstack, javascript, typescript, react, nextjs, nodejs, express"
+          })}
+        </script>
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Manuel Martín" />
+        <meta
+          name="keywords"
+          content="Manuel Martín, Portfolio, developer, web, mobile, fullstack, javascript, typescript, react, nextjs, nodejs, express"
+        />
+        <meta property="og:title" content="Manuel Martín | Portfolio" />
+        <meta
+          property="og:description"
+          content="Manuel Martín | Fullstack web and mobile developer"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://manuelmartin.dev/work" />
+        <meta
+          property="og:image"
+          content="https://manuelmartin.dev/assets/img/commons/logo.png"
+        />
+        <meta property="og:site_name" content="Manuel Martín | Portfolio" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Manuel Martín | Portfolio" />
+        <meta
+          name="twitter:description"
+          content="Manuel Martín | Fullstack web and mobile developer"
+        />
+        <meta
+          name="twitter:image"
+          content="https://manuelmartin.dev/assets/img/commons/logo.png"
+        />
+        <meta name="twitter:site" content="@ManuelMartinDia" />
+        <meta name="twitter:creator" content="@ManuelMartinDia" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PageTransition ref={ref} layoutId="work-page">

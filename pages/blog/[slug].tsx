@@ -155,10 +155,59 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
         <title>Manuel Martín | Portfolio</title>
         <meta
           name="description"
-          content="Portfolio de Manuel Martín, desarrollador web fullstack."
+          content="Manuel Martín | Fullstack web and mobile developer"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <script type="application/ld+json">
+          {"{" +
+            '"@context": "https://schema.org",' +
+            '"@type": "BlogPosting",' +
+            `"headline": "${props.post.title}",` +
+            `"image": ["https://manuelmartin.dev/assets/img/commons/logo.png"],` +
+            `"author": "Manuel Martín",` +
+            `"datePublished": "${props.post.createdAt}",` +
+            `"dateModified": "${props.post.updatedAt}",` +
+            `"description": "${props.post.excerpt}",` +
+            `"mainEntityOfPage": "True",` +
+            `"publisher": "Manuel Martín",` +
+            `"url": "https://manuelmartin.dev/blog/${props.post.slug}"` +
+            "}"}
+        </script>
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Manuel Martín" />
+        <meta
+          name="keywords"
+          content="Manuel Martín, Portfolio, developer, web, mobile, fullstack, javascript, typescript, react, nextjs, nodejs, express"
+        />
+        <meta property="og:title" content="Manuel Martín | Portfolio" />
+        <meta
+          property="og:description"
+          content="Manuel Martín | Fullstack web and mobile developer"
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content={`https://manuelmartin.dev/blog/${props.post.slug}`}
+        />
+        <meta
+          property="og:image"
+          content="https://manuelmartin.dev/assets/img/commons/logo.png"
+        />
+        <meta property="og:site_name" content="Manuel Martín | Portfolio" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Manuel Martín | Portfolio" />
+        <meta
+          name="twitter:description"
+          content="Manuel Martín | Fullstack web and mobile developer"
+        />
+        <meta
+          name="twitter:image"
+          content="https://manuelmartin.dev/assets/img/commons/logo.png"
+        />
+        <meta name="twitter:site" content="@ManuelMartinDia" />
+        <meta name="twitter:creator" content="@ManuelMartinDia" />
+        <link rel="canonical" href="https://manuelmartin.dev" />
       </Head>
       <PageTransition ref={ref} layoutId="blog-post-page">
         <ProgressBar />
