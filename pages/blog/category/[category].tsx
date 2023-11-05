@@ -9,24 +9,11 @@ import styles from "@/styles/Layout.module.scss";
 import Hero from "../../../components/layout/Hero";
 import PageTransition from "../../../components/transitions/PageTransition";
 import PostList from "../../../components/posts/PostList";
-import { Post } from "../../../components/admin/Posts/AdminPosts";
-
-type BlogCategoryPageProps = {
-  posts: Post[];
-  mostPopular: {
-    title: string;
-    slug: string;
-    likes: number;
-  }[];
-  count: number;
-};
+import { BlogPageProps } from "../index";
 
 type BlogCategoryPageRef = React.ForwardedRef<HTMLDivElement>;
 
-function BlogCategoryPage(
-  props: BlogCategoryPageProps,
-  ref: BlogCategoryPageRef
-) {
+function BlogCategoryPage(props: BlogPageProps, ref: BlogCategoryPageRef) {
   return (
     <>
       <Head>
@@ -42,7 +29,7 @@ function BlogCategoryPage(
         <div className={styles.container}>
           <Hero title="Blog" nextUnderscore="Tech" right="Dev" />
           <div className={styles.container_content}>
-            <PostList data={props} categoriesFilters={false} />
+            <PostList data={props} hasCategoriesFilters={false} />
           </div>
         </div>
       </PageTransition>

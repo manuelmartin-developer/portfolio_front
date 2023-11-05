@@ -8,8 +8,15 @@ import ProjectsList from "../../components/projects/ProjectList";
 import { useProjectsStore } from "../../store/projectsStore";
 import ProjectContent from "../../components/projects/ProjectContent";
 import PageTransition from "../../components/transitions/PageTransition";
+import { GetStaticProps } from "next";
+import axios from "axios";
+import { Project } from "../../components/admin/Projects/AdminProjects";
+import { Category } from "../../components/admin/Categories/AdminCategories";
 
-type WorkPageProps = {};
+type WorkPageProps = {
+  projects: Project[];
+  categories: Category[];
+};
 type WorkPageRef = React.ForwardedRef<HTMLDivElement>;
 
 function Work(props: WorkPageProps, ref: WorkPageRef) {
@@ -18,6 +25,10 @@ function Work(props: WorkPageProps, ref: WorkPageRef) {
 
   // Lifecycle component
   useEffect(() => {
+    projectSelected
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "unset");
+
     if (!projectSelected) return;
 
     // Prevent that back button go to the previous page.
@@ -30,12 +41,6 @@ function Work(props: WorkPageProps, ref: WorkPageRef) {
         setProjectSelected(null);
       });
     };
-  }, [projectSelected]);
-
-  useEffect(() => {
-    projectSelected
-      ? (document.body.style.overflow = "hidden")
-      : (document.body.style.overflow = "unset");
   }, [projectSelected]);
 
   return (
@@ -53,7 +58,7 @@ function Work(props: WorkPageProps, ref: WorkPageRef) {
         <div className={styles.container}>
           <Hero title="Dev" nextUnderscore="03 . 11 . 2023" right="v0.1.2" />
           <div className={styles.container_content}>
-            <ProjectsList />
+            <ProjectsList data={props.projects} categories={props.categories} />
             {projectSelected && (
               <ProjectContent key={projectSelected.id_project} />
             )}
@@ -65,3 +70,46 @@ function Work(props: WorkPageProps, ref: WorkPageRef) {
 }
 
 export default forwardRef(Work);
+
+export const getStaticProps: GetStaticProps = async () => {
+  const onGetProjects = async () => {
+    const URL = `${process.env.NEXT_PUBLIC_API_URL}/projects/`;
+
+    try {
+      const response = await axios.get(URL);
+      if (response.status === 200) {
+        return {
+          projects: response.data.projects
+        };
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const onGetCategories = async () => {
+    const URL = `${process.env.NEXT_PUBLIC_API_URL}/categories/?type=project`;
+
+    try {
+      const response = await axios.get(URL);
+      if (response.status === 200) {
+        return {
+          categories: response.data.categories
+        };
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const projects = await onGetProjects();
+  const categories = await onGetCategories();
+
+  return {
+    props: {
+      ...projects,
+      ...categories
+    },
+    revalidate: 60
+  };
+};

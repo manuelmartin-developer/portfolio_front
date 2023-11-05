@@ -83,7 +83,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   useEffect(() => {
-    if (projectSelected && router.pathname !== "/work/[slug]") {
+    if (projectSelected && router.pathname !== "/work/[project]") {
       window.history.pushState(
         null,
         "",
@@ -91,7 +91,7 @@ export default function App({ Component, pageProps }: AppProps) {
       );
     } else if (
       !projectSelected &&
-      router.pathname !== "/work/[slug]" &&
+      router.pathname !== "/work/[project]" &&
       router.pathname.startsWith("/work")
     ) {
       window.history.pushState(null, "", `/work`);

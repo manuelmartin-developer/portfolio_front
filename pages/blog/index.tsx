@@ -10,6 +10,7 @@ import Hero from "../../components/layout/Hero";
 import PageTransition from "../../components/transitions/PageTransition";
 import PostList from "../../components/posts/PostList";
 import { Post } from "../../components/admin/Posts/AdminPosts";
+import { Category } from "../../components/admin/Categories/AdminCategories";
 
 export type BlogPageProps = {
   posts: Post[];
@@ -19,6 +20,7 @@ export type BlogPageProps = {
     likes: number;
   }[];
   count: number;
+  categories?: Category[];
 };
 type BlogPageRef = React.ForwardedRef<HTMLDivElement>;
 
@@ -38,7 +40,7 @@ function Blog(props: BlogPageProps, ref: BlogPageRef) {
         <div className={styles.container}>
           <Hero title="Blog" nextUnderscore="Tech" right="Dev" />
           <div className={styles.container_content}>
-            <PostList data={props} categoriesFilters={true} />
+            <PostList data={props} hasCategoriesFilters={true} />
           </div>
         </div>
       </PageTransition>
@@ -49,7 +51,7 @@ function Blog(props: BlogPageProps, ref: BlogPageRef) {
 export default forwardRef(Blog);
 
 export const getStaticProps: GetStaticProps = async () => {
-  const onGetAllPosts = async () => {
+  const onGetPosts = async () => {
     const URL = `${process.env.NEXT_PUBLIC_API_URL}/posts/`;
 
     try {
@@ -66,11 +68,28 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   };
 
-  const posts = await onGetAllPosts();
+  const onGetCategories = async () => {
+    const URL = `${process.env.NEXT_PUBLIC_API_URL}/categories/?type=post`;
+
+    try {
+      const response = await axios.get(URL);
+      if (response.status === 200) {
+        return {
+          categories: response.data.categories
+        };
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const posts = await onGetPosts();
+  const categories = await onGetCategories();
 
   return {
     props: {
-      ...posts
+      ...posts,
+      ...categories
     },
     revalidate: 1
   };

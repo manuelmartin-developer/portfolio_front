@@ -112,12 +112,16 @@
     font-size: 18px;
     font-weight: 400;
     margin-bottom: 8px;
+    @media only screen and (max-width: 600px) {
+      font-size: 14px;
+    }
   }
   & > h2 {
     font-size: calc(40px + 4vw);
     font-weight: 400;
     @media only screen and (max-width: 600px) {
       font-size: calc(40px + 2vw);
+      align-self: center;
     }
   }
 }
@@ -154,14 +158,31 @@
   @media only screen and (max-width: 600px) {
     padding: 40px;
   }
+  @media only screen and (max-width: 500px) {
+    padding: 20px;
+  }
 }
 .filters {
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
+  position: relative;
+  &__buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-right: 3rem;
+    @media only screen and (max-width: 600px) {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
   &_item {
     position: relative;
     border: none;
@@ -220,6 +241,26 @@
       font-size: 12px;
     }
   }
+  &__overlay {
+    pointer-events: none;
+    position: absolute;
+    align-self: flex-end;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100px;
+    min-width: 100px;
+    background: linear-gradient(
+      to right,
+      rgba(30, 41, 59, 0) 0%,
+      rgba(30, 41, 59, 1) 100%
+    );
+    z-index: 998;
+    visibility: hidden;
+    @media only screen and (max-width: 600px) {
+      visibility: visible;
+    }
+  }
 }
 .closeBtn {
   position: fixed;
@@ -238,6 +279,13 @@
   background: none;
   & > svg {
     stroke-width: 2px;
+  }
+  @media only screen and (max-width: 500px) {
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
   }
 }
 

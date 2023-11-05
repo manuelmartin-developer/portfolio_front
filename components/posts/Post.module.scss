@@ -8,8 +8,11 @@
   grid-gap: 4rem;
   margin: 0 auto;
   @media screen and (max-width: 800px) {
-    grid-template-columns: 1fr;
-    grid-gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2rem;
   }
   &_left {
     width: 100%;
@@ -34,6 +37,12 @@
     align-items: flex-start;
     & > h2 {
       color: var(--accent-color);
+    }
+    @media screen and (max-width: 800px) {
+      width: 100%;
+      margin-top: 0;
+      border-top: 1px solid var(--font-color);
+      padding-top: 2rem;
     }
   }
 }
@@ -103,11 +112,25 @@
 }
 .filters {
   width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
+  position: relative;
+  &__buttons {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-right: 3rem;
+    @media only screen and (max-width: 600px) {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
   &_item {
     position: relative;
     border: none;
@@ -164,6 +187,26 @@
       top: -5px;
       right: -3px;
       font-size: 12px;
+    }
+  }
+  &__overlay {
+    pointer-events: none;
+    position: absolute;
+    align-self: flex-end;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100px;
+    min-width: 100px;
+    background: linear-gradient(
+      to right,
+      rgba(30, 41, 59, 0) 0%,
+      rgba(30, 41, 59, 1) 100%
+    );
+    z-index: 998;
+    visibility: hidden;
+    @media only screen and (max-width: 600px) {
+      visibility: visible;
     }
   }
 }

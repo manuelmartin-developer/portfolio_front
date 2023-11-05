@@ -18,6 +18,8 @@ export interface Category {
   type: CategoryType;
   createdAt: Date;
   updatedAt: Date;
+  project_count?: number;
+  post_count?: number;
 }
 
 const AdminCategories = () => {

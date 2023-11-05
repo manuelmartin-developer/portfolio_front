@@ -28,7 +28,7 @@ import { RiOpenaiFill } from "react-icons/ri";
 import { FaDocker } from "@react-icons/all-files/fa/FaDocker";
 import { useProjectsStore } from "../../store/projectsStore";
 
-const Project = () => {
+const ProjectComponent = () => {
   // Store
   const { setCursorVariant, setCursorText } = useCursorStore();
   const { projectSelected } = useProjectsStore();
@@ -254,4 +254,4 @@ const Project = () => {
   );
 };
 
-export default Project;
+export default ProjectComponent;

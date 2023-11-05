@@ -1,5 +1,4 @@
 import { GetStaticProps, GetStaticPaths, NextPage } from "next";
-import Work from ".";
 import { useProjectsStore } from "../../store/projectsStore";
 import { useEffect } from "react";
 import axios from "axios";
@@ -15,11 +14,13 @@ const WorkProject: NextPage<any> = (props: { project: Project }) => {
 
   // Lifecycle component
   useEffect(() => {
-    if (!router.isReady) return;
     setProjectSelected(props.project);
-  }, [router.isReady, props.project]);
+    router.push("/work/", undefined, {
+      shallow: true
+    });
+  }, []);
 
-  return <Work />;
+  return null;
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -40,7 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: paths.map((path: any) => {
       return {
         params: {
-          project: path.title
+          project: path.title.toLowerCase()
         }
       };
     }),
