@@ -39,3 +39,5 @@ next-env.d.ts
 
 # mdposts data
 /public/assets/mdposts
+/public/assets/galerias
+

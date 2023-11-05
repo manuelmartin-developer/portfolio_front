@@ -49,6 +49,7 @@
   display: grid;
   padding: 3rem 0;
   grid-template-columns: repeat(4, 1fr);
+  place-items: center;
   gap: 1rem;
   & > img {
     width: 200px;
