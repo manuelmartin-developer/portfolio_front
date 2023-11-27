@@ -63,6 +63,11 @@ const Switch = () => {
     setCursorText("Randimize Color");
   };
 
+  const onEnterCheckbox = () => {
+    setCursorVariant("link");
+    setCursorText("Magic");
+  };
+
   const onLeave = () => {
     setCursorVariant("default");
     setCursorText("");
@@ -71,14 +76,16 @@ const Switch = () => {
   return (
     <>
       <div
-        className="checkbox-wrapper-42"
+        className="checkbox-wrapper"
         style={{
           marginTop: "2rem"
         }}
+        onMouseEnter={onEnterCheckbox}
+        onMouseLeave={onLeave}
       >
-        <input id="cbx-42" type="checkbox" onChange={deleteAllStyles} />
-        <label className="cbx" htmlFor="cbx-42"></label>
-        <label className="lbl" htmlFor="cbx-42">
+        <input id="cbx" type="checkbox" onChange={deleteAllStyles} />
+        <label className="cbx" htmlFor="cbx"></label>
+        <label className="lbl" htmlFor="cbx">
           Make some magic!
         </label>
       </div>
