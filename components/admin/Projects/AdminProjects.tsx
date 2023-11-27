@@ -28,6 +28,7 @@ export interface Project {
   backgroundColor: string;
   color: string;
   isSideProject: boolean;
+  hasComponent: boolean;
   url: string;
   paragraphs: string[];
   role: string;

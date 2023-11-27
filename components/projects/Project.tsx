@@ -1,4 +1,5 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 import { motion } from "framer-motion";
 import { Gallery, Item } from "react-photoswipe-gallery";
@@ -28,6 +29,8 @@ import { RiOpenaiFill } from "react-icons/ri";
 import { FaDocker } from "@react-icons/all-files/fa/FaDocker";
 import { useProjectsStore } from "../../store/projectsStore";
 import Image from "next/image";
+// Dynamic imports
+const Switch = dynamic(() => import("./gists/Switch"), { ssr: false });
 
 const ProjectComponent = () => {
   // Store
@@ -49,15 +52,17 @@ const ProjectComponent = () => {
     <>
       <div className={styles.title}>
         <h1>{projectSelected?.title}</h1>
-        <Link
-          className={styles.linkBtn}
-          href={projectSelected?.url || "#"}
-          target="_blank"
-          onMouseEnter={() => onEnterLink("Visit")}
-          onMouseLeave={onLeaveLink}
-        >
-          <FiExternalLink />
-        </Link>
+        {projectSelected?.url && (
+          <Link
+            className={styles.linkBtn}
+            href={projectSelected?.url || "#"}
+            target="_blank"
+            onMouseEnter={() => onEnterLink("Visit")}
+            onMouseLeave={onLeaveLink}
+          >
+            <FiExternalLink />
+          </Link>
+        )}
         {projectSelected?.title === "Touryme" && (
           <img
             src="https://wakatime.com/badge/user/8020e9ee-e306-42d1-badf-114217fce27c/project/8666cd1b-8fca-4ad1-acda-7d011ae56b53.svg?style=plastic"
@@ -115,6 +120,8 @@ const ProjectComponent = () => {
           {paragraph}
         </p>
       ))}
+      {projectSelected?.hasComponent &&
+        projectSelected.title === "Fun with CSS" && <Switch />}
       {projectSelected?.title === "Touryme" && (
         <motion.div
           className={styles.icons}
@@ -224,7 +231,7 @@ const ProjectComponent = () => {
                 <BiLogoTypescript size="1.5rem" />
               )}
               {technology.name === "Ionic" && <IoLogoIonic size="1.5rem" />}
-              {technology.name === "Javascript" && (
+              {technology.name === "JavaScript" && (
                 <BiLogoJavascript size="1.5rem" />
               )}
               {technology.name === "CSS" && <BiLogoCss3 size="1.5rem" />}

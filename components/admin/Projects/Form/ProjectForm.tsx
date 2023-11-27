@@ -71,6 +71,7 @@ const ProjectForm: React.FC<{
   const [gallery, setGallery] = useState<ProjectImage[]>([]);
   const [isDraft, setIsDraft] = useState<boolean>(true);
   const [isSideProject, setIsSideProject] = useState<boolean>(true);
+  const [hasComponent, setHasComponent] = useState<boolean>(false);
   const [paragraphsCount, setParagraphsCount] = useState<number>(1);
 
   //Store
@@ -157,7 +158,8 @@ const ProjectForm: React.FC<{
       ),
       technologies: selectedTechnologies,
       isDraft,
-      isSideProject
+      isSideProject,
+      hasComponent
     };
 
     try {
@@ -318,6 +320,7 @@ const ProjectForm: React.FC<{
     setSelectedTechnologies(projectInFocus.technologies);
     setIsDraft(projectInFocus.isDraft);
     setIsSideProject(projectInFocus.isSideProject);
+    setHasComponent(projectInFocus.hasComponent);
     setFeaturedImage(projectInFocus.featuredImage);
     setGallery(projectInFocus.gallery);
   }, [isEditingProject, projectInFocus]);
@@ -461,10 +464,10 @@ const ProjectForm: React.FC<{
               type="text"
               className={`${styles.input} ${errors.url ? styles.error : ""}`}
               placeholder="URL"
-              {...register("url", { required: true, pattern: /^https?:\/\//i })}
+              {...register("url", { pattern: /^https?:\/\//i })}
             />
             <AnimatePresence mode="wait">
-              {errors.url && (
+              {errors.url && errors.url.type === "pattern" && (
                 <motion.p
                   key="error"
                   className={styles.formContainer__error}
@@ -473,7 +476,7 @@ const ProjectForm: React.FC<{
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  La URL es obligatoria
+                  La URL debe empezar por http:// o https://
                 </motion.p>
               )}
             </AnimatePresence>
@@ -577,6 +580,18 @@ const ProjectForm: React.FC<{
                 }}
               />
               <label htmlFor="isSideProject">Proyecto personal</label>
+            </div>
+            <div className={styles.formGroup__checkbox}>
+              <input
+                type="checkbox"
+                id="hasComponent"
+                {...register("hasComponent")}
+                checked={hasComponent}
+                onChange={() => {
+                  setHasComponent(!hasComponent);
+                }}
+              />
+              <label htmlFor="hasComponent">¿Tiene componente?</label>
             </div>
           </div>
           <div className={styles.projectForm_form__form__footer}>

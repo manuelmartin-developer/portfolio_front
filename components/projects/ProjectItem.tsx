@@ -62,7 +62,7 @@ const ProjectItem: React.FC<{
           >
             <Image
               className={styles.card_image}
-              src={project.featuredImage.url}
+              src={project.featuredImage?.url}
               alt={project.title}
               width={800}
               height={450}

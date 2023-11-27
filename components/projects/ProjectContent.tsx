@@ -47,7 +47,7 @@ const ProjectContent = () => {
         >
           <Image
             className={styles.card_image}
-            src={projectSelected?.featuredImage.url || ""}
+            src={projectSelected?.featuredImage?.url || ""}
             alt={projectSelected?.title || ""}
             width={800}
             height={450}
@@ -114,28 +114,30 @@ const ProjectContent = () => {
           >
             {<Project />}
           </motion.div>
-          <motion.div
-            className={styles.content_container__phone}
-            onMouseEnter={() => {
-              document.querySelector(".cursor")?.classList.add("hidden");
-            }}
-            onMouseLeave={() => {
-              document.querySelector(".cursor")?.classList.remove("hidden");
-            }}
-          >
-            <DeviceFrameset device={"iPhone X"}>
-              <iframe
-                className={`${styles.phoneIframe} ${
-                  styles[`project_${projectSelected?.id_project}`]
-                }`}
-                src={projectSelected?.url}
-                title={projectSelected?.title}
-                width="100%"
-                height="100%"
-                allow="camera; geolocation;"
-              ></iframe>
-            </DeviceFrameset>
-          </motion.div>
+          {projectSelected?.url && (
+            <motion.div
+              className={styles.content_container__phone}
+              onMouseEnter={() => {
+                document.querySelector(".cursor")?.classList.add("hidden");
+              }}
+              onMouseLeave={() => {
+                document.querySelector(".cursor")?.classList.remove("hidden");
+              }}
+            >
+              <DeviceFrameset device={"iPhone X"}>
+                <iframe
+                  className={`${styles.phoneIframe} ${
+                    styles[`project_${projectSelected?.id_project}`]
+                  }`}
+                  src={projectSelected?.url}
+                  title={projectSelected?.title}
+                  width="100%"
+                  height="100%"
+                  allow="camera; geolocation;"
+                ></iframe>
+              </DeviceFrameset>
+            </motion.div>
+          )}
         </motion.div>
       </motion.div>
     </motion.div>
