@@ -90,7 +90,6 @@ const Switch = () => {
           justifyContent: "flex-start",
           alignItems: "flex-start",
           height: "fit-content",
-          width: "100%",
           position: "relative",
           margin: "2rem"
         }}
