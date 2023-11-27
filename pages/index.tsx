@@ -16,7 +16,6 @@ import { RiTwitterXFill } from "react-icons/ri";
 import { MdOutlineEmail } from "react-icons/md";
 import { IoIosRefresh } from "@react-icons/all-files/io/IoIosRefresh";
 import PageTransition from "../components/transitions/PageTransition";
-import Switch from "../components/projects/gists/Switch";
 
 type IndexPageProps = {
   codingStats: any;
@@ -345,7 +344,6 @@ function Home(props: IndexPageProps, ref: IndexPageRef) {
                 </tbody>
               </motion.table>
             </motion.div>
-            <Switch />
             <motion.div
               className={styles.container_content_social}
               initial={{ opacity: 0 }}
