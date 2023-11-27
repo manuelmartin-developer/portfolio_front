@@ -27,10 +27,14 @@ import { DiMongodb } from "react-icons/di";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { RiOpenaiFill } from "react-icons/ri";
 import { FaDocker } from "@react-icons/all-files/fa/FaDocker";
+import { SiMapbox } from "@react-icons/all-files/si/SiMapbox";
 import { useProjectsStore } from "../../store/projectsStore";
 import Image from "next/image";
 // Dynamic imports
 const Switch = dynamic(() => import("./gists/Switch"), { ssr: false });
+const AirportsMap = dynamic(() => import("./gists/AirportsMap"), {
+  ssr: false
+});
 
 const ProjectComponent = () => {
   // Store
@@ -122,6 +126,9 @@ const ProjectComponent = () => {
       ))}
       {projectSelected?.hasComponent &&
         projectSelected.title === "Fun with CSS" && <Switch />}
+      {projectSelected?.hasComponent &&
+        projectSelected.title === "Airports" && <AirportsMap />}
+
       {projectSelected?.title === "Touryme" && (
         <motion.div
           className={styles.icons}
@@ -247,6 +254,7 @@ const ProjectComponent = () => {
               )}
               {technology.name === "OpenAI" && <RiOpenaiFill size="1.5rem" />}
               {technology.name === "Docker" && <FaDocker size="1.5rem" />}
+              {technology.name === "Mapbox" && <SiMapbox size="1.5rem" />}
 
               <p
                 style={{

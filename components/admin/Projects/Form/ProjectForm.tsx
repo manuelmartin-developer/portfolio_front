@@ -37,7 +37,8 @@ const technologies = [
   "AWS",
   "TensorFlow",
   "OpenAI",
-  "Docker"
+  "Docker",
+  "Mapbox"
 ];
 
 const ProjectForm: React.FC<{

@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import styles from "./Switch.module.scss";
-import { useCursorStore } from "../../../store/cursorStore";
+import { useCursorStore } from "../../../../store/cursorStore";
 
 const Switch = () => {
   // Refs
@@ -31,7 +31,7 @@ const Switch = () => {
     }
   };
 
-  const deleteAllStyles = () => {
+  const changeStyles = () => {
     const container = document.querySelector(".container");
     if (!container) return;
     const divs = container.querySelectorAll("div");
@@ -63,7 +63,7 @@ const Switch = () => {
     setCursorText("Randimize Color");
   };
 
-  const onEnterCheckbox = () => {
+  const onEnterTitle = () => {
     setCursorVariant("link");
     setCursorText("Magic");
   };
@@ -75,20 +75,15 @@ const Switch = () => {
 
   return (
     <>
-      <div
-        className="checkbox-wrapper"
-        style={{
-          marginTop: "2rem"
-        }}
-        onMouseEnter={onEnterCheckbox}
+      <h3
+        role="button"
+        className={styles.title}
+        onMouseEnter={onEnterTitle}
         onMouseLeave={onLeave}
+        onClick={changeStyles}
       >
-        <input id="cbx" type="checkbox" onChange={deleteAllStyles} />
-        <label className="cbx" htmlFor="cbx"></label>
-        <label className="lbl" htmlFor="cbx">
-          Make some magic!
-        </label>
-      </div>
+        Make some Magic!
+      </h3>
       <div
         className="container"
         style={{

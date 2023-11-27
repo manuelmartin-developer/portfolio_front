@@ -2,6 +2,7 @@ import "@/styles/globals.scss";
 import "@/styles/device.scss";
 import "@/styles/emulator.scss";
 import "tippy.js/dist/tippy.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";
