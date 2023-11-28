@@ -90,6 +90,7 @@ const AirportsMap = () => {
         width={"100%"}
         initialViewState={INITIAL_VIEW_STATE}
         controller={true}
+        // @ts-ignore
         layers={layers}
       >
         <Map
