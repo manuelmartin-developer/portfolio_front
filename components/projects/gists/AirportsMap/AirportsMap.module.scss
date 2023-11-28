@@ -12,6 +12,8 @@
   justify-content: flex-start;
   align-items: center;
   gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem;
 }
 
 .slider {
@@ -20,5 +22,4 @@
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  padding: 2rem;
 }
