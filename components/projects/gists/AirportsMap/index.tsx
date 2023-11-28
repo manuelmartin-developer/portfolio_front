@@ -28,6 +28,11 @@ const AirportsMap = () => {
   // Component states
   const [sourceLng, setSourceLng] = useState(2.078003349812917);
   const [sourceLat, setSourceLat] = useState(41.30315527974634);
+  const [strokeWidth, setStrokeWidth] = useState(1);
+  const [colors, setColors] = useState({
+    sourceColor: [33, 158, 188],
+    targetColor: [253, 158, 2]
+  });
 
   //   Store
   const { setCursorVariant } = useCursorStore();
@@ -44,6 +49,22 @@ const AirportsMap = () => {
     if (!airport.object) return;
     setSourceLng(airport.object.geometry.coordinates[0]);
     setSourceLat(airport.object.geometry.coordinates[1]);
+  };
+
+  const randomizeColors = () => {
+    setColors({
+      sourceColor: [
+        Math.floor(Math.random() * 255),
+        Math.floor(Math.random() * 255),
+        Math.floor(Math.random() * 255)
+      ],
+
+      targetColor: [
+        Math.floor(Math.random() * 255),
+        Math.floor(Math.random() * 255),
+        Math.floor(Math.random() * 255)
+      ]
+    });
   };
 
   // Layers
@@ -76,30 +97,52 @@ const AirportsMap = () => {
         ),
       getSourcePosition: () => [sourceLng, sourceLat],
       getTargetPosition: (feature: any) => feature.geometry.coordinates,
-      getSourceColor: [33, 158, 188],
-      getTargetColor: [253, 158, 2],
-      getWidth: 1,
+      getSourceColor: colors.sourceColor as any,
+      getTargetColor: colors.targetColor as any,
+      getWidth: strokeWidth,
       updateTriggers: {
         getSourcePosition: [sourceLng, sourceLat]
       }
     })
   ];
   return (
-    <div className={styles.airportsMap}>
-      <DeckGL
-        width={"100%"}
-        initialViewState={INITIAL_VIEW_STATE}
-        controller={true}
-        // @ts-ignore
-        layers={layers}
-      >
-        <Map
-          mapStyle={MAP_STYLE}
-          {...INITIAL_VIEW_STATE}
-          mapboxAccessToken={MAPBOX_TOKEN}
-        />
-      </DeckGL>
-    </div>
+    <>
+      <div className={styles.controls}>
+        <label htmlFor="strokeWidth" className={styles.slider}>
+          Stroke width
+          <input
+            type="range"
+            min="1"
+            max="10"
+            value={strokeWidth}
+            onChange={(e) => setStrokeWidth(parseInt(e.target.value))}
+          />
+        </label>
+        <button
+          onMouseEnter={() => setCursorVariant("dot")}
+          onMouseLeave={() => setCursorVariant("default")}
+          className={styles.btn}
+          onClick={randomizeColors}
+        >
+          Randomize colors
+        </button>
+      </div>
+      <div className={styles.airportsMap}>
+        <DeckGL
+          width={"100%"}
+          initialViewState={INITIAL_VIEW_STATE}
+          controller={true}
+          // @ts-ignore
+          layers={layers}
+        >
+          <Map
+            mapStyle={MAP_STYLE}
+            {...INITIAL_VIEW_STATE}
+            mapboxAccessToken={MAPBOX_TOKEN}
+          />
+        </DeckGL>
+      </div>
+    </>
   );
 };
 
