@@ -249,7 +249,7 @@ const ProjectComponent = () => {
                 <BiLogoPostgresql size="1.5rem" />
               )}
               {technology.name === "AWS" && <BiLogoAws size="1.5rem" />}
-              {technology.name === "Tensorflow" && (
+              {technology.name === "TensorFlow" && (
                 <SiTensorflow size="1.5rem" />
               )}
               {technology.name === "OpenAI" && <RiOpenaiFill size="1.5rem" />}
