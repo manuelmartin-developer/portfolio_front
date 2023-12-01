@@ -152,6 +152,7 @@ const ProjectForm: React.FC<{
 
     const payload = {
       ...data,
+      title: data.title.trim().replace(/\s+/g, "-"),
       categories: selectedCategories,
       paragraphs: Array.from(
         { length: paragraphsCount },
