@@ -15,6 +15,8 @@ import { TbBrandNextjs } from "react-icons/tb";
 import { FaReact } from "@react-icons/all-files/fa/FaReact";
 import { FaNodeJs } from "@react-icons/all-files/fa/FaNodeJs";
 import { SiExpress, SiTensorflow } from "react-icons/si";
+import { RiFlutterFill } from "react-icons/ri";
+import { SiDart } from "react-icons/si";
 import {
   BiLogoTypescript,
   BiLogoAws,
@@ -255,7 +257,8 @@ const ProjectComponent = () => {
               {technology.name === "OpenAI" && <RiOpenaiFill size="1.5rem" />}
               {technology.name === "Docker" && <FaDocker size="1.5rem" />}
               {technology.name === "Mapbox" && <SiMapbox size="1.5rem" />}
-
+              {technology.name === "Flutter" && <RiFlutterFill size="1.5rem" />}
+              {technology.name === "Dart" && <SiDart size="1.5rem" />}
               <p
                 style={{
                   position: "relative",

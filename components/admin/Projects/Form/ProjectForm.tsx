@@ -38,7 +38,9 @@ const technologies = [
   "TensorFlow",
   "OpenAI",
   "Docker",
-  "Mapbox"
+  "Mapbox",
+  "Flutter",
+  "Dart"
 ];
 
 const ProjectForm: React.FC<{
