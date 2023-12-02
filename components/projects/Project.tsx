@@ -17,6 +17,7 @@ import { FaNodeJs } from "@react-icons/all-files/fa/FaNodeJs";
 import { SiExpress, SiTensorflow } from "react-icons/si";
 import { RiFlutterFill } from "react-icons/ri";
 import { SiDart } from "react-icons/si";
+import { SiLeaflet } from "react-icons/si";
 import {
   BiLogoTypescript,
   BiLogoAws,
@@ -37,6 +38,7 @@ const Switch = dynamic(() => import("./gists/Switch"), { ssr: false });
 const AirportsMap = dynamic(() => import("./gists/AirportsMap"), {
   ssr: false
 });
+const Mars = dynamic(() => import("./gists/Mars"), { ssr: false });
 
 const ProjectComponent = () => {
   // Store
@@ -127,9 +129,11 @@ const ProjectComponent = () => {
         </p>
       ))}
       {projectSelected?.hasComponent &&
-        projectSelected.title === "Fun with CSS" && <Switch />}
+        projectSelected.title === "Fun-with-CSS" && <Switch />}
       {projectSelected?.hasComponent &&
         projectSelected.title === "Airports" && <AirportsMap />}
+      {projectSelected?.hasComponent &&
+        projectSelected.title === "A-walk-on-Mars" && <Mars />}
 
       {projectSelected?.title === "Touryme" && (
         <motion.div
@@ -259,6 +263,7 @@ const ProjectComponent = () => {
               {technology.name === "Mapbox" && <SiMapbox size="1.5rem" />}
               {technology.name === "Flutter" && <RiFlutterFill size="1.5rem" />}
               {technology.name === "Dart" && <SiDart size="1.5rem" />}
+              {technology.name === "Leaflet" && <SiLeaflet size="1.5rem" />}
               <p
                 style={{
                   position: "relative",

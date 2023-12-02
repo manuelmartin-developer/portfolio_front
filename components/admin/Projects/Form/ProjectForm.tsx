@@ -40,7 +40,8 @@ const technologies = [
   "Docker",
   "Mapbox",
   "Flutter",
-  "Dart"
+  "Dart",
+  "Leaflet"
 ];
 
 const ProjectForm: React.FC<{

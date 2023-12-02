@@ -8,6 +8,7 @@ import { useProjectsStore } from "../../store/projectsStore";
 import TopOverlay from "./TopOverlay";
 import { AnimatePresence } from "framer-motion";
 import { useAdminStore } from "../../store/adminStore";
+import { useModalStore } from "../../store/modalStore";
 // Dynamic imports
 const Monitor = dynamic(() => import("./monitor/Monitor"), { ssr: false });
 const AdminPanel = dynamic(() => import("../admin/AdminPanel"), { ssr: false });
@@ -24,6 +25,7 @@ const Layout: React.FC<Props> = ({ children }) => {
   const { setCursorVariant, setCursorText } = useCursorStore();
   const { projectSelected } = useProjectsStore();
   const { isAdminLoggedIn } = useAdminStore();
+  const { isModalOpen } = useModalStore();
 
   // Methods
   const onEnterAPP = () => {
@@ -45,10 +47,10 @@ const Layout: React.FC<Props> = ({ children }) => {
   };
 
   useEffect(() => {
-    isMonitorOpen
+    isMonitorOpen || isModalOpen
       ? document.body.setAttribute("style", "overflow: hidden")
       : document.body.setAttribute("style", "overflow: auto");
-  }, [isMonitorOpen]);
+  }, [isMonitorOpen, isModalOpen]);
 
   return (
     <>

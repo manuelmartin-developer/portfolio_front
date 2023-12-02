@@ -1,0 +1,111 @@
+@import "../../../../styles/commons/Form.module.scss";
+.container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2rem;
+  &_daily_image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2rem;
+    &_img {
+      width: 100%;
+      height: 100%;
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      & > a {
+        width: 100%;
+        & > img {
+          border-radius: 10px;
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+        }
+      }
+      & > p {
+        width: 100%;
+        text-align: left;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--font-color);
+        font-style: italic;
+      }
+    }
+  }
+  &_description {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+  &_map {
+    width: 100%;
+    height: 500px;
+  }
+  &_modal {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    padding: 5rem;
+    overflow-y: auto;
+    @media only screen and (max-width: 500px) {
+      padding: 2rem;
+    }
+    &__content {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-auto-rows: 300px;
+      grid-auto-flow: dense;
+      gap: 2rem;
+      &__img {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        & > a {
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+          & > img {
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          & > p {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--font-color);
+            font-style: italic;
+            margin-top: 5px;
+          }
+        }
+      }
+    }
+  }
+}
