@@ -41,7 +41,9 @@ const technologies = [
   "Mapbox",
   "Flutter",
   "Dart",
-  "Leaflet"
+  "Leaflet",
+  "C#",
+  "Unity"
 ];
 
 const ProjectForm: React.FC<{

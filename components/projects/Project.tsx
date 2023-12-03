@@ -18,6 +18,8 @@ import { SiExpress, SiTensorflow } from "react-icons/si";
 import { RiFlutterFill } from "react-icons/ri";
 import { SiDart } from "react-icons/si";
 import { SiLeaflet } from "react-icons/si";
+import { SiUnity } from "react-icons/si";
+import { TbBrandCSharp } from "react-icons/tb";
 import {
   BiLogoTypescript,
   BiLogoAws,
@@ -39,6 +41,7 @@ const AirportsMap = dynamic(() => import("./gists/AirportsMap"), {
   ssr: false
 });
 const Mars = dynamic(() => import("./gists/Mars"), { ssr: false });
+const Elf = dynamic(() => import("./gists/Elf"), { ssr: false });
 
 const ProjectComponent = () => {
   // Store
@@ -134,6 +137,9 @@ const ProjectComponent = () => {
         projectSelected.title === "Airports" && <AirportsMap />}
       {projectSelected?.hasComponent &&
         projectSelected.title === "A-walk-on-Mars" && <Mars />}
+      {projectSelected?.hasComponent && projectSelected.title === "Elf" && (
+        <Elf />
+      )}
 
       {projectSelected?.title === "Touryme" && (
         <motion.div
@@ -264,6 +270,8 @@ const ProjectComponent = () => {
               {technology.name === "Flutter" && <RiFlutterFill size="1.5rem" />}
               {technology.name === "Dart" && <SiDart size="1.5rem" />}
               {technology.name === "Leaflet" && <SiLeaflet size="1.5rem" />}
+              {technology.name === "Unity" && <SiUnity size="1.5rem" />}
+              {technology.name === "C#" && <TbBrandCSharp size="1.5rem" />}
               <p
                 style={{
                   position: "relative",
