@@ -1,3 +1,4 @@
+@import "../styles/commons/Form.module.scss";
 .container {
   position: relative;
   display: flex;
@@ -90,14 +91,20 @@
     }
     &__date {
       width: 100%;
-      text-align: right;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-size: 20px;
       font-weight: 300;
       margin-top: 1rem;
       color: var(--font-color);
       @media screen and (max-width: 800px) {
-        margin-top: 0;
         font-size: 16px;
+      }
+      @media screen and (max-width: 500px) {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 1rem;
       }
     }
 
@@ -443,4 +450,10 @@
   @media screen and (max-width: 1400px) {
     top: calc(8vw + 56px);
   }
+}
+.not_liked {
+  filter: grayscale(100%);
+}
+.liked {
+  filter: grayscale(0%);
 }

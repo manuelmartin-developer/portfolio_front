@@ -4,6 +4,7 @@ import { forwardRef, useEffect, useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 
 import axios from "axios";
+import confetti from "canvas-confetti";
 
 import styles from "@/styles/Layout.module.scss";
 import "@uiw/react-markdown-preview/markdown.css";
@@ -20,92 +21,33 @@ const Markdown = dynamic(
   { ssr: false }
 );
 
-const ConfettiExplosion = dynamic(
-  () => import("react-confetti-explosion").then((mod) => mod.default),
-  { ssr: false }
-);
-
 type BlogPostPageProps = {
   post: Post;
 };
 type BlogPostPageRef = React.ForwardedRef<HTMLDivElement>;
 
-enum ConfettiLevel {
-  ZERO = 0,
-  ONE = 1,
-  TWO = 2,
-  THREE = 3,
-  FOUR = 4,
-  FIVE = 5
-}
-
-interface ConfettiState {
-  [key: number]: {
-    colors: string[];
-    particleCount: number;
-    force: number;
-  };
-}
-
-const confettiConfig: ConfettiState = {
-  1: {
-    colors: ["#000", "#333", "#666"],
-    particleCount: 30,
-    force: 0.1
-  },
-  2: {
-    colors: ["#000", "#f00"],
-    particleCount: 60,
-    force: 0.3
-  },
-  3: {
-    colors: ["#f00", "#0f0", "#00f"],
-    particleCount: 100,
-    force: 0.5
-  },
-  4: {
-    colors: ["#f00", "#0f0", "#00f", "#ff0", "#0ff"],
-    particleCount: 200,
-    force: 0.7
-  },
-  5: {
-    colors: [
-      "#a864fd",
-      "#29cdff",
-      "#78ff44",
-      "#ff718d",
-      "#fdff6a",
-      "#a864fd",
-      "#29cdff",
-      "#78ff44",
-      "#ff718d",
-      "#fdff6a"
-    ],
-    particleCount: 300,
-    force: 0.9
-  }
-};
-
 function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
   // Componet states
-  const [isConfettiActive, setIsConfettiActive] = useState<boolean>(false);
-  const [confettiLevel, setConfettiLevel] = useState<ConfettiLevel>(
-    ConfettiLevel.ZERO
-  );
   const [likes, setLikes] = useState<number>(props.post.likes);
+  const [liked, setLiked] = useState<boolean>(false);
 
   // Store
   const { setCursorVariant, setCursorText } = useCursorStore();
 
   // Methods
-  const onEnterConfettiButton = () => {
-    setCursorVariant("party");
-    setCursorText("¡Fiesta!");
-  };
 
-  const onLeaveConfettiButton = () => {
-    setCursorVariant("default");
-    setCursorText("");
+  const onHandleStorage = () => {
+    const storagedLikes = localStorage.getItem("liked");
+    if (!storagedLikes) {
+      localStorage.setItem(
+        "liked",
+        JSON.stringify([{ id: props.post.id_post }])
+      );
+    } else {
+      const parsedStoragedLikes = JSON.parse(storagedLikes);
+      parsedStoragedLikes.push({ id: props.post.id_post });
+      localStorage.setItem("liked", JSON.stringify(parsedStoragedLikes));
+    }
   };
 
   const onHandleLike = async () => {
@@ -118,36 +60,32 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
     try {
       const response = await axios.post(URL, payload);
       if (response.status === 200) {
-        setIsConfettiActive(true);
         setLikes(response.data.post.likes);
-        setConfettiLevel(confettiLevel + 1);
-        localStorage.setItem(
-          `confetti-level-${props.post.id_post.toString()}`,
-          (confettiLevel + 1).toString()
-        );
+        setLiked(true);
+        onHandleStorage();
+        onHandleConfetti();
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+  const onHandleConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  };
+
   // Component Lifecycle
   useEffect(() => {
-    if (confettiLevel === ConfettiLevel.FIVE) {
-      setCursorVariant("default");
-      setCursorText("");
-    }
-  }, [confettiLevel]);
+    const liked = JSON.parse(localStorage.getItem("liked") || "[]");
+    if (!liked || liked.length === 0) return;
 
-  useEffect(() => {
-    const confettiLevelStorage = localStorage.getItem(
-      `confetti-level-${props.post.id_post.toString()}`
-    );
-
-    confettiLevelStorage
-      ? setConfettiLevel(Number(confettiLevelStorage) as ConfettiLevel)
-      : setConfettiLevel(ConfettiLevel.ZERO);
-  }, [confettiLevel]);
+    const isLiked = liked.find((like: any) => like.id === props.post.id_post);
+    isLiked && setLiked(true);
+  }, []);
 
   return (
     <>
@@ -221,89 +159,47 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
             <div className={styles.container_hero}>
               <div className={styles.container_hero__subtitle}>
                 {props.post.title}
-                <span className={styles.container_hero__date}>
-                  {new Date(props.post.createdAt) ===
-                  new Date(props.post.updatedAt)
-                    ? new Date(props.post.createdAt).toLocaleDateString(
-                        "es-ES",
-                        {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric"
-                        }
-                      )
-                    : "Actualizado " +
-                      new Date(props.post.updatedAt).toLocaleDateString(
-                        "es-ES",
-                        {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric"
-                        }
-                      )}
-                </span>
-                <motion.div
-                  className={styles.container__confetti}
-                  initial={{ opacity: 0, x: -100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 1 }}
-                >
-                  {isConfettiActive && (
-                    <ConfettiExplosion
-                      force={confettiConfig[confettiLevel].force}
-                      duration={2000}
-                      onComplete={() => setIsConfettiActive(false)}
-                      particleCount={
-                        confettiConfig[confettiLevel].particleCount
-                      }
-                      width={window.innerWidth}
-                      colors={confettiConfig[confettiLevel].colors}
-                    />
-                  )}
-
-                  <AnimatePresence mode="sync">
-                    {confettiLevel !== ConfettiLevel.FIVE && (
-                      <motion.button
-                        key="confettiButton"
-                        onMouseEnter={onEnterConfettiButton}
-                        onMouseLeave={onLeaveConfettiButton}
-                        className={`${styles.container__confetti__button} ${
-                          confettiLevel === 1
-                            ? styles.container__confetti__button__level1
-                            : confettiLevel === 2
-                            ? styles.container__confetti__button__level2
-                            : confettiLevel === 3
-                            ? styles.container__confetti__button__level3
-                            : confettiLevel === 4
-                            ? styles.container__confetti__button__level4
-                            : confettiLevel !== 0
-                            ? styles.container__confetti__button__level5
-                            : ""
-                        }`}
-                        onClick={() => {
-                          if (!isConfettiActive) {
-                            onHandleLike();
+                <div className={styles.container_hero__date}>
+                  <span className={styles.container_hero__date__likes}>
+                    <button
+                      className={`${styles.btn} ${
+                        liked ? styles.liked : styles.not_liked
+                      }`}
+                      onMouseEnter={() => {
+                        setCursorVariant("dot");
+                      }}
+                      onMouseLeave={() => {
+                        setCursorVariant("default");
+                      }}
+                      onClick={() => {
+                        onHandleLike();
+                      }}
+                    >
+                      🎉 {likes}
+                    </button>
+                  </span>
+                  <span>
+                    {new Date(props.post.createdAt) ===
+                    new Date(props.post.updatedAt)
+                      ? new Date(props.post.createdAt).toLocaleDateString(
+                          "es-ES",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric"
                           }
-                        }}
-                      >
-                        🎉
-                        <AnimatePresence mode="wait">
-                          {confettiLevel !== ConfettiLevel.ZERO && (
-                            <motion.h6
-                              key="confettiButtonLikes"
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                              transition={{ duration: 0.5 }}
-                            >
-                              +{likes} {likes === 1 ? "like" : "likes"}
-                            </motion.h6>
-                          )}
-                        </AnimatePresence>
-                      </motion.button>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
+                        )
+                      : "Actualizado " +
+                        new Date(props.post.updatedAt).toLocaleDateString(
+                          "es-ES",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric"
+                          }
+                        )}
+                  </span>
+                </div>
                 <motion.div
                   className="line"
                   initial={{ width: 0 }}

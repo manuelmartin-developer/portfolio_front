@@ -90,17 +90,6 @@ const Cursor: React.FC = () => {
       width: "3rem",
       height: "3rem",
       backgroundColor: "rgba(0, 0, 0, 0)"
-    },
-    party: {
-      scale: 3,
-      width: "3rem",
-      height: "3rem",
-      backgroundColor: "rgba(0, 0, 0, 0)",
-      border: "2px solid #fff",
-      transition: {
-        type: "spring",
-        mass: 0.3
-      }
     }
   };
 

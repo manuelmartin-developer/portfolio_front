@@ -266,11 +266,20 @@ body > #__next {
   }
 }
 .wmde-markdown {
+  font-family: "Helvetica Neue", sans-serif !important;
+  font-size: 20px !important;
   background-color: var(--bg-color-light) !important;
   color: var(--font-color) !important;
-  & > img {
+  & > p > img {
+    width: 80% !important;
     display: block !important;
-    margin: 0 auto !important;
+    margin: 2rem auto !important;
+    @media screen and (max-width: 768px) {
+      width: 100% !important;
+    }
+  }
+  & > h3 {
+    margin-top: 4rem !important;
   }
 }
 
