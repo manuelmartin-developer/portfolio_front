@@ -90,7 +90,11 @@ function BlogCategoryPage(props: BlogPageProps, ref: BlogCategoryPageRef) {
       </Head>
       <PageTransition ref={ref} layoutId="blog-category-page">
         <div className={styles.container}>
-          <Hero title="Blog" nextUnderscore="Tech" right="Dev" />
+          <Hero
+            title={props.categoryName?.charAt(0).toUpperCase() || "Blog"}
+            nextUnderscore="Tech"
+            right="Dev"
+          />
           <div className={styles.container_content}>
             <PostList data={props} hasCategoriesFilters={false} />
           </div>

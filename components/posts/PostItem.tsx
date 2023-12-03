@@ -60,6 +60,23 @@ const PostItem: React.FC<{ post: Post }> = ({ post }) => {
             <h3>{title}</h3>
           </Link>
         </div>
+        <div className={styles.card_content_container__categories}>
+          {post.categories.map((category, index) => (
+            <Link
+              key={index}
+              href={`/blog/category/${category.label.toLocaleLowerCase()}`}
+              prefetch={false}
+              onMouseEnter={() => onEnterLink(category.label)}
+              onMouseLeave={onLeaveLink}
+              onClick={onLeaveLink}
+            >
+              <span>
+                {category.label}
+                {index < post.categories.length - 1 && " / "}
+              </span>
+            </Link>
+          ))}
+        </div>
         <div className={styles.card_content_container__excerpt}>
           <p>{excerpt}</p>
         </div>
