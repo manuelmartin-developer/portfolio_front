@@ -80,6 +80,10 @@
       grid-auto-rows: 300px;
       grid-auto-flow: dense;
       gap: 2rem;
+      @media only screen and (max-width: 500px) {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-auto-rows: 200px;
+      }
       &__img {
         width: 100%;
         height: 100%;
@@ -107,5 +111,21 @@
         }
       }
     }
+  }
+}
+.iframe {
+  width: 890px;
+  height: 500px;
+  border-radius: 10px;
+  border: none;
+  @media (max-width: 1068px) {
+    width: 100%;
+    height: 400px;
+  }
+  @media (max-width: 768px) {
+    height: 300px;
+  }
+  @media (max-width: 568px) {
+    height: 200px;
   }
 }

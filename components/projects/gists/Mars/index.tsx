@@ -91,20 +91,35 @@ const Mars = () => {
         <div className={styles.container_daily_image}>
           Another cool thing of Nasa Open API is the daily image of the day.
           This is the image of today:
-          <div
-            className={styles.container_daily_image_img}
-            onMouseEnter={() => {
-              setCursorText("Click to see hd image");
-              setCursorVariant("link");
-            }}
-            onMouseLeave={() => {
-              setCursorText("");
-              setCursorVariant("default");
-            }}
-          >
-            <Link href={nasaDailyImage.hdurl} target="_blank">
-              <img src={nasaDailyImage.url} alt={nasaDailyImage.title} />
-            </Link>
+          <div className={styles.container_daily_image_img}>
+            {nasaDailyImage.media_type === "video" && (
+              <iframe
+                onMouseEnter={() => {
+                  setCursorVariant("hidden");
+                }}
+                onMouseLeave={() => {
+                  setCursorVariant("default");
+                }}
+                src={nasaDailyImage.url}
+                className={styles.iframe}
+              />
+            )}
+            {nasaDailyImage.media_type === "image" && (
+              <Link
+                href={nasaDailyImage.hdurl || "#"}
+                target="_blank"
+                onMouseEnter={() => {
+                  setCursorText("Click to see hd image");
+                  setCursorVariant("link");
+                }}
+                onMouseLeave={() => {
+                  setCursorText("");
+                  setCursorVariant("default");
+                }}
+              >
+                <img src={nasaDailyImage.url} alt={nasaDailyImage.title} />
+              </Link>
+            )}
             <p>
               <strong>{nasaDailyImage.title}</strong>
             </p>
