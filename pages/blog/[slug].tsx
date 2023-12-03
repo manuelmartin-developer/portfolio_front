@@ -45,6 +45,11 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
       );
     } else {
       const parsedStoragedLikes = JSON.parse(storagedLikes);
+      if (
+        parsedStoragedLikes.find((like: any) => like.id === props.post.id_post)
+      ) {
+        return;
+      }
       parsedStoragedLikes.push({ id: props.post.id_post });
       localStorage.setItem("liked", JSON.stringify(parsedStoragedLikes));
     }
