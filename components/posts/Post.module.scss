@@ -108,6 +108,29 @@
       color: var(--font-color);
       transition: color 0.3s ease;
     }
+    &__categories {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      &__category {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--font-color);
+        transition: color 0.3s ease;
+        border: 1px solid var(--font-color);
+        padding: 0.5rem;
+        border-radius: 5px;
+        & > span {
+          line-height: 1;
+        }
+      }
+    }
   }
 }
 .filters {

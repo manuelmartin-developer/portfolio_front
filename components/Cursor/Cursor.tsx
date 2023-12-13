@@ -86,9 +86,8 @@ const Cursor: React.FC = () => {
       y: 0
     },
     image: {
-      scale: 4,
-      width: "3rem",
-      height: "3rem",
+      width: "10rem",
+      height: "10rem",
       backgroundColor: "rgba(0, 0, 0, 0)"
     }
   };
@@ -128,7 +127,7 @@ const Cursor: React.FC = () => {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              transform: "translate(0%, -70%)"
+              transform: "translate(-50%, -110%)"
             }}
             src="/assets/img/commons/me.jpeg"
             alt="Manuel Martín"

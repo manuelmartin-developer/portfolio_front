@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 import Nav from "./Nav";
 import Footer from "./Footer";
-import { TbDeviceHeartMonitor } from "react-icons/tb";
-import dynamic from "next/dynamic";
 import { useCursorStore } from "../../store/cursorStore";
+import { TbDeviceHeartMonitor } from "react-icons/tb";
 import { useProjectsStore } from "../../store/projectsStore";
 import TopOverlay from "./TopOverlay";
 import { AnimatePresence } from "framer-motion";
 import { useAdminStore } from "../../store/adminStore";
 import { useModalStore } from "../../store/modalStore";
+
 // Dynamic imports
 const Monitor = dynamic(() => import("./monitor/Monitor"), { ssr: false });
 const AdminPanel = dynamic(() => import("../admin/AdminPanel"), { ssr: false });
@@ -69,6 +72,7 @@ const Layout: React.FC<Props> = ({ children }) => {
         }}
       >
         {children}
+        <SpeedInsights />
       </main>
       <Footer />
       <button

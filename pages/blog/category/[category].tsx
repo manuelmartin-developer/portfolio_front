@@ -96,7 +96,11 @@ function BlogCategoryPage(props: BlogPageProps, ref: BlogCategoryPageRef) {
             right="Dev"
           />
           <div className={styles.container_content}>
-            <PostList data={props} hasCategoriesFilters={false} />
+            <PostList
+              data={props}
+              hasCategoriesFilters={false}
+              categoryTitle={`Publicaciones en ${props.categoryName}`}
+            />
           </div>
         </div>
       </PageTransition>

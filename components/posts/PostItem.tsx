@@ -27,6 +27,10 @@ const PostItem: React.FC<{ post: Post }> = ({ post }) => {
     setCursorVariant("link");
   };
 
+  const onEnterCategory = () => {
+    setCursorVariant("dot");
+  };
+
   const onLeaveLink = () => {
     setCursorText("");
     setCursorVariant("default");
@@ -63,17 +67,15 @@ const PostItem: React.FC<{ post: Post }> = ({ post }) => {
         <div className={styles.card_content_container__categories}>
           {post.categories.map((category, index) => (
             <Link
+              className={styles.card_content_container__categories__category}
               key={index}
               href={`/blog/category/${category.label.toLocaleLowerCase()}`}
               prefetch={false}
-              onMouseEnter={() => onEnterLink(category.label)}
+              onMouseEnter={onEnterCategory}
               onMouseLeave={onLeaveLink}
               onClick={onLeaveLink}
             >
-              <span>
-                {category.label}
-                {index < post.categories.length - 1 && " / "}
-              </span>
+              <span>{category.label}</span>
             </Link>
           ))}
         </div>

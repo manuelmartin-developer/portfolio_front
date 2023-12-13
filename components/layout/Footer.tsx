@@ -1,7 +1,4 @@
-import Link from "next/link";
 import styles from "./Footer.module.scss";
-import { CiLinkedin } from "react-icons/ci";
-import { RiGithubLine } from "@react-icons/all-files/ri/RiGithubLine";
 import { useCursorStore } from "../../store/cursorStore";
 
 const Footer: React.FC = () => {

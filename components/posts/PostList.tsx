@@ -16,7 +16,8 @@ import Link from "next/link";
 const PostList: React.FC<{
   data: BlogPageProps;
   hasCategoriesFilters: boolean;
-}> = ({ data, hasCategoriesFilters }) => {
+  categoryTitle?: string;
+}> = ({ data, hasCategoriesFilters, categoryTitle }) => {
   // Refs
   const filtersButtonsRef = useRef<HTMLDivElement>(null);
 
@@ -121,7 +122,7 @@ const PostList: React.FC<{
           <span className={styles.filters__overlay}></span>
         </div>
         <div className={styles.card_list_title}>
-          <h1>Publicaciones recientes</h1>
+          <h1>{categoryTitle || "Publicaciones recientes"}</h1>
           <span>{postCount || 0} publicaciones</span>
         </div>
         <ul className={styles.card_list}>
