@@ -12,83 +12,85 @@ const SimTip = () => {
   };
   return (
     <>
-      <p className={styles.paragraph}>
-        Lorem ipsum{' '}
-        <Tooltip
-          content="Auch! 🤕"
-          fontSize={20}
-          offset={10}
-          animation="fade"
-          padding={8}
-        >
-          <span className={styles.span}>dolor</span>
-        </Tooltip>{' '}
-        sit, amet consectetur{' '}
-        <Tooltip
-          content={
-            <p>
-              You can also use a custom component as content. This is a{' '}
-              <strong>React Component</strong>!
-            </p>
-          }
-          fontSize={20}
-          offset={10}
-          animation="scale"
-          padding={8}
-          hasArrow
-          variant="info"
-        >
-          <span className={styles.span}>adipisicing</span>
-        </Tooltip>{' '}
-        elit. Sequi ipsum sit veniam. Aliquam distinctio consequuntur, vel
-        temporibus{' '}
-        <Tooltip
-          placement="right"
-          content={
-            <p>
-              Custom <strong>placement</strong>!
-            </p>
-          }
-          fontSize={16}
-          offset={10}
-          animation="flicker"
-          animationDuration={800}
-          padding={8}
-          hasArrow
-          variant="error"
-        >
-          <span className={styles.span}>voluptate</span>
-        </Tooltip>{' '}
-        reprehenderit ratione dolorem iure{' '}
-        <Tooltip
-          placement="bottom"
-          content={
-            <>
-              <p>You can wrap the content that you can imagine.</p>
-              <div
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
-              >
-                <button onClick={onHandleConfetti} className={styles.btn}>
-                  🎉
-                </button>
-              </div>
-            </>
-          }
-          fontSize={16}
-          offset={10}
-          animation="slide"
-          padding={8}
-          variant="success"
-        >
-          <span className={styles.span}>voluptates</span>
-        </Tooltip>{' '}
-        culpa soluta. Molestiae animi delectus id ea?
-      </p>
+      <div className={styles.container}>
+        <p className={styles.paragraph}>
+          Lorem ipsum{' '}
+          <Tooltip
+            content="Auch! 🤕"
+            fontSize={20}
+            offset={10}
+            animation="fade"
+            padding={8}
+          >
+            <span className={styles.span}>dolor</span>
+          </Tooltip>{' '}
+          sit, amet consectetur{' '}
+          <Tooltip
+            content={
+              <p>
+                You can also use a custom component as content. This is a{' '}
+                <strong>React Component</strong>!
+              </p>
+            }
+            fontSize={20}
+            offset={10}
+            animation="scale"
+            padding={8}
+            hasArrow
+            variant="info"
+          >
+            <span className={styles.span}>adipisicing</span>
+          </Tooltip>{' '}
+          elit. Sequi ipsum sit veniam. Aliquam distinctio consequuntur, vel
+          temporibus{' '}
+          <Tooltip
+            placement="right"
+            content={
+              <p>
+                Custom <strong>placement</strong>!
+              </p>
+            }
+            fontSize={16}
+            offset={10}
+            animation="flicker"
+            animationDuration={800}
+            padding={8}
+            hasArrow
+            variant="error"
+          >
+            <span className={styles.span}>voluptate</span>
+          </Tooltip>{' '}
+          reprehenderit ratione dolorem iure{' '}
+          <Tooltip
+            placement="bottom"
+            content={
+              <>
+                <p>You can wrap the content that you can imagine.</p>
+                <div
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}
+                >
+                  <button onClick={onHandleConfetti} className={styles.btn}>
+                    🎉
+                  </button>
+                </div>
+              </>
+            }
+            fontSize={16}
+            offset={10}
+            animation="slide"
+            padding={8}
+            variant="success"
+          >
+            <span className={styles.span}>voluptates</span>
+          </Tooltip>{' '}
+          culpa soluta. Molestiae animi delectus id ea?
+        </p>
+      </div>
       <p className={styles.paragraph}>
         Download the package from{' '}
         <a
