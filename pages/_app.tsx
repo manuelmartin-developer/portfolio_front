@@ -8,7 +8,6 @@ import type { AppProps } from 'next/app';
 import { Analytics } from '@vercel/analytics/react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import axios, { AxiosError } from 'axios';
 import { SnackbarProvider, useSnackbar } from 'notistack';
@@ -114,7 +113,6 @@ export default function App({ Component, pageProps }: AppProps) {
         >
           <Layout>
             <Component key={pageKey} {...pageProps} />
-            <SpeedInsights />
           </Layout>
         </SnackbarProvider>
       </AnimatePresence>

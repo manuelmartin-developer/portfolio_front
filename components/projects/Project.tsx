@@ -15,7 +15,7 @@ import { TbBrandNextjs } from 'react-icons/tb';
 import { FaReact } from '@react-icons/all-files/fa/FaReact';
 import { FaNodeJs } from '@react-icons/all-files/fa/FaNodeJs';
 import { SiExpress, SiTensorflow } from 'react-icons/si';
-import { RiFlutterFill } from 'react-icons/ri';
+import { RiFlutterFill } from '@react-icons/all-files/ri/RiFlutterFill';
 import { SiDart } from 'react-icons/si';
 import { SiLeaflet } from 'react-icons/si';
 import { SiUnity } from 'react-icons/si';
