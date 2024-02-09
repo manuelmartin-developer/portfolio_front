@@ -1,23 +1,23 @@
-import Head from "next/head";
-import dynamic from "next/dynamic";
-import { forwardRef, useEffect, useState } from "react";
-import { GetStaticPaths, GetStaticProps } from "next";
+import Head from 'next/head';
+import dynamic from 'next/dynamic';
+import { forwardRef, useEffect, useState } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
-import axios from "axios";
-import confetti from "canvas-confetti";
+import axios from 'axios';
+import confetti from 'canvas-confetti';
 
-import styles from "@/styles/Layout.module.scss";
-import "@uiw/react-markdown-preview/markdown.css";
+import styles from '@/styles/Layout.module.scss';
+import '@uiw/react-markdown-preview/markdown.css';
 
-import { Post } from "../../components/admin/Posts/AdminPosts";
-import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
-import PageTransition from "../../components/transitions/PageTransition";
-import { AnimatePresence, motion } from "framer-motion";
-import { useCursorStore } from "../../store/cursorStore";
+import { Post } from '../../components/admin/Posts/AdminPosts';
+import ProgressBar from '../../components/UI/ProgressBar/ProgressBar';
+import PageTransition from '../../components/transitions/PageTransition';
+import { motion } from 'framer-motion';
+import { useCursorStore } from '../../store/cursorStore';
 
 // Dynamic imports
 const Markdown = dynamic(
-  () => import("@uiw/react-markdown-preview").then((mod) => mod.default),
+  () => import('@uiw/react-markdown-preview').then((mod) => mod.default),
   { ssr: false }
 );
 
@@ -37,10 +37,10 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
   // Methods
 
   const onHandleStorage = () => {
-    const storagedLikes = localStorage.getItem("liked");
+    const storagedLikes = localStorage.getItem('liked');
     if (!storagedLikes) {
       localStorage.setItem(
-        "liked",
+        'liked',
         JSON.stringify([{ id: props.post.id_post }])
       );
     } else {
@@ -51,7 +51,7 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
         return;
       }
       parsedStoragedLikes.push({ id: props.post.id_post });
-      localStorage.setItem("liked", JSON.stringify(parsedStoragedLikes));
+      localStorage.setItem('liked', JSON.stringify(parsedStoragedLikes));
     }
   };
 
@@ -85,7 +85,7 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
 
   // Component Lifecycle
   useEffect(() => {
-    const liked = JSON.parse(localStorage.getItem("liked") || "[]");
+    const liked = JSON.parse(localStorage.getItem('liked') || '[]');
     if (!liked || liked.length === 0) return;
 
     const isLiked = liked.find((like: any) => like.id === props.post.id_post);
@@ -103,7 +103,7 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <script type="application/ld+json">
-          {"{" +
+          {'{' +
             '"@context": "https://schema.org",' +
             '"@type": "BlogPosting",' +
             `"headline": "${props.post.title}",` +
@@ -115,7 +115,7 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
             `"mainEntityOfPage": "True",` +
             `"publisher": "Manuel Martín",` +
             `"url": "https://manuelmartin.dev/blog/${props.post.slug}"` +
-            "}"}
+            '}'}
         </script>
         <meta name="robots" content="index, follow" />
         <meta name="author" content="Manuel Martín" />
@@ -171,10 +171,10 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
                         liked ? styles.liked : styles.not_liked
                       }`}
                       onMouseEnter={() => {
-                        setCursorVariant("dot");
+                        setCursorVariant('dot');
                       }}
                       onMouseLeave={() => {
-                        setCursorVariant("default");
+                        setCursorVariant('default');
                       }}
                       onClick={() => {
                         onHandleLike();
@@ -187,20 +187,20 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
                     {new Date(props.post.createdAt) ===
                     new Date(props.post.updatedAt)
                       ? new Date(props.post.createdAt).toLocaleDateString(
-                          "es-ES",
+                          'es-ES',
                           {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric"
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
                           }
                         )
-                      : "Actualizado " +
+                      : 'Actualizado ' +
                         new Date(props.post.updatedAt).toLocaleDateString(
-                          "es-ES",
+                          'es-ES',
                           {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric"
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
                           }
                         )}
                   </span>
@@ -209,12 +209,12 @@ function BlogPostPage(props: BlogPostPageProps, ref: BlogPostPageRef) {
                   className="line"
                   initial={{ width: 0 }}
                   transition={{ duration: 0.5, delay: 1 }}
-                  whileInView={{ width: "100%" }}
+                  whileInView={{ width: '100%' }}
                   viewport={{ once: true }}
                   style={{
-                    backgroundColor: "#94a3b8",
-                    height: "1px",
-                    margin: "1rem 0"
+                    backgroundColor: '#94a3b8',
+                    height: '1px',
+                    margin: '1rem 0'
                   }}
                 ></motion.div>
               </div>
@@ -254,7 +254,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         }
       };
     }),
-    fallback: "blocking"
+    fallback: 'blocking'
   };
 };
 

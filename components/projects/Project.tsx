@@ -43,6 +43,7 @@ const AirportsMap = dynamic(() => import('./gists/AirportsMap'), {
 });
 const Mars = dynamic(() => import('./gists/Mars'), { ssr: false });
 const Elf = dynamic(() => import('./gists/Elf'), { ssr: false });
+const SimTip = dynamic(() => import('./gists/SimTip'), { ssr: false });
 
 const ProjectComponent = () => {
   // Store
@@ -140,6 +141,9 @@ const ProjectComponent = () => {
         projectSelected.title === 'A-walk-on-Mars' && <Mars />}
       {projectSelected?.hasComponent && projectSelected.title === 'Elf' && (
         <Elf />
+      )}
+      {projectSelected?.hasComponent && projectSelected.title === 'SimTip' && (
+        <SimTip />
       )}
 
       {projectSelected?.title === 'Touryme' && (
