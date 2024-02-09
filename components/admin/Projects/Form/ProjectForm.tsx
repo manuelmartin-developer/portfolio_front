@@ -1,49 +1,50 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useDropzone } from "react-dropzone";
-import { useForm } from "react-hook-form";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useDropzone } from 'react-dropzone';
+import { useForm } from 'react-hook-form';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
-import styles from "./ProjectForm.module.scss";
+import styles from './ProjectForm.module.scss';
 
-import ConfirmTooltip from "../../../UI/Tooltips/ConfirmTooltip";
-import { useCursorStore } from "../../../../store/cursorStore";
-import axios, { AxiosError } from "axios";
-import { useSnackbar } from "notistack";
-import { Project, ProjectImage } from "../AdminProjects";
-import { Category } from "../../Categories/AdminCategories";
+import ConfirmTooltip from '../../../UI/Tooltips/ConfirmTooltip';
+import { useCursorStore } from '../../../../store/cursorStore';
+import axios, { AxiosError } from 'axios';
+import { useSnackbar } from 'notistack';
+import { Project, ProjectImage } from '../AdminProjects';
+import { Category } from '../../Categories/AdminCategories';
 
 enum FileType {
-  GALLERY = "gallery",
-  FEATURED = "featuredImage"
+  GALLERY = 'gallery',
+  FEATURED = 'featuredImage'
 }
 
 const technologies = [
-  "React",
-  "Next.js",
-  "Node.js",
-  "Express",
-  "Ionic",
-  "TypeScript",
-  "JavaScript",
-  "HTML",
-  "CSS",
-  "Sass",
-  "Material UI",
-  "MongoDB",
-  "PostgreSQL",
-  "AWS",
-  "TensorFlow",
-  "OpenAI",
-  "Docker",
-  "Mapbox",
-  "Flutter",
-  "Dart",
-  "Leaflet",
-  "C#",
-  "Unity"
+  'React',
+  'Next.js',
+  'Node.js',
+  'Express',
+  'Ionic',
+  'TypeScript',
+  'JavaScript',
+  'HTML',
+  'CSS',
+  'Sass',
+  'Material UI',
+  'MongoDB',
+  'PostgreSQL',
+  'AWS',
+  'TensorFlow',
+  'OpenAI',
+  'Docker',
+  'Mapbox',
+  'Flutter',
+  'Dart',
+  'Leaflet',
+  'C#',
+  'Unity',
+  'Vite'
 ];
 
 const ProjectForm: React.FC<{
@@ -93,7 +94,7 @@ const ProjectForm: React.FC<{
     isDragAccept: isDragAcceptImage,
     isDragActive: isDragActiveImage
   } = useDropzone({
-    accept: { "image/*": [".jpg", ".jpeg", ".png", ".webp"] },
+    accept: { 'image/*': ['.jpg', '.jpeg', '.png', '.webp'] },
     multiple: true,
     onDrop: (acceptedFiles) => {
       onUploadFile(FileType.GALLERY, undefined, acceptedFiles);
@@ -106,7 +107,7 @@ const ProjectForm: React.FC<{
     isDragAccept: isDragAcceptFeaturedImage,
     isDragActive: isDragActiveFeaturedImage
   } = useDropzone({
-    accept: { "image/*": [".jpg", ".jpeg", ".png", ".webp"] },
+    accept: { 'image/*': ['.jpg', '.jpeg', '.png', '.webp'] },
     multiple: false,
     disabled: featuredImage ? true : false,
     onDrop: (acceptedFiles) => {
@@ -127,7 +128,7 @@ const ProjectForm: React.FC<{
   //   Methods
   const onGetProjectCategories = async () => {
     const URL = `${process.env.NEXT_PUBLIC_API_URL}/categories/?type=project`;
-    const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem('admin_token');
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
@@ -141,8 +142,8 @@ const ProjectForm: React.FC<{
       const axiosError = error as AxiosError;
       if (axiosError && axiosError.response?.data) {
         const errorData: any = axiosError.response.data;
-        enqueueSnackbar(errorData.message || "Ha ocurrido un error", {
-          variant: "error"
+        enqueueSnackbar(errorData.message || 'Ha ocurrido un error', {
+          variant: 'error'
         });
       }
     }
@@ -150,14 +151,14 @@ const ProjectForm: React.FC<{
 
   const onUpdateProject = async (data: any) => {
     const URL = `${process.env.NEXT_PUBLIC_API_URL}/projects/${projectInFocus?.code}`;
-    const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem('admin_token');
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
 
     const payload = {
       ...data,
-      title: data.title.trim().replace(/\s+/g, "-"),
+      title: data.title.trim().replace(/\s+/g, '-'),
       categories: selectedCategories,
       paragraphs: Array.from(
         { length: paragraphsCount },
@@ -172,7 +173,7 @@ const ProjectForm: React.FC<{
     try {
       const response = await axios.put(URL, payload, config);
       if (response.status === 200) {
-        enqueueSnackbar("Proyecto actualizado", { variant: "success" });
+        enqueueSnackbar('Proyecto actualizado', { variant: 'success' });
         setIsAddingProject(false);
         setIsEditingProject(false);
       }
@@ -181,8 +182,8 @@ const ProjectForm: React.FC<{
       if (axiosError && axiosError.response?.data) {
         const errorData: any = axiosError.response.data;
         enqueueSnackbar(
-          errorData.errorData?.message || "Ha ocurrido un error",
-          { variant: "error" }
+          errorData.errorData?.message || 'Ha ocurrido un error',
+          { variant: 'error' }
         );
       }
     }
@@ -190,31 +191,31 @@ const ProjectForm: React.FC<{
 
   const onUploadFile = async (type: FileType, file?: File, files?: File[]) => {
     const URL = `${process.env.NEXT_PUBLIC_API_URL}/files/projects/${projectInFocus?.code}/`;
-    const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem('admin_token');
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
-    enqueueSnackbar("Subiendo archivos...", {
-      variant: "info",
+    enqueueSnackbar('Subiendo archivos...', {
+      variant: 'info',
       persist: true,
-      key: "uploading"
+      key: 'uploading'
     });
     try {
       const formData = new FormData();
-      formData.append("type", type);
+      formData.append('type', type);
       type === FileType.FEATURED &&
         file &&
-        formData.append("featuredImage", file as File);
+        formData.append('featuredImage', file as File);
       type === FileType.GALLERY &&
         files &&
         files.length > 0 &&
-        files.forEach((f) => formData.append("gallery", f));
+        files.forEach((f) => formData.append('gallery', f));
       const response = await axios.post(URL, formData, config);
 
       if (response.status === 201) {
-        closeSnackbar("uploading");
-        enqueueSnackbar("Archivo subido", {
-          variant: "success"
+        closeSnackbar('uploading');
+        enqueueSnackbar('Archivo subido', {
+          variant: 'success'
         });
         type === FileType.GALLERY && setGallery(response.data.file.gallery);
         type === FileType.FEATURED &&
@@ -224,9 +225,9 @@ const ProjectForm: React.FC<{
       const axiosError = error as AxiosError;
       if (axiosError && axiosError.response?.data) {
         const errorData: any = axiosError.response.data;
-        closeSnackbar("uploading");
-        enqueueSnackbar(errorData?.message || "Ha ocurrido un error", {
-          variant: "error"
+        closeSnackbar('uploading');
+        enqueueSnackbar(errorData?.message || 'Ha ocurrido un error', {
+          variant: 'error'
         });
       }
     }
@@ -234,7 +235,7 @@ const ProjectForm: React.FC<{
 
   const onHandleCancel = async () => {
     const URL = `${process.env.NEXT_PUBLIC_API_URL}/projects/${projectInFocus?.code}`;
-    const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem('admin_token');
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
@@ -242,7 +243,7 @@ const ProjectForm: React.FC<{
     try {
       const response = await axios.delete(URL, config);
       if (response.status === 200) {
-        enqueueSnackbar("Proyecto eliminado", { variant: "success" });
+        enqueueSnackbar('Proyecto eliminado', { variant: 'success' });
         setIsAddingProject(false);
       }
     } catch (error) {
@@ -250,8 +251,8 @@ const ProjectForm: React.FC<{
       if (axiosError && axiosError.response?.data) {
         const errorData: any = axiosError.response.data;
         enqueueSnackbar(
-          errorData.errorData?.message || "Ha ocurrido un error",
-          { variant: "error" }
+          errorData.errorData?.message || 'Ha ocurrido un error',
+          { variant: 'error' }
         );
       }
     }
@@ -259,7 +260,7 @@ const ProjectForm: React.FC<{
 
   const onDeleteFile = async (type: FileType, url: string) => {
     const URL = `${process.env.NEXT_PUBLIC_API_URL}/files/projects/${projectInFocus?.code}/`;
-    const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem('admin_token');
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
@@ -268,19 +269,19 @@ const ProjectForm: React.FC<{
       url,
       type
     };
-    enqueueSnackbar("Eliminando archivo...", {
-      variant: "info",
+    enqueueSnackbar('Eliminando archivo...', {
+      variant: 'info',
       persist: true,
-      key: "deleting"
+      key: 'deleting'
     });
 
     try {
       const response = await axios.delete(URL, { ...config, data: payload });
 
       if (response.status === 200) {
-        closeSnackbar("deleting");
-        enqueueSnackbar("Archivo eliminado", {
-          variant: "success"
+        closeSnackbar('deleting');
+        enqueueSnackbar('Archivo eliminado', {
+          variant: 'success'
         });
         type === FileType.GALLERY && setGallery(response.data.file.gallery);
         type === FileType.FEATURED &&
@@ -290,11 +291,11 @@ const ProjectForm: React.FC<{
       const axiosError = error as AxiosError;
       if (axiosError && axiosError.response?.data) {
         const errorData: any = axiosError.response.data;
-        closeSnackbar("deleting");
+        closeSnackbar('deleting');
         enqueueSnackbar(
-          errorData.errorData?.message || "Ha ocurrido un error",
+          errorData.errorData?.message || 'Ha ocurrido un error',
           {
-            variant: "error"
+            variant: 'error'
           }
         );
       }
@@ -302,22 +303,22 @@ const ProjectForm: React.FC<{
   };
 
   const onEnterButton = () => {
-    setCursorVariant("dot");
+    setCursorVariant('dot');
   };
 
   const onLeave = () => {
-    setCursorVariant("default");
+    setCursorVariant('default');
   };
 
   // Component lifecycle
   useEffect(() => {
     if (!isEditingProject || !projectInFocus) return;
-    setValue("title", projectInFocus.title);
+    setValue('title', projectInFocus.title);
     setSelectedCategories(projectInFocus.categories);
-    setValue("backgroundColor", projectInFocus.backgroundColor);
-    setValue("color", projectInFocus.color);
-    setValue("url", projectInFocus.url);
-    setValue("role", projectInFocus.role);
+    setValue('backgroundColor', projectInFocus.backgroundColor);
+    setValue('color', projectInFocus.color);
+    setValue('url', projectInFocus.url);
+    setValue('role', projectInFocus.role);
     setParagraphsCount(projectInFocus.paragraphs.length);
     Array.from({ length: projectInFocus.paragraphs.length }).forEach(
       (_, index) => {
@@ -346,9 +347,9 @@ const ProjectForm: React.FC<{
           <div className={styles.formContainer}>
             <input
               type="text"
-              className={`${styles.input} ${errors.title ? styles.error : ""}`}
+              className={`${styles.input} ${errors.title ? styles.error : ''}`}
               placeholder="Título"
-              {...register("title", { required: true })}
+              {...register('title', { required: true })}
             />
             <AnimatePresence mode="wait">
               {errors.title && (
@@ -369,7 +370,7 @@ const ProjectForm: React.FC<{
           <div className={styles.formContainer}>
             <Select
               className={`multi-select ${
-                isSubmitted && !selectedCategories?.length ? "error" : ""
+                isSubmitted && !selectedCategories?.length ? 'error' : ''
               }`}
               classNamePrefix="multi-select"
               closeMenuOnSelect={false}
@@ -417,13 +418,13 @@ const ProjectForm: React.FC<{
           <div className={`${styles.formGroup} ${styles.formGroup__color}`}>
             <div className={`${styles.formGroup} ${styles.formGroup__color}`}>
               <h4>
-                Background <span>({watch("backgroundColor") || "#000"})</span>
+                Background <span>({watch('backgroundColor') || '#000'})</span>
               </h4>
               <input
                 type="color"
                 className={styles.color}
                 placeholder="Color de fondo"
-                {...register("backgroundColor", { required: true })}
+                {...register('backgroundColor', { required: true })}
               />
               <AnimatePresence mode="wait">
                 {errors.backgroundColor && (
@@ -442,13 +443,13 @@ const ProjectForm: React.FC<{
             </div>
             <div className={`${styles.formGroup} ${styles.formGroup__color}`}>
               <h4>
-                Texto <span>({watch("color") || "#fff"})</span>
+                Texto <span>({watch('color') || '#fff'})</span>
               </h4>
               <input
                 type="color"
                 className={styles.color}
                 placeholder="Color de texto"
-                {...register("color", { required: true })}
+                {...register('color', { required: true })}
               />
               <AnimatePresence mode="wait">
                 {errors.color && (
@@ -469,12 +470,12 @@ const ProjectForm: React.FC<{
           <div className={styles.formContainer}>
             <input
               type="text"
-              className={`${styles.input} ${errors.url ? styles.error : ""}`}
+              className={`${styles.input} ${errors.url ? styles.error : ''}`}
               placeholder="URL"
-              {...register("url", { pattern: /^https?:\/\//i })}
+              {...register('url', { pattern: /^https?:\/\//i })}
             />
             <AnimatePresence mode="wait">
-              {errors.url && errors.url.type === "pattern" && (
+              {errors.url && errors.url.type === 'pattern' && (
                 <motion.p
                   key="error"
                   className={styles.formContainer__error}
@@ -492,7 +493,7 @@ const ProjectForm: React.FC<{
             type="text"
             className={styles.input}
             placeholder="Rol"
-            {...register("role")}
+            {...register('role')}
           />
           <div className={styles.formGroup__paragraphs}>
             <div className={styles.formGroup__paragraphs__buttons}>
@@ -538,7 +539,7 @@ const ProjectForm: React.FC<{
           </div>
           <Select
             className={`multi-select ${
-              isSubmitted && !selectedTechnologies?.length ? "error" : ""
+              isSubmitted && !selectedTechnologies?.length ? 'error' : ''
             }`}
             classNamePrefix="multi-select"
             closeMenuOnSelect={false}
@@ -568,7 +569,7 @@ const ProjectForm: React.FC<{
               <input
                 type="checkbox"
                 id="isDraft"
-                {...register("isDraft")}
+                {...register('isDraft')}
                 checked={isDraft}
                 onChange={() => {
                   setIsDraft(!isDraft);
@@ -580,7 +581,7 @@ const ProjectForm: React.FC<{
               <input
                 type="checkbox"
                 id="isSideProject"
-                {...register("isSideProject")}
+                {...register('isSideProject')}
                 checked={isSideProject}
                 onChange={() => {
                   setIsSideProject(!isSideProject);
@@ -592,7 +593,7 @@ const ProjectForm: React.FC<{
               <input
                 type="checkbox"
                 id="hasComponent"
-                {...register("hasComponent")}
+                {...register('hasComponent')}
                 checked={hasComponent}
                 onChange={() => {
                   setHasComponent(!hasComponent);
@@ -638,7 +639,7 @@ const ProjectForm: React.FC<{
               onMouseEnter={onEnterButton}
               onMouseLeave={onLeave}
             >
-              {isAddingProject ? "Agregar" : "Guardar"}
+              {isAddingProject ? 'Agregar' : 'Guardar'}
             </button>
           </div>
         </form>
@@ -647,15 +648,15 @@ const ProjectForm: React.FC<{
             <h4>Galería</h4>
             <div
               {...getRootPropsGallery({
-                className: "blog_dropzone",
+                className: 'blog_dropzone',
                 style: {
-                  transition: "all 0.3s ease",
+                  transition: 'all 0.3s ease',
                   border:
                     isDragActiveImage && isDragAcceptImage
-                      ? "2px dashed rgba(147, 213, 0, 1)"
+                      ? '2px dashed rgba(147, 213, 0, 1)'
                       : isDragActiveImage && !isDragAcceptImage
-                      ? "2px dashed #ff4b26"
-                      : "0px dashed #fff"
+                      ? '2px dashed #ff4b26'
+                      : '0px dashed #fff'
                 }
               })}
             >
@@ -676,36 +677,36 @@ const ProjectForm: React.FC<{
                     onClick={(e) => {
                       e.stopPropagation();
                       navigator.clipboard.writeText(file.url);
-                      enqueueSnackbar("URL copiada", { variant: "info" });
+                      enqueueSnackbar('URL copiada', { variant: 'info' });
                     }}
                     style={{
                       backgroundImage: `url(${file.url})`,
-                      backgroundPosition: "center",
-                      backgroundSize: "contain",
-                      backgroundColor: "#fff",
-                      backgroundRepeat: "no-repeat",
-                      position: "relative",
-                      width: "100px",
-                      minWidth: "100px",
-                      height: "100px",
-                      borderRadius: "8px"
+                      backgroundPosition: 'center',
+                      backgroundSize: 'contain',
+                      backgroundColor: '#fff',
+                      backgroundRepeat: 'no-repeat',
+                      position: 'relative',
+                      width: '100px',
+                      minWidth: '100px',
+                      height: '100px',
+                      borderRadius: '8px'
                     }}
                   >
                     <button
                       onMouseEnter={onEnterButton}
                       onMouseLeave={onLeave}
                       style={{
-                        position: "absolute",
-                        top: "-10px",
-                        right: "-10px",
-                        width: "20px",
-                        minWidth: "20px",
-                        height: "20px",
-                        borderRadius: "50%",
-                        backgroundColor: "#000",
-                        color: "#fff",
-                        border: "none",
-                        cursor: "pointer",
+                        position: 'absolute',
+                        top: '-10px',
+                        right: '-10px',
+                        width: '20px',
+                        minWidth: '20px',
+                        height: '20px',
+                        borderRadius: '50%',
+                        backgroundColor: '#000',
+                        color: '#fff',
+                        border: 'none',
+                        cursor: 'pointer',
                         zIndex: 99999
                       }}
                       onClick={(e) => {
@@ -743,16 +744,16 @@ const ProjectForm: React.FC<{
             >
               <div
                 {...getRootPropsFeaturedImage({
-                  className: "blog_dropzone",
+                  className: 'blog_dropzone',
                   style: {
-                    transition: "all 0.3s ease",
+                    transition: 'all 0.3s ease',
                     border:
                       isDragActiveFeaturedImage && isDragAcceptFeaturedImage
-                        ? "2px dashed rgba(147, 213, 0, 1)"
+                        ? '2px dashed rgba(147, 213, 0, 1)'
                         : isDragActiveFeaturedImage &&
                           !isDragAcceptFeaturedImage
-                        ? "2px dashed #ff4b26"
-                        : "0px dashed #fff",
+                        ? '2px dashed #ff4b26'
+                        : '0px dashed #fff',
                     opacity: featuredImage ? 0.5 : 1
                   }
                 })}
@@ -771,35 +772,35 @@ const ProjectForm: React.FC<{
                       onClick={(e) => {
                         e.stopPropagation();
                         navigator.clipboard.writeText(featuredImage.url);
-                        enqueueSnackbar("URL copiada", { variant: "info" });
+                        enqueueSnackbar('URL copiada', { variant: 'info' });
                       }}
                       style={{
                         backgroundImage: `url(${featuredImage.url})`,
-                        backgroundSize: "cover",
-                        backgroundColor: "#fff",
-                        backgroundPosition: "center",
-                        position: "relative",
-                        width: "150px",
-                        minWidth: "150px",
-                        height: "150px",
-                        borderRadius: "8px"
+                        backgroundSize: 'cover',
+                        backgroundColor: '#fff',
+                        backgroundPosition: 'center',
+                        position: 'relative',
+                        width: '150px',
+                        minWidth: '150px',
+                        height: '150px',
+                        borderRadius: '8px'
                       }}
                     >
                       <button
                         onMouseEnter={onEnterButton}
                         onMouseLeave={onLeave}
                         style={{
-                          position: "absolute",
-                          top: "-10px",
-                          right: "-10px",
-                          width: "20px",
-                          minWidth: "20px",
-                          height: "20px",
-                          borderRadius: "50%",
-                          backgroundColor: "#000",
-                          color: "#fff",
-                          border: "none",
-                          cursor: "pointer",
+                          position: 'absolute',
+                          top: '-10px',
+                          right: '-10px',
+                          width: '20px',
+                          minWidth: '20px',
+                          height: '20px',
+                          borderRadius: '50%',
+                          backgroundColor: '#000',
+                          color: '#fff',
+                          border: 'none',
+                          cursor: 'pointer',
                           zIndex: 99999
                         }}
                         onClick={(e) => {
